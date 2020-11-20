@@ -89,7 +89,7 @@ Possibly remove some telescopes (SDSS creates problems most of the times)
 #        http://svo2.cab.inta-csic.es/theory/newov2/syph.php             #
 #                 unzip the files in "models" folder                     #
 # ---------------------------------------------------------------------- #
-
+import os
 import pandas as pd
 # For Kr models:
 #          logg is like: 3.0, 4.5, 5.0 etc.
