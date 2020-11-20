@@ -1,0 +1,5 @@
+# Object photometry calculated by VOSA as data average
+#
+#    FilterID    Wavelength         Obs.Flux        Obs.Error             Flux            Error    Point Props    Service    dis (VO)    dis_2 (VO)    Nobjs    Obs.Qua (VO) 
+#       (---)           (A)    (erg/s/cm2/A)    (erg/s/cm2/A)    (erg/s/cm2/A)    (erg/s/cm2/A)          (---)      (---)       (deg)         (deg)    (---)           (---) 
+#============================================================================================================================================================================
