@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[25]:
+# In[2]:
 
 
 import pandas as pd
@@ -103,35 +103,35 @@ def add_A_comp_to_model(flux_A,flux_model):
 def initializing_sf_T(mode, sf_min, sf_max):
     # Initialising the scaling factor grid and temperature grid for different modes
     if mode=='test_Kr_Koe': # Testing of working of Kurucz (already fitted)+Koster(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=3)
-        TempBList = ['10000','22000','30000']
+        scale_list = np.geomspace(sf_min, sf_max, num=3)
+        temp_B_list = ['10000','22000','30000']
     if mode=='rough_Kr_Koe': # rough fitting of Kurucz (already fitted)+Koster(to be fitted) model binary. 
-        ScaleList = np.geomspace(sf_min, sf_max, num=20)
-        TempBList = ['05000','06000','07000','08000','09000','10000','11000','12000','13000','14000','15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','35000','40000','50000','60000','70000','80000']
+        scale_list = np.geomspace(sf_min, sf_max, num=20)
+        temp_B_list = ['05000','06000','07000','08000','09000','10000','11000','12000','13000','14000','15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','35000','40000','50000','60000','70000','80000']
     if mode=='finer_Kr_Koe': # finer fitting of Kurucz (already fitted)+Koster(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=100)
-        TempBList = ['05000','05250','05500','05750','06000','06250','06500','06750','07000','07250','07500','07750','08000','08250','08500','08750','09000','09250','09500','09750','10000','10250','10500','10750','11000','11250','11500','11750','12000','12250','12500','12750','13000','13250','13500','13750','14000','14250','14500','14750','15000','15250','15500','15750','16000','16250','16500','16750','17000','17250','17500','17750','18000','18250','18500','18750','19000','19250','19500','19750','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','32000','34000','35000','36000','38000','40000','45000','50000','60000','70000','80000']
+        scale_list = np.geomspace(sf_min, sf_max, num=100)
+        temp_B_list = ['05000','05250','05500','05750','06000','06250','06500','06750','07000','07250','07500','07750','08000','08250','08500','08750','09000','09250','09500','09750','10000','10250','10500','10750','11000','11250','11500','11750','12000','12250','12500','12750','13000','13250','13500','13750','14000','14250','14500','14750','15000','15250','15500','15750','16000','16250','16500','16750','17000','17250','17500','17750','18000','18250','18500','18750','19000','19250','19500','19750','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','32000','34000','35000','36000','38000','40000','45000','50000','60000','70000','80000']
     if mode=='rough_Kr_Kr': # rough fitting of Kurucz (already fitted)+Kurucz(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=20)
-        TempBList = ['5000','6000','7000','8000','9000','10000','11000','12000','13000','14000','15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','32000','34000','36000','38000']
+        scale_list = np.geomspace(sf_min, sf_max, num=20)
+        temp_B_list = ['5000','6000','7000','8000','9000','10000','11000','12000','13000','14000','15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','32000','34000','36000','38000']
     if mode=='finer_Kr_Kr': # finer fitting of Kurucz (already fitted)+Kurucz(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=100)
-        TempBList = ['5000','5250','5500','5750','6000','6250','6500','6750','7000','7250','7500','7750','8000','8250','8500','8750','9000','9250','9500','9750','10000','10250','10500','10750','11000','11250','11500','11750','12000','12250','12500','12750','13000','14000','15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','31000','32000','33000','34000','35000','36000','37000','38000','39000']
+        scale_list = np.geomspace(sf_min, sf_max, num=100)
+        temp_B_list = ['5000','5250','5500','5750','6000','6250','6500','6750','7000','7250','7500','7750','8000','8250','8500','8750','9000','9250','9500','9750','10000','10250','10500','10750','11000','11250','11500','11750','12000','12250','12500','12750','13000','14000','15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','31000','32000','33000','34000','35000','36000','37000','38000','39000']
     if mode=='test_Kr_Kr': # Testing of working of Kurucz (already fitted)+Kurucz(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=3)
-        TempBList = ['5000','5250','5500']
+        scale_list = np.geomspace(sf_min, sf_max, num=3)
+        temp_B_list = ['5000','5250','5500']
     if mode=='rough_Kr_Tlusty': # rough fitting of Kurucz (already fitted)+Tlusty(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=20)
-        TempBList = ['15000','17000','19000','21000','23000','25000','27000','29000','30000','32500' ,'35000','37500','40000','42500','45000','47500','50000','52500','55000']
+        scale_list = np.geomspace(sf_min, sf_max, num=20)
+        temp_B_list = ['15000','17000','19000','21000','23000','25000','27000','29000','30000','32500' ,'35000','37500','40000','42500','45000','47500','50000','52500','55000']
     if mode=='finer_Kr_Tlusty': # finer fitting of Kurucz (already fitted)+Tlusty(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=100)
-        TempBList = ['15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','32500' ,'35000','37500','40000','42500','45000','47500','50000','52500','55000']
+        scale_list = np.geomspace(sf_min, sf_max, num=100)
+        temp_B_list = ['15000','16000','17000','18000','19000','20000','21000','22000','23000','24000','25000','26000','27000','28000','29000','30000','32500' ,'35000','37500','40000','42500','45000','47500','50000','52500','55000']
     if mode=='test_Kr_Tlusty': # Testing of working of Kurucz (already fitted)+Tlusty(to be fitted) model binary.
-        ScaleList = np.geomspace(sf_min, sf_max, num=3)
-        TempBList = ['15000','16000','17000']
-#     print  ('len(SF),  len(T),  len(T)*len(SF) = ','',len(ScaleList),len(TempBList) , len(TempBList)*len(ScaleList))
+        scale_list = np.geomspace(sf_min, sf_max, num=3)
+        temp_B_list = ['15000','16000','17000']
+#     print  ('len(SF),  len(T),  len(T)*len(SF) = ','',len(scale_list),len(temp_B_list) , len(temp_B_list)*len(scale_list))
     # Return scale factor list and temperature list
-    return ScaleList,TempBList    
+    return scale_list,temp_B_list    
 
 
 def calculating_chi2(scale_list, temp_B_list, fitting_required, mode):
@@ -154,17 +154,15 @@ def calculating_chi2(scale_list, temp_B_list, fitting_required, mode):
             data_chi.loc[counter, 'SF'] = sf
             data_chi.loc[counter, 'ChiSqr'] = Sumchi
 
-            if (counter%100==0):
-                print ('Calculating chi2:  %d/%d  (%d%%)' %(counter, count, 100*counter/count)),
-                sys.stdout.flush()
-                print ("\r"),
+            if (counter%100==0):  # printing progress
+                print ('\r Calculating chi2:  %d/%d  (%d%%)' %(counter, count, 100*counter/count), end='')
                 
         data_chi=data_chi.sort_values('ChiSqr')
         data_chi = data_chi.reset_index(drop=True)
         if not os.path.exists('outputs/chi_files/'):
             os.makedirs('outputs/chi_files/')
         data_chi.to_csv(ChiSqr_File_B, index=False, header=True, sep=',')
-    print (data_chi.head())
+    print ('\r',data_chi.head())
     return data_chi
    
     
@@ -177,8 +175,6 @@ def minimizing_chi2(flux_model,data_chi):
     flux_model['flux_B']=sf_B * flux_model[str(Teff_B)]
     flux_model['Total'] = flux_model['flux_B']+flux_model['flux_A']
     flux_model['ResidualFlux']=(flux_model['CorFlux'] - flux_model['Total'])
-#     flux_model['Obs-Mod']=(flux_model['CorFlux'] - flux_model['Total'])**2
-#     flux_model['ersqr']= (flux_model['CorErr'])**2
     flux_model['chisqu']= flux_model['ResidualFlux']**2 / flux_model['CorErr']**2
     return Teff_B,sf_B, R_B, L_B
 
@@ -293,6 +289,7 @@ def create_plots(mode):
     ####################### Saving file   
     if not os.path.exists('outputs/'+mode):
         os.makedirs('outputs/'+mode)
+    plt.show()
     plt.savefig ('outputs/'+mode+'/'+STAR_NAME+'_'+str(Teff_B)+'_logg'+str(logg_B)+'_Z'+Z_B+'_'+model+'_'+str(cycle)+'.png', format='png', dpi=300)#,bbox_inches='tight')
 #     plt.savefig ('outputs/'+mode+'/'+STAR_NAME+'_'+str(Teff_B)+'_logg'+str(logg_B)+'_Z'+Z_B+'_'+model+'_'+str(cycle)+'.pdf', format='pdf', dpi=300)#,bbox_inches='tight')
 
@@ -340,11 +337,11 @@ def save_log():
     file_object.close()
 
 
-# In[28]:
+# In[5]:
 
 
-STAR_NAME,   logg_B,   Z_B,   model,   cycle,   fitting_required   =   'WOCS2002',   '7.0',   '00',   'Koe',   1,   0
-DIR_OBS,   DISTANCE, DISTANCE_ERR, FREE_PARA   =   'data/vosa_results_38604/objects/',   831.76,   11,   2+1
+STAR_NAME,logg_B,Z_B,model,cycle,fitting_required = 'WOCS2002','7.0','00','Koe',3,1
+DIR_OBS, DISTANCE, DISTANCE_ERR, FREE_PARA = 'data/vosa_results_38604/objects/', 831.76, 11, 2+1
 double_fitting = 1
 '''
     STAR_NAME           Name of the star
@@ -397,16 +394,16 @@ data_chi                = calculating_chi2(scale_list, temp_B_list,fitting_requi
 Teff_B,sf_B, R_B, L_B   = minimizing_chi2(flux_model,data_chi)
 print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_B, R_B, L_B))
 create_plots(mode)
-#################################################################################
-mode='finer_Kr_'+model     # limit the fits to smaller sf range. Also use all available temperatures
-sf_min = data_chi['SF'].head(100).min()
-sf_max = data_chi['SF'].head(100).max()
+###############################################################################
+# mode='finer_Kr_'+model     # limit the fits to smaller sf range. Also use all available temperatures
+# sf_min = data_chi['SF'].head(100).min()
+# sf_max = data_chi['SF'].head(100).max()
 
-scale_list, temp_B_list = initializing_sf_T(mode,sf_min, sf_max)
-data_chi = calculating_chi2(scale_list, temp_B_list,fitting_required, mode)
-Teff_B,sf_B, R_B, L_B   = minimizing_chi2(flux_model,data_chi)
-print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_B, R_B, L_B))
-create_plots(mode)
-#################################################################################
+# scale_list, temp_B_list = initializing_sf_T(mode,sf_min, sf_max)
+# data_chi = calculating_chi2(scale_list, temp_B_list,fitting_required, mode)
+# Teff_B,sf_B, R_B, L_B   = minimizing_chi2(flux_model,data_chi)
+# print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_B, R_B, L_B))
+# create_plots(mode)
+# #################################################################################
 save_log()
 
