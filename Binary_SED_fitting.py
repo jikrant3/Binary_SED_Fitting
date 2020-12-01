@@ -202,6 +202,64 @@ def minimizing_chi2(flux_model,data_chi):
     flux_model['chisqu']= flux_model['ResidualFlux']**2 / flux_model['CorErr']**2
     return Teff_B,sf_B, R_B, L_B
 
+
+def visualise_A_component_SED(save=1):
+    ###################### initialising
+    label_A = 'A (' + str(Teff_A) + ' K, logg=' + str(logg_A) + ')'
+    f, axes = plt.subplots(figsize=(6,4),nrows = 2, ncols = 1)
+    [axi.set_axis_off() for axi in axes.ravel()]
+    axes[0] = f.add_axes([0.15, 0.35, 0.8, 0.55])
+    axes[1] = f.add_axes([0.15, 0.15, 0.8, 0.2])
+    ####################### SED
+    axes[0].scatter(not_fitted_A['Wavelength'], not_fitted_A['Flux'], color='orange', marker='o',label ='No Fit', s=30)
+    axes[0].plot(flux_A['Wavelength'], flux_A['FluxMod'], color='green', linestyle='-',label ='Model', lw=1)
+
+    matplotlib.rcParams.update({'errorbar.capsize': 4})
+    axes[0].errorbar(flux_A['Wavelength'], flux_A['Flux'], yerr=flux_A['Error'],color='k', label='Obs',fmt='none',lw=2)
+    ########## Fractional residual
+    flux_A_excess = flux_A[((flux_A['Flux']-flux_A['FluxMod'])/flux_A['Flux']>0.5)]
+    axes[1].scatter(flux_A_excess['Wavelength'], (flux_A_excess['Flux']-flux_A_excess['FluxMod'])/flux_A_excess['Flux'], color='red',marker='o',label ='Excess', s=30)
+    axes[1].plot(flux_A['Wavelength'], (flux_A['Flux']-flux_A['FluxMod'])/flux_A['Flux'], color='green', linestyle='-',label ='Model', lw=1)
+    axes[1].errorbar(flux_A['Wavelength'], flux_A['Flux']-flux_A['Flux'], yerr=flux_A['Error']/flux_A['Flux'],color='k', label='Fractional Error',fmt='none',lw=2)
+    ####################### Titles and labels
+    axes[0].set_title(STAR_NAME + '       ' + label_A, x=0, y=1, ha='left')
+    axes[0].set_ylabel('Flux (erg s$^{-1}$ cm$^{-2}$ $\AA$$^{-1}$)')
+    axes[1].set_ylabel('Residual')
+    axes[1].set_xlabel('Wavelength ($\AA$)')
+    ####################### axes range and scales
+    axes[1].axhline(0.5, ls=(0, (5, 10)), lw=2, c='0.5',zorder=0)
+    
+    axes[0].set_xscale('log')
+    axes[0].set_yscale('log')
+    axes[1].set_xscale('log')
+
+    wave_min = min(not_fitted_A['Wavelength'].min(),flux_A['Wavelength'].min())
+    wave_max = max(not_fitted_A['Wavelength'].max(),flux_A['Wavelength'].max())
+    
+    axes[0].set_xlim([wave_min/1.2,wave_max*1.2])
+    axes[1].set_xlim([wave_min/1.2,wave_max*1.2])
+    axes[1].set_ylim([-0.2,1.5])
+
+    flux_min = min(flux_A['Flux'].min(),  not_fitted_A['Flux'].min())
+    flux_max = max(flux_A['Flux'].max(),  not_fitted_A['Flux'].max())
+    axes[0].set_ylim([flux_min/5,flux_max*5])
+
+    plt.setp(axes[0].get_xticklabels(),visible=False)
+    ####################### decoration    
+    axes[0].grid()
+    axes[1].grid()
+    axes[0].tick_params(which='both', direction='out', length=4)
+    axes[1].tick_params(which='both', direction='out', length=4)
+     
+    axes[0].legend(scatterpoints=1, loc='upper center', ncol=5,frameon=False,handletextpad=0.3, borderpad=0.1)
+    axes[1].legend(scatterpoints=1, loc='upper right', ncol=3,frameon=False,handletextpad=0.3, borderpad=0.1)
+    if save==1: ########## Saving file   
+        if not os.path.exists('outputs/A_SEDs/'):
+            os.makedirs('outputs/A_SEDs/')
+        plt.savefig ('outputs/A_SEDs/'+STAR_NAME+'_'+str(Teff_A)+'_logg'+str(logg_A)+'.png', format='png', dpi=300)#,bbox_inches='tight')
+#         plt.savefig ('outputs/A_SEDs/'+STAR_NAME+'_'+str(Teff_A)+'_logg'+str(logg_A)+'.pdf', format='pdf', dpi=300)#,bbox_inches='tight')
+    plt.show()
+    
     
 def create_plots(mode, save=1):
     iso = pd.read_csv('data/example_isochrone.txt',engine='python',delimiter= ',', header=0)
@@ -372,7 +430,8 @@ def save_log():
 # In[2]:
 
 
-STAR_NAME,logg_B,Z_B,model,cycle,fitting_required = 'WOCS2002', '7.0', '00', 'Koe', 4, 1
+star_list=['WOCS2002']
+STAR_NAME,logg_B,Z_B,model,cycle,fitting_required = star_list[0], '7.0', '00', 'Koe', 4, 1
 DIR_OBS, DISTANCE, DISTANCE_ERR, FREE_PARA = 'data/vosa_results_38873/objects/', 831.76, 11, 2+1
 double_fitting = 1
 '''
@@ -400,6 +459,13 @@ flux_A, Teff_A,logg_A,logg_A,sf_A,L_A = read_A_comp_from_VOSA(STAR_NAME)
 You can manually specify filters not to be fitted in drop_filters()
 '''
 flux_A, not_fitted_A,N_points, N_Np = drop_filters(STAR_NAME,flux_A)
+
+visualise_A_component_SED()
+
+
+# In[3]:
+
+
 # read model flux file
 flux_model = read_model_file(model, logg_B, Z_B)
 
@@ -410,7 +476,7 @@ if (double_fitting == 1):
     flux_model = add_A_comp_to_model(flux_A,flux_model)
 
 
-# In[3]:
+# In[4]:
 
 
 ###############################################################################
@@ -428,7 +494,7 @@ print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_
 create_plots(mode, save=1)
 
 
-# In[4]:
+# In[5]:
 
 
 ###############################################################################
