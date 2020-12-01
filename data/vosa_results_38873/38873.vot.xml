@@ -195,6 +195,33 @@
    <FIELD name="FitExc_UVIT.F154W" unit="" ucd="" utype="" datatype="int" >
      <DESCRIPTION>Excess according to model fit for filter Astrosat/UVIT.F154W</DESCRIPTION>
    </FIELD>
+   <FIELD name="Obs.Flux_GALEX.FUV" unit="erg/s/cm2/A" ucd="" utype="" datatype="float" >
+     <DESCRIPTION>Observed Flux for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="Obs.Error_GALEX.FUV" unit="erg/s/cm2/A" ucd="" utype="" datatype="float" >
+     <DESCRIPTION>Error (observed) for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="Flux_GALEX.FUV" unit="erg/s/cm2/A" ucd="" utype="" datatype="float" >
+     <DESCRIPTION>Deredden Flux for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="Error_GALEX.FUV" unit="erg/s/cm2/A" ucd="" utype="" datatype="float" >
+     <DESCRIPTION>Obs.Error (deredden) for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="Point Props_GALEX.FUV" unit="" ucd="" utype="" datatype="char" arraysize="*">
+     <DESCRIPTION>Point Props for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="FluxMod_GALEX.FUV" unit="erg/s/cm2/A" ucd="" utype="" datatype="float" >
+     <DESCRIPTION>Model Flux for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="Fitted_GALEX.FUV" unit="" ucd="" utype="" datatype="int" >
+     <DESCRIPTION>Fitted for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="Excess_GALEX.FUV" unit="" ucd="" utype="" datatype="int" >
+     <DESCRIPTION>Excess for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
+   <FIELD name="FitExc_GALEX.FUV" unit="" ucd="" utype="" datatype="int" >
+     <DESCRIPTION>Excess according to model fit for filter GALEX/GALEX.FUV</DESCRIPTION>
+   </FIELD>
    <FIELD name="Obs.Flux_UVIT.F169M" unit="erg/s/cm2/A" ucd="" utype="" datatype="float" >
      <DESCRIPTION>Observed Flux for filter Astrosat/UVIT.F169M</DESCRIPTION>
    </FIELD>
@@ -611,29 +638,29 @@
 <TD>0.1736+-0</TD>
 <TD>Veil:3000</TD>
 <TD>Kurucz</TD>
-<TD>3424</TD>
+<TD>3422</TD>
 <TD>5250</TD>
-<TD>4.5</TD>
+<TD>3.5</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>4.9529160803008</TD>
-<TD>2.1059405038352E-20</TD>
-<TD>9.068702978123E-10</TD>
-<TD>2.5547631009326E-11</TD>
-<TD>0.69878660317314</TD>
-<TD>19.610405580808</TD>
-<TD>1.0711427993364</TD>
-<TD>46028</TD>
-<TD>11</TD>
-<TD>17</TD>
+<TD>1.9356159509123</TD>
+<TD>2.1194762034195E-20</TD>
+<TD>9.0794579680721E-10</TD>
+<TD>4.2373864617126E-11</TD>
+<TD>0.69870743500328</TD>
+<TD>19.633662458382</TD>
+<TD>1.4356129127817</TD>
+<TD>220883</TD>
+<TD>13</TD>
+<TD>18</TD>
 <TD>0.1736+-0</TD>
 <TD>125</TD>
 <TD>0.25</TD>
 <TD>0.175</TD>
 <TD>5125</TD>
 <TD>5375</TD>
-<TD>4.25</TD>
-<TD>4.75</TD>
+<TD>3.25</TD>
+<TD>3.75</TD>
 <TD>-0.25</TD>
 <TD>0.1</TD>
 <TD></TD>
@@ -651,7 +678,7 @@
 <TD>3.6711551312906E-16</TD>
 <TD>7.7768953130279E-18</TD>
 <TD></TD>
-<TD>2.5905457312849E-19</TD>
+<TD>1.6516215345477E-19</TD>
 <TD>0</TD>
 <TD>1</TD>
 <TD></TD>
@@ -660,7 +687,16 @@
 <TD>3.3614462026211E-16</TD>
 <TD>1.7956836927571E-17</TD>
 <TD></TD>
-<TD>4.8137977159625E-19</TD>
+<TD>3.3061399478476E-19</TD>
+<TD>0</TD>
+<TD>1</TD>
+<TD></TD>
+<TD>1.8756910123087E-15</TD>
+<TD>4.0527067225489E-17</TD>
+<TD>2.848523238766E-15</TD>
+<TD>6.1546540466034E-17</TD>
+<TD></TD>
+<TD>2.4676189088244E-19</TD>
 <TD>0</TD>
 <TD>1</TD>
 <TD></TD>
@@ -669,7 +705,7 @@
 <TD>3.3328288641238E-16</TD>
 <TD>1.9952717356082E-17</TD>
 <TD></TD>
-<TD>6.1969917989651E-19</TD>
+<TD>4.2658274222725E-19</TD>
 <TD>0</TD>
 <TD>1</TD>
 <TD></TD>
@@ -678,7 +714,7 @@
 <TD>9.2540787820812E-14</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>8.8554943320108E-14</TD>
+<TD>8.9112249992381E-14</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -687,7 +723,7 @@
 <TD>1.0277571321066E-13</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>1.0171899653681E-13</TD>
+<TD>1.0262278941295E-13</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -696,7 +732,7 @@
 <TD>1.0802890743712E-13</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>1.1140733101415E-13</TD>
+<TD>1.1316468292513E-13</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -705,7 +741,7 @@
 <TD>9.5082862693534E-14</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>9.2210347268108E-14</TD>
+<TD>9.2947484690728E-14</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -714,7 +750,7 @@
 <TD>9.114165559661E-14</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>1.0077917224771E-13</TD>
+<TD>1.0146363634263E-13</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -723,7 +759,7 @@
 <TD>8.1189682312996E-14</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>8.0872008059093E-14</TD>
+<TD>8.1414056492648E-14</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -732,7 +768,7 @@
 <TD>4.5125428760573E-14</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>7.5269653255536E-14</TD>
+<TD>7.5803430117415E-14</TD>
 <TD>0</TD>
 <TD>0</TD>
 <TD></TD>
@@ -741,7 +777,7 @@
 <TD>3.6142865318861E-14</TD>
 <TD>7.3235380153146E-16</TD>
 <TD></TD>
-<TD>3.5571528629817E-14</TD>
+<TD>3.584732341029E-14</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -750,7 +786,7 @@
 <TD>1.8833073391807E-14</TD>
 <TD>3.4691803237791E-16</TD>
 <TD></TD>
-<TD>1.9523024430908E-14</TD>
+<TD>1.9551983716744E-14</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -759,7 +795,7 @@
 <TD>7.8283615302401E-15</TD>
 <TD>1.2978337364711E-16</TD>
 <TD></TD>
-<TD>7.6774260214426E-15</TD>
+<TD>7.7056714698187E-15</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -768,7 +804,7 @@
 <TD>1.5464090552331E-15</TD>
 <TD>2.9910202881305E-17</TD>
 <TD></TD>
-<TD>1.498614814991E-15</TD>
+<TD>1.5083458272484E-15</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -777,7 +813,7 @@
 <TD>4.3137508502704E-16</TD>
 <TD>7.1516004499605E-18</TD>
 <TD></TD>
-<TD>4.2473085643581E-16</TD>
+<TD>4.262386145829E-16</TD>
 <TD>1</TD>
 <TD>0</TD>
 <TD></TD>
@@ -786,8 +822,8 @@
 <TD>1.2345021828411E-17</TD>
 <TD>4.3206704116875E-19</TD>
 <TD></TD>
-<TD>1.2002291725314E-17</TD>
-<TD>0</TD>
+<TD>1.2118277977541E-17</TD>
+<TD>1</TD>
 <TD>0</TD>
 <TD></TD>
 <TD>2.3984259507761E-18</TD>
@@ -795,8 +831,8 @@
 <TD>2.4060932561576E-18</TD>
 <TD>0</TD>
 <TD></TD>
-<TD>9.0281895023563E-19</TD>
-<TD>0</TD>
+<TD>9.1077011561809E-19</TD>
+<TD>1</TD>
 <TD>0</TD>
 <TD></TD>
 </TR>

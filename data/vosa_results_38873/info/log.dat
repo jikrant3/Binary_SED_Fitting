@@ -1,0 +1,35 @@
+
+2020/12/01 07:03:14 VO photometry search process started
+                    
+2020/12/01 07:03:21 New photometry found in VO services.
+                    SED changed
+                       WOCS2002 : 2MASS,WISE,GAIA DR2,GALEX
+                    
+2020/12/01 07:04:24 UV/blue excess redefined by user for all objects : 3000
+                    
+2020/12/01 07:06:09 Model fit process started
+                    
+2020/12/01 07:06:16 Model fit executed
+                    Parameter values used for the fit:
+                    -  Kurucz ODFNEW /NOVER models
+                          teff_min = 3500
+                          teff_max = 50000
+                          logg_min = 3.00
+                          logg_max = 5.00
+                          meta_min = 0
+                          meta_max = 0
+                    
+2020/12/01 07:08:03 Previous model fit results are not valid anymore for some objects. They have been deleted.
+                    
+2020/12/01 07:08:03 Model fit process started again for some objects with the same previous fit options
+                    
+2020/12/01 07:08:11 Model fit executed
+                    Parameter values used for the fit:
+                    -  Kurucz ODFNEW /NOVER models
+                          teff_min = 3500
+                          teff_max = 50000
+                          logg_min = 3.00
+                          logg_max = 5.00
+                          meta_min = 0
+                          meta_max = 0
+                    

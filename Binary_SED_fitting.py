@@ -1,7 +1,7 @@
 #!/usr/bin/env python
 # coding: utf-8
 
-# In[2]:
+# In[1]:
 
 
 import pandas as pd
@@ -15,7 +15,8 @@ import sys
 import matplotlib
 import matplotlib.pyplot as plt
 from matplotlib import ticker
-###############################
+
+###############################################################################
 def get_number_from_string(line): 
     # Read a float number from sentence
     for t in line.split():
@@ -30,35 +31,19 @@ def read_A_comp_from_VOSA(STAR_NAME):
     # Reading single component fitted data from VOSA
     file_A = DIR_OBS + STAR_NAME +'/bestfitp/'+ STAR_NAME +'.bfit.phot.dat'
     flux_A = pd.read_csv(file_A, engine='python', comment='#',delim_whitespace= True, skipinitialspace=True, header=None)
-
     # Reading the column names and fit parameters automatically
     flux_A_col = pd.read_csv(file_A, engine='python',delim_whitespace= True,skipinitialspace=True,skiprows=39, nrows=1,escapechar='#', header=None)
     flux_A_col=flux_A_col.drop([0], axis=1)
     flux_A.columns = flux_A_col.values[0]
     flux_A = flux_A.set_index('FilterID')
+    
     Teff_A = get_number_from_string(linecache.getline(file_A, 9))
     logg_A = get_number_from_string(linecache.getline(file_A, 10))
     sf_A = get_number_from_string(linecache.getline(file_A, 13))
     L_A = get_number_from_string(linecache.getline(file_A, 37))
-    print('A-Component fit parameters: T=%d, logg=%f, SF=%.2e, L=%f' %(Teff_A, logg_A, sf_A, L_A))
-    '''
-    Some filters will have to be removed while fitting.
-        In case of IR excess, you can remove Wise filters,
-        or you want to specifically remove something, you can do it here.
-    e.g. Removing I,W3,W4 filter in WOCS2002 and none in BSS2
-    '''    
-    if (STAR_NAME == 'WOCS2002'):
-        flux_A=flux_A.drop(index='KPNO/Mosaic.I')
-        flux_A=flux_A.drop(index='WISE/WISE.W3')
-        flux_A=flux_A.drop(index='WISE/WISE.W4')
-    if (STAR_NAME=='BSS2'):
-        pass
-
+    print('A-Component fit parameters: T=%d, logg=%f, SF=%.2e, L=%f' %(Teff_A, logg_A, sf_A, L_A))  
     print ('Total filters: %d' %len(flux_A.index.values))           # Check if the filters are same as required
-    #  print (flux_A.index.values)
-    N_points = len(flux_A)
-    N_Np = N_points-FREE_PARA
-    return flux_A, N_points,N_Np,Teff_A,logg_A,logg_A,sf_A,L_A
+    return flux_A, Teff_A,logg_A,logg_A,sf_A,L_A
     '''
     flux_A_col.values[0]     # The column names in the file are as follows: 
             'Filter', 'Wave', 'ObsFlux', 'ObsErr', 'CorFlux','CorErr', 'ModFlux', 'Fitted', 'Excess', 'FitExc','UpLim'
@@ -69,6 +54,45 @@ def read_A_comp_from_VOSA(STAR_NAME):
             This residual will be fitted with B-component
     '''
 
+def drop_filters(STAR_NAME,flux_A):
+    '''
+    Some filters will have to be removed while fitting.
+        In case of IR excess, you can remove Wise filters,
+        or you want to specifically remove something, you can do it here.
+    e.g. Removing I,W3,W4 filter in WOCS2002 and none in BSS2
+    '''    
+    # Select a set of filters which were Fitted or given excess
+    # Removing points with upper limits or FitExcess
+    flux_A['UpLim'] = flux_A['UpLim'].replace(['---'],0)
+    flux_A['UpLim'] = flux_A['UpLim'].replace(['1'],1)
+    flux_A['FitExc'] = flux_A['FitExc'].replace(['---'],0)
+    flux_A['FitExc'] = flux_A['FitExc'].replace(['1'],1)
+    flux_A['to_be_fitted'] = flux_A.Fitted+flux_A.Excess+flux_A.FitExc+flux_A.UpLim
+
+    not_fitted_A = flux_A[(flux_A['to_be_fitted']!=1)]
+    flux_A = flux_A[(flux_A['to_be_fitted']==1)]
+
+    if (STAR_NAME == 'WOCS2002'):
+        for filter_name in ['GALEX/GALEX.FUV','WISE/WISE.W3']:
+            not_fitted_A = pd.concat([not_fitted_A, flux_A[(flux_A.index==filter_name)]])
+            flux_A=flux_A.drop(index=filter_name)
+    if (STAR_NAME=='BSS2'):
+        pass
+    
+    # printing filters to be fitted and not_fitted
+    _t1, _t2 = pd.DataFrame(),pd.DataFrame()    
+    _t1['to_be_fitted'] = flux_A.index.values
+    _t1['Wavelength'] = flux_A.Wavelength.values
+    _t1 = _t1.set_index('Wavelength')
+    _t2['not_fitted_A'] = not_fitted_A.index.values
+    _t2['Wavelength'] = not_fitted_A.Wavelength.values
+    _t2 = _t2.set_index('Wavelength')
+    _filter_table = pd.concat([_t1,_t2],sort=True)    
+    print (_filter_table.sort_index().fillna(''))
+
+    N_points = len(flux_A)
+    N_Np = N_points-FREE_PARA
+    return flux_A,not_fitted_A, N_points, N_Np
     
 def read_model_file(model, logg_B, Z_B):
     # loading the synthetic flux file
@@ -179,11 +203,11 @@ def minimizing_chi2(flux_model,data_chi):
     return Teff_B,sf_B, R_B, L_B
 
     
-def create_plots(mode):
+def create_plots(mode, save=1):
     iso = pd.read_csv('data/example_isochrone.txt',engine='python',delimiter= ',', header=0)
     ###################### initialising
-    label_A = 'A=' + str(Teff_A) + ' K,\nlogg=' + str(logg_A)
-    label_B = 'B=' + str(Teff_B) + ' K, logg=' + str(logg_B)+'\nR='+str(round(R_B,3)) + ' L='+str(round(L_B,3))
+    label_A = 'A (' + str(Teff_A) + ' K, logg=' + str(logg_A) + ')'
+    label_B = 'B (' + str(Teff_B) + ' K, logg=' + str(logg_B)+', R='+str(round(R_B,3)) + ', L='+str(round(L_B,3)) + ')'
     f, axes = plt.subplots(figsize=(12,6),nrows = 3, ncols = 3)
     [axi.set_axis_off() for axi in axes.ravel()]
     axes[0][0] = f.add_axes([0.06, 0.44, 0.49, 0.50])
@@ -196,9 +220,12 @@ def create_plots(mode):
     
     axes[0][2] = f.add_axes([0.91, 0.10, 0.02, 0.56])
     ####################### SED
-    axes[0][0].plot(flux_model['wave'], flux_model['flux_A'], color='orange', linestyle='-.',label =label_A, lw=1)
-    axes[0][0].plot(flux_model['wave'], flux_model['flux_B'], color='dodgerblue', linestyle=(0, (5, 5)),label =label_B, lw=1)
+    axes[0][0].plot(flux_model['wave'], flux_model['flux_A'], color='orange', linestyle='-.',label ='A', lw=1)
+    axes[0][0].plot(flux_model['wave'], flux_model['flux_B'], color='dodgerblue', linestyle=(0, (5, 5)),label ='B', lw=1)
     axes[0][0].plot(flux_model['wave'], flux_model['Total'], color='green', linestyle='-',label ='Model', lw=1)
+    axes[0][0].scatter(not_fitted_A['Wavelength'], not_fitted_A['Flux'], color='orange', marker='o',label ='No Fit', s=30)
+
+    
     matplotlib.rcParams.update({'errorbar.capsize': 4})
     axes[0][0].errorbar(flux_model['wave'], flux_model['CorFlux'], yerr=flux_model['CorErr'],color='k', label='Obs',fmt='none',lw=2)
     ########## Fractional residual
@@ -234,7 +261,7 @@ def create_plots(mode):
     axes[1][1].axhline(radius(data_chi.SF[0]), ls=(0, (5, 10)), lw=2, c='g',zorder=1)
     axes[2][1].axhline(data_chi.ChiSqr[0], ls=(0, (5, 10)), lw=2, c='g',zorder=1)
     ####################### Titles and labels
-    axes[0][0].set_title(STAR_NAME+'    ' +mode)
+    axes[0][0].set_title(STAR_NAME+'       ' +mode + '       ' + label_A +'       '+ label_B, x=0, y=1, ha='left')
     axes[2][0].set_title('$\chi^2$ = '+str(round(flux_model['chisqu'].sum(),1))+'\n$\chi_r^2$ = '+str(round(flux_model['chisqu'].sum()/N_Np,2)),x=0.98,y=0.9, ha='right', va='top')
 
     axes[0][0].set_ylabel('Flux (erg s$^{-1}$ cm$^{-2}$ $\AA$$^{-1}$)')
@@ -256,15 +283,20 @@ def create_plots(mode):
     axes[1][1].set_xscale('log')
     axes[2][1].set_xscale('log')
 
-    axes[0][0].set_xlim([flux_model['wave'].min()/1.1,flux_model['wave'].max()*1.1])
-    axes[1][0].set_xlim([flux_model['wave'].min()/1.1,flux_model['wave'].max()*1.1])
-    axes[2][0].set_xlim([flux_model['wave'].min()/1.1,flux_model['wave'].max()*1.1])
+    wave_min = min(not_fitted_A['Wavelength'].min(),flux_model['wave'].min())
+    wave_max = max(not_fitted_A['Wavelength'].max(),flux_model['wave'].max())
+    
+    axes[0][0].set_xlim([wave_min/1.2,wave_max*1.2])
+    axes[1][0].set_xlim([wave_min/1.2,wave_max*1.2])
+    axes[2][0].set_xlim([wave_min/1.2,wave_max*1.2])
 
     axes[0][1].set_xlim([data_chi.Temp.astype(np.int).max()*1.1,data_chi.Temp.astype(np.int).min()/1.5])
     axes[1][1].set_xlim([data_chi.Temp.astype(np.int).max()*1.1,data_chi.Temp.astype(np.int).min()/1.5])
     axes[2][1].set_xlim([data_chi.Temp.astype(np.int).max()*1.1,data_chi.Temp.astype(np.int).min()/1.5])
 
-    axes[0][0].set_ylim([flux_model['CorFlux'].min()/5,flux_model['CorFlux'].max()*5])
+    flux_min = min(flux_model['CorFlux'].min(),  not_fitted_A['Flux'].min())
+    flux_max = max(flux_model['CorFlux'].max(),  not_fitted_A['Flux'].max())
+    axes[0][0].set_ylim([flux_min/5,flux_max*5])
     axes[0][1].set_ylim(min(L_B,L_A)/10,max(L_A,L_B)*10)
     axes[1][1].set_ylim(radius(sf_min),radius(sf_max))
 
@@ -284,14 +316,14 @@ def create_plots(mode):
         axes[i][j].grid()
     axes[0][2].tick_params(which='both', direction='out', length=4)
      
-    axes[0][0].legend(scatterpoints=1, loc='upper center', ncol=4,frameon=False,handletextpad=0.3, borderpad=0.1)
+    axes[0][0].legend(scatterpoints=1, loc='upper center', ncol=5,frameon=False,handletextpad=0.3, borderpad=0.1)
     axes[0][1].legend(scatterpoints=1)
-    ####################### Saving file   
-    if not os.path.exists('outputs/'+mode):
-        os.makedirs('outputs/'+mode)
+    if save==1: ########## Saving file   
+        if not os.path.exists('outputs/'+mode):
+            os.makedirs('outputs/'+mode)
+        plt.savefig ('outputs/'+mode+'/'+STAR_NAME+'_'+str(Teff_B)+'_logg'+str(logg_B)+'_Z'+Z_B+'_'+model+'_'+str(cycle)+'.png', format='png', dpi=300)#,bbox_inches='tight')
+        # plt.savefig ('outputs/'+mode+'/'+STAR_NAME+'_'+str(Teff_B)+'_logg'+str(logg_B)+'_Z'+Z_B+'_'+model+'_'+str(cycle)+'.pdf', format='pdf', dpi=300)#,bbox_inches='tight')
     plt.show()
-    plt.savefig ('outputs/'+mode+'/'+STAR_NAME+'_'+str(Teff_B)+'_logg'+str(logg_B)+'_Z'+Z_B+'_'+model+'_'+str(cycle)+'.png', format='png', dpi=300)#,bbox_inches='tight')
-#     plt.savefig ('outputs/'+mode+'/'+STAR_NAME+'_'+str(Teff_B)+'_logg'+str(logg_B)+'_Z'+Z_B+'_'+model+'_'+str(cycle)+'.pdf', format='pdf', dpi=300)#,bbox_inches='tight')
 
 
 def radius(sf):
@@ -337,17 +369,17 @@ def save_log():
     file_object.close()
 
 
-# In[5]:
+# In[2]:
 
 
-STAR_NAME,logg_B,Z_B,model,cycle,fitting_required = 'WOCS2002','7.0','00','Koe',3,1
-DIR_OBS, DISTANCE, DISTANCE_ERR, FREE_PARA = 'data/vosa_results_38604/objects/', 831.76, 11, 2+1
+STAR_NAME,logg_B,Z_B,model,cycle,fitting_required = 'WOCS2002', '7.0', '00', 'Koe', 4, 1
+DIR_OBS, DISTANCE, DISTANCE_ERR, FREE_PARA = 'data/vosa_results_38873/objects/', 831.76, 11, 2+1
 double_fitting = 1
 '''
-    STAR_NAME           Name of the star
-    logg_B              logg of the star-to-be-fitted (B-component)
+    STAR_NAME          Name of the star
+    logg_B             logg of the star-to-be-fitted (B-component)
     Z_B                metallicity of B-component
-    model               Spectral model for B-component 
+    model              Spectral model for B-component 
                             Here Kurucz (Kr; Castelli et al 1997, AA 318, 841) and Koester (Koe; Trembley & Bergeron 2010, ApJ696, 1755) are used
                             One can add new models in "models" directory and use them
     cycle              You can use different cycle to try different things
@@ -361,27 +393,27 @@ double_fitting = 1
     double_fitting     '1' for double component fitting, '0' for single component fitting (---planned---)
 '''
 
-flux_A, N_points,N_Np,Teff_A,logg_A,logg_A,sf_A,L_A = read_A_comp_from_VOSA(STAR_NAME)
-
+# Read data from A component fitted with VOSA
+flux_A, Teff_A,logg_A,logg_A,sf_A,L_A = read_A_comp_from_VOSA(STAR_NAME)
+# Remove some filters from the above file
+'''
+You can manually specify filters not to be fitted in drop_filters()
+'''
+flux_A, not_fitted_A,N_points, N_Np = drop_filters(STAR_NAME,flux_A)
+# read model flux file
 flux_model = read_model_file(model, logg_B, Z_B)
 
 if (double_fitting == 0): # Planning to add a way to fit single components, basically keep "flux_A=0"
+    # Upload the flux and filter names
     pass
 if (double_fitting == 1):
     flux_model = add_A_comp_to_model(flux_A,flux_model)
-    
-'''
-There are three main modes defined
-1.   test         Takes 3 temperatures and 3 scaling_factors 
-                  Used for testing/developing the code
-2.   rough        Takes a loose temperature grid
-                  Used to get general idea of best fits in scaling factor
-3.   finer        Takes complete available temperature grid
-                  Uses small scaling-factor-range using the 'rough' fitting
-                  Uses finer grid for scaling factor within above range
-mode = 'rough_Kr_Koe':   means A-component used Kurucz model and B-component is being fitted with Koester 
-'''
-##################################################################################
+
+
+# In[3]:
+
+
+###############################################################################
 mode ='rough_Kr_'+model
 
 # Expected upper and lower bounds for B-component
@@ -390,20 +422,25 @@ R_min,  R_max  = 0.001,                 2           # in Rsun
 sf_min, sf_max = scaling_factor(R_min), scaling_factor(R_max)   
 
 scale_list, temp_B_list = initializing_sf_T(mode,sf_min, sf_max)
-data_chi                = calculating_chi2(scale_list, temp_B_list,fitting_required , mode)
+data_chi                = calculating_chi2(scale_list, temp_B_list,fitting_required, mode)
+Teff_B,sf_B, R_B, L_B   = minimizing_chi2(flux_model,data_chi)
+print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_B, R_B, L_B))
+create_plots(mode, save=1)
+
+
+# In[4]:
+
+
+###############################################################################
+mode='finer_Kr_'+model     # limit the fits to smaller sf range. Also use all available temperatures
+sf_min = data_chi['SF'].head(100).min()
+sf_max = data_chi['SF'].head(100).max()
+
+scale_list, temp_B_list = initializing_sf_T(mode,sf_min, sf_max)
+data_chi = calculating_chi2(scale_list, temp_B_list,fitting_required, mode)
 Teff_B,sf_B, R_B, L_B   = minimizing_chi2(flux_model,data_chi)
 print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_B, R_B, L_B))
 create_plots(mode)
-###############################################################################
-# mode='finer_Kr_'+model     # limit the fits to smaller sf range. Also use all available temperatures
-# sf_min = data_chi['SF'].head(100).min()
-# sf_max = data_chi['SF'].head(100).max()
-
-# scale_list, temp_B_list = initializing_sf_T(mode,sf_min, sf_max)
-# data_chi = calculating_chi2(scale_list, temp_B_list,fitting_required, mode)
-# Teff_B,sf_B, R_B, L_B   = minimizing_chi2(flux_model,data_chi)
-# print ('B-component fitting parameters: T=%d,sf=%.2e,R=%f,L=%f'%(int(Teff_B),sf_B, R_B, L_B))
-# create_plots(mode)
-# #################################################################################
+################################################################################
 save_log()
 
