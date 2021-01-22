@@ -8,9 +8,10 @@ The form and function are generally limited to what is required for that project
 Feedback is welcomed, but feature requests will probably not be honored. <br />
 The contents of this repository might change dramatically without notice. <br />
 
-## Acknowledgement:
+## Reference:
 This code is developed by Vikrant V. Jadhav and Sindhu Pandey. 
 If you use the code, please refer to Jadhav et al. (2021, under review), UOCS. IV. Discovery of diverse hot companions to blue stragglers in the old open cluster King 2.
+
 
 File structure:
 ``` bash
