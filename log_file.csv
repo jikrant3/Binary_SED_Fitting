@@ -1,2 +1,0 @@
-cycle,name,Teff_A_K,sf_A,logg_A,R_A_rsun,L_A_lsun,Teff_B_K,sf_B,logg_B,R_B_rsun,L_B_lsun,Z_B,e_R_B_rsun,e_L_B_lsun,chi2,chi2_r,model,N_points,N_Np
-4,WOCS2002,5250,2.12E-20,3.5,5.370823073,19.74166672,14500,2.51E-25,7,0.018495327,0.01362263,0,0.0002446,---,11.75494354,1.068631231,Koe,14,11
