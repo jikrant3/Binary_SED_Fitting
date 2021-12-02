@@ -1,6 +1,17 @@
 # Binary_SED_Fitting
 Fitting SEDs of binary stars. The code is optimised for chi2 SED fitting of a double component star. It is assumed that one component has already been fit (using VOSA for our case).
 
+## Disclaimer
+Please make sure to familiarise with the inputs and working of the algotithm. The accuracy of the results depends solely on the user. <br />
+The contents of this repository are part of an ongoing research project. <br />
+The form and function are generally limited to what is required for that project and may not be appropriate for your project. <br />
+Feedback is welcomed, but feature requests will probably not be honored. <br />
+The contents of this repository might change dramatically without notice. <br />
+
+## Reference:
+This code is developed by Vikrant V. Jadhav and Sindhu Pandey. 
+If you use the code, please refer to Jadhav et al. (2021, under review), UOCS. IV. Discovery of diverse hot companions to blue stragglers in the old open cluster King 2.
+
 
 File structure:
 ``` bash
