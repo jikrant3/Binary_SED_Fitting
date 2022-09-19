@@ -21,43 +21,57 @@ The contents of this repository might change dramatically without notice. <br />
 
 File structure:
 ``` bash
-|   Binary_SED_fitting_v2.5.ipynb                # Fitting binary SEDs and plotting
-│   Creating_VOSA_and_model_files_v1.1.ipynb     # Creating files compatible with VOSA 
-│   LICENSE
-│   log_file_binary.csv                          # log file
+│   1_Creating_VOSA_files_v2.1.0.ipynb                       # Creating files compatible with VOSA 
+│   2_example_single_star.ipynb                              # Example of single SED fitting and plotting
+│   3_example_binary_star.ipynb                              # Example of double SED fitting and plotting
+│   4_example_star_cluster.ipynb                             # Example of double SED fitting of multiple stars at once
+│   log_binary_fitting.csv                                   # log file for binary fits
+│   log_single_fitting.csv                                   # log file for single fits
 │   README.md
+│   util_functions.py
 │
 ├───data
-│   │   example_photomety_file.csv          
+│   │   example_photomety_file.csv
 │   │   example_VOSA_input_file.txt
 │   │
-│   └───vosa_results_38604
+│   ├───extinction_corrected_flux_files                      # extinction corrected flux for stars
+│   │       WOCS1007.csv
+│   │       WOCS2002.csv
+│   │       Y1168.csv
+│   │
+│   └───vosa_results_53985                                   # Results of single fitting by VOSA
 │       ├───objects
-│       │   └───WOCS2002
+│       │   ├───WOCS1007
+│       │   │   ├───bestfitp
+│       │   │   │       WOCS1007.bfit.phot.dat
+│       │   │
+│       │   ├───WOCS2002
+│       │   │   ├───bestfitp
+│       │   │   │       WOCS2002.bfit.phot.dat
+│       │   │
+│       │   └───Y1168
 │       │       ├───bestfitp
-│       │       │       WOCS2002.bfit.phot.dat
+│       │       │       Y1168.bfit.phot.dat
 │
-├───models
-│       readme_models.txt                        
-│       isochrone.txt                            # Parsec isochrones of logAge = 8,9 and 10
-│       Table_Mass_0.2                           # WD cooling curve of mass 0.2
-│       Table_Mass_1.3                           # WD cooling curve of mass 1.3
-│       Koe_logg7.0.csv                          # Koester models of various logg
-│       Koe_logg8.0.csv
-│       Koe_logg9.0.csv
-│       Kr_logg3.0_Zm05.csv                      # Kurucz models of various logg and Z
-│       Kr_logg3.0_Zp00.csv
-│       Kurucz_models_logg0_to_3.zip             # Compressed file including Kurucz models
-│       Kurucz_models_logg3.5_to_5.zip           # Compressed file including Kurucz models
-│       ...
-└───outputs
-    ├───chi_files
-    │       WOCS2002_chi2_binary_Koe_logg7.0_1.csv                 # Initial chi2 file for WOCS2002 star
-    │       WOCS2002_chi2_iterations100_binary_Koe_logg7.0_1.csv   # chi2 file after iterations
+├───outputs
+│   ├───chi_files                                            # chi2 files of SEDs  
+│   │       binary_WOCS1007_Koester_noisy_13.csv
+│   │       ...
+│   │
+│   └───pickels                                              # pickels of SEDs fitted class objects   
+│           BinaryStar_WOCS1007_13.pkl
+│           ...
+│
+└───plots
+    │   single_SEDsWOCS2002_Kurucz_1_noisy.jpg
     │
-    ├───binary_SEDs
-        └───WOCS2002
-                A_SED_WOCS2002_5250.0_logg3.5.png                 # SED fitted with only A component
-                WOCS2002_Koe_logg7.0_14750_1.png                  # Initial binary SED
-                WOCS2002_Koe_logg7.0_14750_1_iterations.png       # binary SED after iterations        
+    ├───binary_SEDs                                          # binary SED fits
+    │       WOCS1007_Koester_11750_13.jpg
+    │       ...
+    │
+    ├───single_SEDs                                          # single SED fits
+    │       blackbody_SED_WOCS2002_6181.457794845878_1.jpg
+    │       ...
+    │
+    └───test                                                 # test SED fits
 ```

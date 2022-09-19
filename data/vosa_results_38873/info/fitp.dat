@@ -1,8 +1,0 @@
-Parameter values used for the fit:
--  Kurucz ODFNEW /NOVER models
-      teff_min = 3500
-      teff_max = 50000
-      logg_min = 3.00
-      logg_max = 5.00
-      meta_min = 0
-      meta_max = 0

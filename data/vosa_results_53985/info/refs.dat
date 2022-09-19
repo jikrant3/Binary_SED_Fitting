@@ -1,0 +1,49 @@
+If your research benefits from the use of VOSA, we would appreciate if you could include the corresponding reference in your publication. Note also that VOSA makes use of models, VO services, etc that should be referenced too if they are relevant to your final results. Here you have a list of all the services that have been used for obtaining the results for this particular file. Please, take that into account. The refs.bibtex.bib file includes all the bibtex entries corresponding to the information below
+
+VOSA
+-----------------------------------------------------
+ * VOSA
+   - Acknowledgement : This publication makes use of VOSA, developed under the Spanish Virtual Observatory project supported from the Spanish MICINN through grant AyA2008-02156.
+   - 2008A&A...492..277B : Bayo et al 2008, A&A, 492, 277B
+
+
+Dereddening
+-----------------------------------------------------
+ * For dereddening the SEDs we make use of the extinction law by Fitzpatrick (1999) improved by Indebetouw et al (2005) in the infrared.
+   - 1999PASP..111...63F : Fitzpatrick, E.; 1999, PASP, 111, 63
+   - 2005ApJ...619..931I : Indebetouw et al, 2005, ApJ 619, 931
+
+
+VO photometry
+-----------------------------------------------------
+ * Gaia DR3 (CDS)
+   - Gaia DR3 Documentation : https://gea.esac.esa.int/archive/documentation/GDR3/
+   - Gaia DR3 Credit and citation instructions : https://gea.esac.esa.int/archive/documentation/GDR3/Miscellaneous/sec_credit_and_citation_instructions/
+   - 2000A&AS..143...23O : Ochsenbein et al 2000, A&AS 143, 221
+   - 2016A&A...595A...1G : Gaia Collaboration et al. 2016, A&A 595, 1G
+   - Acknowledgement : This work has made use of data from the European Space Agency (ESA) mission Gaia (https://www.cosmos.esa.int/gaia), processed by the Gaia Data Processing and Analysis Consortium (DPAC, https://www.cosmos.esa.int/web/gaia/dpac/consortium). Funding for the DPAC has been provided by national institutions, in particular the institutions participating in the Gaia Multilateral Agreement.
+
+ * Galaxy Evolution Explorer [GALEX-GR6+7]
+   - 2000A&AS..143...23O : Ochsenbein et al 2000, A&AS 143, 221
+   - GALEX web page : http://galex.stsci.edu
+   - 2017ApJS..230...24B : Bianchi et al. 2017, ApJS 230 24B
+
+ * WISE
+   - Acknowledgement : This publication makes use of data products from the Wide-field Infrared Survey Explorer, which is a joint project of the University of California, Los Angeles, and the Jet Propulsion Laboratory/California Institute of Technology, funded by the National Aeronautics and Space Administration.
+   - 2000A&AS..143...23O : Ochsenbein et al 2000, A&AS 143, 221
+   - 2010AJ....140.1868W : Wright et al 2010, AJ 140, 1868W
+
+ * 2MASS All-Sky Point Source Catalog
+   - 2006AJ....131.1163S : Skrutskie et al, 2006, AJ, 131, 1163S
+   - 2000A&AS..143...23O : Ochsenbein et al 2000, A&AS 143, 221
+   - Acknowledgement : This publication makes use of data products from the Two Micron All Sky Survey, which is a joint project of the University of Massachusetts and the Infrared Processing and Analysis Center/California Institute of Technology, funded by the National Aeronautics and Space Administration and the National Science Foundation.
+
+
+Model Fit: theoretical spectra
+-----------------------------------------------------
+ * Kurucz ODFNEW /NOVER, alpha: 0.0 (2003)
+   - 2003IAUS..210P.A20C : Castelli and Kurucz 2003, IAUS 210, A20
+   - Castelli and Kurucz Atlas : https://www.stsci.edu/hst/instrumentation/reference-data-for-calibration-and-tools/astronomical-catalogs/castelli-and-kurucz-atlas
+   - Castelli ATLAS9 grids web page. : https://wwwuser.oats.inaf.it/castelli/grids.html
+
+
