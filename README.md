@@ -2,10 +2,11 @@
 Fitting SEDs of single and binary stars.
 
 ## Installation
-The code is entirely made of Jupyter notebooks. The code is tested on `python 3.9.12`, `numpy 1.21.5`, `pandas 1.4.2`, `scipy 1.7.3` and `matplotlib 3.5.1`
+The code is entirely made of Jupyter notebooks. The code is tested on `python 3.9.12`, `numpy 1.21.5`, `pandas 1.4.2`, `scipy 1.7.3` and `matplotlib 3.5.1`.
 1. Download synthetic photometry models
-    - Currently, the code has Koester models and Kurucz models. The actual files can be downloaded from [models_and_tools
-](https://github.com/jikrant3/models_and_tools/tree/main/models) and [Google Drive](https://drive.google.com/drive/folders/1UdpMiPVj-q91IpcmcLBmSXmYh_iDgwTq?usp=sharing).
+    - Currently, the code has Koester models and Kurucz models. The actual files can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1UdpMiPVj-q91IpcmcLBmSXmYh_iDgwTq?usp=sharing). More information about how to make these model files is given in [models_and_tools](https://github.com/jikrant3/models_and_tools/).
+    - Download the following files:
+    `koester_synthetic_photometry.nc`, `kurucz_synthetic_photometry.nc`, `master_Bergeron_WD.csv`, `master_isochrone.csv`
 2. :warning: Edit the `DIR_MODELS` in the `util_functions.py` file according to where the model files are located.:warning:
 
 ## Reference:
@@ -63,16 +64,23 @@ File structure:
 │           BinaryStar_WOCS1007_13.pkl
 │           ...
 │
-└───plots
-    │   single_SEDsWOCS2002_Kurucz_1_noisy.jpg
-    │
-    ├───binary_SEDs                                          # binary SED fits
-    │       WOCS1007_Koester_11750_13.jpg
-    │       ...
-    │
-    ├───single_SEDs                                          # single SED fits
-    │       blackbody_SED_WOCS2002_6181.457794845878_1.jpg
-    │       ...
-    │
-    └───test                                                 # test SED fits
+├───plots
+│   │   single_SEDsWOCS2002_Kurucz_1_noisy.jpg
+│   │
+│   ├───binary_SEDs                                          # binary SED fits
+│   │       WOCS1007_Koester_11750_13.jpg
+│   │       ...
+│   │
+│   ├───single_SEDs                                          # single SED fits
+│   │       blackbody_SED_WOCS2002_6181.457794845878_1.jpg
+│   │       ...
+│   │
+│   └───test                                                 # test SED fits
+│
+└───models
+        info.txt                
+        koester_synthetic_photometry.nc                      # Koester model
+        kurucz_synthetic_photometry.nc                       # Kurucz model
+        master_Bergeron_WD.csv                               # WD models
+        master_isochrone.csv                                 # isochrone
 ```
