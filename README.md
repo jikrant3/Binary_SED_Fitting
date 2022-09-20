@@ -1,15 +1,16 @@
 # Binary_SED_Fitting
-Fitting SEDs of binary stars. The code is optimised for chi2 SED fitting of a double component star. It is assumed that one component has already been fit (using VOSA for our case).
+Fitting SEDs of single and binary stars.
 
 ## Installation
-The code is entirely made of Jupyter notebooks.
-The code is tested on `python 3.9.5`, `numpy 1.20.3`, `pandas 1.3.4`, `scipy 1.7.1` and `matplotlib 3.4.3`
-#### Synthetic photometry model files
-Currently, the code has Koester models and Kurucz models (in compressed form). 
-If user requires more model files, they can create them using `Creating_VOSA_and_model_files_v1.1.ipynb`
+The code is entirely made of Jupyter notebooks. The code is tested on `python 3.9.12`, `numpy 1.21.5`, `pandas 1.4.2`, `scipy 1.7.3` and `matplotlib 3.5.1`
+1. Download synthetic photometry models
+    - Currently, the code has Koester models and Kurucz models. The actual files can be downloaded from [models_and_tools
+](https://github.com/jikrant3/models_and_tools/tree/main/models) and [Google Drive](https://drive.google.com/drive/folders/1UdpMiPVj-q91IpcmcLBmSXmYh_iDgwTq?usp=sharing).
+2. :warning: Edit the `DIR_MODELS` in the `util_functions.py` file according to where the model files are located.:warning:
 
 ## Reference:
 This code is developed by Vikrant V. Jadhav. 
+
 If you use the code, please refer to Jadhav et al. (2021), UOCS. IV. Discovery of diverse hot companions to blue stragglers in the old open cluster King 2, Journal of Astrophysics and Astronomy, Volume 42, Issue 2, article id.89 (https://doi.org/10.1007/s12036-021-09746-y)
 
 ## Disclaimer
