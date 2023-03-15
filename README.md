@@ -2,12 +2,15 @@
 Fitting SEDs of single and binary stars.
 
 ## Installation
-The code is entirely made of Jupyter notebooks. The code is tested on `python 3.9.12`, `numpy 1.21.5`, `pandas 1.4.2`, `scipy 1.7.3` and `matplotlib 3.5.1`.
-1. Download synthetic photometry models
+The code is entirely made of Jupyter notebooks. The code is tested on `python 3.9.12`, `numpy 1.21.5`, `pandas 1.4.2`, `scipy 1.7.3` and `matplotlib 3.5.1`, `xarray 2022.06.0`.
+1. Install `xrray`
+    - `python -m pip install xarray`
+    - `python -m pip install "xarray[io]"`
+2. Download synthetic photometry models
     - Currently, the code has Koester models and Kurucz models. The actual files can be downloaded from [Google Drive](https://drive.google.com/drive/folders/1UdpMiPVj-q91IpcmcLBmSXmYh_iDgwTq?usp=sharing). More information about how to make these model files is given in [models_and_tools](https://github.com/jikrant3/models_and_tools/).
     - Download the following files:
     `koester_synthetic_photometry.nc`, `kurucz_synthetic_photometry.nc`, `master_Bergeron_WD.csv`, `master_isochrone.csv`
-2. :warning: Edit the `DIR_MODELS` in the `util_functions.py` file according to where the model files are located.:warning:
+3. :warning: Edit the `DIR_MODELS` in the `util_functions.py` file according to where the model files are located.:warning:
 
 ## Reference:
 This code is developed by Vikrant V. Jadhav. 
