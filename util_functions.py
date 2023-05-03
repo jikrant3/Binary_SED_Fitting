@@ -1704,7 +1704,7 @@ class BinaryStar:
             da_chi2_stacked = xr.DataArray(nd_arr, coords={'Te'  :da_model.Te,
                                                            'logg':da_model.logg,
                                                            'MH'  :da_model.MH,
-                                                           'sf'  :self.sf_list})
+                                                           'sf'  :self.sf_list_B})
             da_vgf2_stacked  = da_chi2_stacked.copy()
             da_vgfb2_stacked = da_chi2_stacked.copy()
         if self.model_to_fit_B=='Koester':
