@@ -1,0 +1,1184 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Example binary fit" href="examples_binary.html" /><link rel="prev" title="I/O and VOSA helper functions" href="examples_io.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Example single fit - Binary_SED_Fitting 3.4.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Binary_SED_Fitting 3.4.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="examples_io.html">I/O and VOSA helper functions</a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#">Example single fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_binary.html">Example binary fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_cluster.html">Example cluster fit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html">Utility functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changlog.html">Changlog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/examples_single.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="example-single-fit">
+<h1>Example single fit<a class="headerlink" href="#example-single-fit" title="Link to this heading">¶</a></h1>
+<p>Fitting method</p>
+<ul class="simple">
+<li><p>Read data</p></li>
+<li><p>Select and create model</p></li>
+<li><p>Fit the data with model</p></li>
+<li><p>Save plots and log</p></li>
+</ul>
+<section id="quick-fit">
+<h2>Quick fit<a class="headerlink" href="#quick-fit" title="Link to this heading">¶</a></h2>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.binary_sed_fitting</span> <span class="k">as</span> <span class="nn">bsf</span>
+<span class="c1">################################################################################</span>
+<span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;WOCS2002&#39;</span>
+<span class="n">file_name</span>   <span class="o">=</span> <span class="s1">&#39;data/extinction_corrected_flux_files/</span><span class="si">%s</span><span class="s1">.csv&#39;</span><span class="o">%</span><span class="k">name</span>
+<span class="n">data</span>        <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="n">distance</span>    <span class="o">=</span> <span class="mf">831.</span> <span class="c1"># pc</span>
+<span class="n">e_distance</span>  <span class="o">=</span> <span class="mf">11.</span>  <span class="c1"># pc</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;kurucz&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">5</span><span class="p">],</span>
+          <span class="s1">&#39;MH&#39;</span>   <span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">],</span>
+          <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Star</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                <span class="n">e_distance</span><span class="o">=</span><span class="n">e_distance</span><span class="p">,</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_chi2</span><span class="p">()</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">52</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">estimate_runtime</span>
+<span class="n">Calculating</span> <span class="n">chi2</span><span class="p">:</span> <span class="n">ETA</span> <span class="o">~</span> <span class="mi">0</span> <span class="n">s</span>
+</pre></div>
+</div>
+<img alt="_images/output_3_1.png" src="_images/output_3_1.png" />
+</section>
+<section id="selecting-model">
+<h2>Selecting model<a class="headerlink" href="#selecting-model" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p>Supported models: Kurucz, Koester and Kurucz_UVBLUE</p></li>
+</ul>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.binary_sed_fitting</span> <span class="k">as</span> <span class="nn">bsf</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;kurucz&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">5</span><span class="p">],</span>
+          <span class="s1">&#39;MH&#39;</span>   <span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">],</span>
+          <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\n\n</span><span class="s1">&#39;</span> <span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">da</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;kurucz_uvblue&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">5</span><span class="p">],</span>
+          <span class="s1">&#39;MH&#39;</span>   <span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\n\n</span><span class="s1">&#39;</span> <span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">da</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;koester&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">80000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span> <span class="mf">6.5</span><span class="p">,</span>   <span class="mf">9.5</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="s1">&#39;</span><span class="se">\n\n\n</span><span class="s1">&#39;</span> <span class="p">,</span><span class="n">model</span><span class="o">.</span><span class="n">da</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">kurucz</span>
+
+
+ <span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">DataArray</span> <span class="p">(</span><span class="n">FilterID</span><span class="p">:</span> <span class="mi">8162</span><span class="p">,</span> <span class="n">Te</span><span class="p">:</span> <span class="mi">23</span><span class="p">,</span> <span class="n">logg</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">MH</span><span class="p">:</span> <span class="mi">1</span><span class="p">,</span> <span class="n">alpha</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">8</span><span class="n">MB</span>
+<span class="p">[</span><span class="mi">938630</span> <span class="n">values</span> <span class="k">with</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">]</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">FilterID</span>  <span class="p">(</span><span class="n">FilterID</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">U38</span> <span class="mi">1</span><span class="n">MB</span> <span class="s1">&#39;Swift/UVOT.UVM2_fil&#39;</span> <span class="o">...</span> <span class="s1">&#39;QUIJOTE/MFI.11GH...</span>
+  <span class="o">*</span> <span class="n">Te</span>        <span class="p">(</span><span class="n">Te</span><span class="p">)</span> <span class="n">int32</span> <span class="mi">92</span><span class="n">B</span> <span class="mi">3500</span> <span class="mi">3750</span> <span class="mi">4000</span> <span class="mi">4250</span> <span class="mi">4500</span> <span class="o">...</span> <span class="mi">8250</span> <span class="mi">8500</span> <span class="mi">8750</span> <span class="mi">9000</span>
+  <span class="o">*</span> <span class="n">logg</span>      <span class="p">(</span><span class="n">logg</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">40</span><span class="n">B</span> <span class="mf">3.0</span> <span class="mf">3.5</span> <span class="mf">4.0</span> <span class="mf">4.5</span> <span class="mf">5.0</span>
+  <span class="o">*</span> <span class="n">MH</span>        <span class="p">(</span><span class="n">MH</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">8</span><span class="n">B</span> <span class="mf">0.0</span>
+  <span class="o">*</span> <span class="n">alpha</span>     <span class="p">(</span><span class="n">alpha</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">8</span><span class="n">B</span> <span class="mf">0.0</span>
+<span class="n">Attributes</span><span class="p">:</span>
+    <span class="n">Wavelengths</span><span class="p">:</span>  <span class="p">[</span><span class="mf">1.19128077e+00</span> <span class="mf">1.24254209e+00</span> <span class="mf">1.48134125e+02</span> <span class="o">...</span> <span class="mf">3.8683349</span><span class="o">...</span>
+    <span class="n">unit</span><span class="p">:</span>         <span class="n">erg</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">cm2</span><span class="o">/</span><span class="n">A</span>
+    <span class="n">long_name</span><span class="p">:</span>    <span class="n">Flux</span>
+<span class="n">kurucz_uvblue</span>
+
+
+ <span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">DataArray</span> <span class="p">(</span><span class="n">FilterID</span><span class="p">:</span> <span class="mi">8162</span><span class="p">,</span> <span class="n">Te</span><span class="p">:</span> <span class="mi">12</span><span class="p">,</span> <span class="n">logg</span><span class="p">:</span> <span class="mi">5</span><span class="p">,</span> <span class="n">MH</span><span class="p">:</span> <span class="mi">1</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">4</span><span class="n">MB</span>
+<span class="p">[</span><span class="mi">489720</span> <span class="n">values</span> <span class="k">with</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">]</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">FilterID</span>  <span class="p">(</span><span class="n">FilterID</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">U38</span> <span class="mi">1</span><span class="n">MB</span> <span class="s1">&#39;Swift/UVOT.UVM2_fil&#39;</span> <span class="o">...</span> <span class="s1">&#39;QUIJOTE/MFI.11GH...</span>
+  <span class="o">*</span> <span class="n">Te</span>        <span class="p">(</span><span class="n">Te</span><span class="p">)</span> <span class="n">int32</span> <span class="mi">48</span><span class="n">B</span> <span class="mi">3500</span> <span class="mi">4000</span> <span class="mi">4500</span> <span class="mi">5000</span> <span class="mi">5500</span> <span class="o">...</span> <span class="mi">7500</span> <span class="mi">8000</span> <span class="mi">8500</span> <span class="mi">9000</span>
+  <span class="o">*</span> <span class="n">logg</span>      <span class="p">(</span><span class="n">logg</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">40</span><span class="n">B</span> <span class="mf">3.0</span> <span class="mf">3.5</span> <span class="mf">4.0</span> <span class="mf">4.5</span> <span class="mf">5.0</span>
+  <span class="o">*</span> <span class="n">MH</span>        <span class="p">(</span><span class="n">MH</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">8</span><span class="n">B</span> <span class="mf">0.0</span>
+    <span class="n">alpha</span>     <span class="n">float64</span> <span class="mi">8</span><span class="n">B</span> <span class="o">...</span>
+<span class="n">Attributes</span><span class="p">:</span>
+    <span class="n">Wavelengths</span><span class="p">:</span>  <span class="p">[</span><span class="mf">1.19128077e+00</span> <span class="mf">1.24254209e+00</span> <span class="mf">1.48134125e+02</span> <span class="o">...</span> <span class="mf">3.8683349</span><span class="o">...</span>
+    <span class="n">unit</span><span class="p">:</span>         <span class="n">erg</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">cm2</span><span class="o">/</span><span class="n">A</span>
+    <span class="n">long_name</span><span class="p">:</span>    <span class="n">Flux</span>
+<span class="n">koester</span>
+
+
+ <span class="o">&lt;</span><span class="n">xarray</span><span class="o">.</span><span class="n">DataArray</span> <span class="p">(</span><span class="n">FilterID</span><span class="p">:</span> <span class="mi">8162</span><span class="p">,</span> <span class="n">Te</span><span class="p">:</span> <span class="mi">82</span><span class="p">,</span> <span class="n">logg</span><span class="p">:</span> <span class="mi">13</span><span class="p">)</span><span class="o">&gt;</span> <span class="n">Size</span><span class="p">:</span> <span class="mi">70</span><span class="n">MB</span>
+<span class="p">[</span><span class="mi">8700692</span> <span class="n">values</span> <span class="k">with</span> <span class="n">dtype</span><span class="o">=</span><span class="n">float64</span><span class="p">]</span>
+<span class="n">Coordinates</span><span class="p">:</span>
+  <span class="o">*</span> <span class="n">FilterID</span>  <span class="p">(</span><span class="n">FilterID</span><span class="p">)</span> <span class="o">&lt;</span><span class="n">U38</span> <span class="mi">1</span><span class="n">MB</span> <span class="s1">&#39;IUE/IUE.1250-1300&#39;</span> <span class="o">...</span> <span class="s1">&#39;QUIJOTE/MFI.11GHz_H3&#39;</span>
+  <span class="o">*</span> <span class="n">Te</span>        <span class="p">(</span><span class="n">Te</span><span class="p">)</span> <span class="n">int32</span> <span class="mi">328</span><span class="n">B</span> <span class="mi">5000</span> <span class="mi">5250</span> <span class="mi">5500</span> <span class="mi">5750</span> <span class="o">...</span> <span class="mi">50000</span> <span class="mi">60000</span> <span class="mi">70000</span> <span class="mi">80000</span>
+  <span class="o">*</span> <span class="n">logg</span>      <span class="p">(</span><span class="n">logg</span><span class="p">)</span> <span class="n">float64</span> <span class="mi">104</span><span class="n">B</span> <span class="mf">6.5</span> <span class="mf">6.75</span> <span class="mf">7.0</span> <span class="mf">7.25</span> <span class="mf">7.5</span> <span class="o">...</span> <span class="mf">8.75</span> <span class="mf">9.0</span> <span class="mf">9.25</span> <span class="mf">9.5</span>
+<span class="n">Attributes</span><span class="p">:</span>
+    <span class="n">Wavelengths</span><span class="p">:</span>  <span class="p">[</span><span class="mf">1.28470318e+03</span> <span class="mf">1.35336435e+03</span> <span class="mf">1.35623969e+03</span> <span class="o">...</span> <span class="mf">3.8683349</span><span class="o">...</span>
+    <span class="n">unit</span><span class="p">:</span>         <span class="n">erg</span><span class="o">/</span><span class="n">s</span><span class="o">/</span><span class="n">cm2</span><span class="o">/</span><span class="n">A</span>
+    <span class="n">long_name</span><span class="p">:</span>    <span class="n">Flux</span>
+</pre></div>
+</div>
+</section>
+<section id="recommended-fitting-routine">
+<h2>Recommended fitting routine<a class="headerlink" href="#recommended-fitting-routine" title="Link to this heading">¶</a></h2>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">Star</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">name</span></code> : Name of the star</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">distance</span></code>, <code class="docutils literal notranslate"><span class="pre">e_distance</span></code> : Distance and it’s error in pc</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">filters_to_drop</span></code> : Filters to be removed from the fit (due to
+bad data, bad fit, saturation…)</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">wavelength_range</span></code> : Wavelength range to be fitted in Angstrom</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code> : DataFrame with the photometric flux</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">model</span></code> : Model object of required model and parameter limits</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">r_limits</span></code> : 2 options</p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">blackbody</span></code> : Radius range automatically calculated from
+blackbody fit</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">[r_min,r_max]</span></code> : Radius is varied between the r_min and
+r_max given in solar radii</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">run_name</span></code> : A string name for tracking different fits</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_chi2</span></code></p>
+<ul>
+<li><p>Calculates chi2 for the data and model.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refit</span></code></p>
+<ul>
+<li><p>if <code class="docutils literal notranslate"><span class="pre">True</span></code> : the fit is redone.</p></li>
+<li><p>If <code class="docutils literal notranslate"><span class="pre">False</span></code>: If a previous fit is available, it is read.
+Otherwise a fresh fit is made.</p></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_noisy_chi2</span></code></p>
+<ul>
+<li><p>Fits chi2 by adding noise to the data. Useful for getting
+statistical errors.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">refit</span></code> : if <code class="docutils literal notranslate"><span class="pre">True</span></code> the fit is redone. If <code class="docutils literal notranslate"><span class="pre">False</span></code>, the
+previous fit is read.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+<ul>
+<li><p><code class="docutils literal notranslate"><span class="pre">add_noisy_seds</span></code> : Whether to plot the noisy SEDs.</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">folder</span></code> : Folder for saving the plot</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">FR_cutoff</span></code> : Fractional residual cutoff for indicating excess
+flux</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_public</span></code></p>
+<ul>
+<li><p>Plots a smaller plot with SED, FR and EWR</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save_summary</span></code></p>
+<ul>
+<li><p>Saves the fit parameters in a logfile</p></li>
+</ul>
+</li>
+</ul>
+<section id="example-1">
+<h3>Example 1<a class="headerlink" href="#example-1" title="Link to this heading">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.binary_sed_fitting</span> <span class="k">as</span> <span class="nn">bsf</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">bsf</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">bsf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;WOCS2002&#39;</span>
+<span class="n">file_name</span>   <span class="o">=</span> <span class="s1">&#39;data/extinction_corrected_flux_files/</span><span class="si">%s</span><span class="s1">.csv&#39;</span><span class="o">%</span><span class="k">name</span>
+<span class="n">data</span>        <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="n">distance</span>    <span class="o">=</span> <span class="mf">831.</span> <span class="c1"># pc</span>
+<span class="n">e_distance</span>  <span class="o">=</span> <span class="mf">11.</span>  <span class="c1"># pc</span>
+
+<span class="n">refit</span>    <span class="o">=</span> <span class="kc">False</span>
+<span class="n">run_name</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;kurucz&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">5</span><span class="p">],</span>
+          <span class="s1">&#39;MH&#39;</span>   <span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">],</span>
+          <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Star</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                <span class="n">e_distance</span><span class="o">=</span><span class="n">e_distance</span><span class="p">,</span>
+                <span class="n">filters_to_drop</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;KPNO/Mosaic.I&#39;</span><span class="p">],</span>
+                <span class="n">wavelength_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">1_000_000_000</span><span class="p">],</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">r_limits</span><span class="o">=</span><span class="s1">&#39;blackbody&#39;</span><span class="p">,</span>
+                <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_noisy_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">add_noisy_seds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+          <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;plots/&#39;</span><span class="p">,</span>
+          <span class="n">FR_cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot_public</span><span class="p">(</span><span class="n">add_noisy_seds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;plots/&#39;</span><span class="p">,</span>
+                 <span class="n">FR_cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">save_summary</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="fm">__init__</span>
+<span class="o">==========================================================</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="o">------------</span>            <span class="n">WOCS2002</span> <span class="n">A</span>            <span class="o">------------</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="o">==========================================================</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">drop_filters</span>
+                        <span class="n">Fitted</span>           <span class="n">Not</span> <span class="n">fitted</span>
+<span class="n">wavelength</span>
+<span class="mf">1481.000000</span>                     <span class="n">Astrosat</span><span class="o">/</span><span class="n">UVIT</span><span class="o">.</span><span class="n">F148W</span>
+<span class="mf">1541.000000</span>                     <span class="n">Astrosat</span><span class="o">/</span><span class="n">UVIT</span><span class="o">.</span><span class="n">F154W</span>
+<span class="mf">1608.000000</span>                     <span class="n">Astrosat</span><span class="o">/</span><span class="n">UVIT</span><span class="o">.</span><span class="n">F169M</span>
+<span class="mf">2303.366368</span>                         <span class="n">GALEX</span><span class="o">/</span><span class="n">GALEX</span><span class="o">.</span><span class="n">NUV</span>
+<span class="mf">4357.276538</span>      <span class="n">KPNO</span><span class="o">/</span><span class="n">Mosaic</span><span class="o">.</span><span class="n">B</span>
+<span class="mf">5035.750275</span>     <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">Gbp</span>
+<span class="mf">5366.240786</span>      <span class="n">KPNO</span><span class="o">/</span><span class="n">Mosaic</span><span class="o">.</span><span class="n">V</span>
+<span class="mf">5822.388714</span>       <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">G</span>
+<span class="mf">7619.959993</span>     <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">Grp</span>
+<span class="mf">8101.609574</span>                           <span class="n">KPNO</span><span class="o">/</span><span class="n">Mosaic</span><span class="o">.</span><span class="n">I</span>
+<span class="mf">8578.159519</span>    <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">Grvs</span>
+<span class="mf">12350.000000</span>     <span class="mi">2</span><span class="n">MASS</span><span class="o">/</span><span class="mi">2</span><span class="n">MASS</span><span class="o">.</span><span class="n">J</span>
+<span class="mf">16620.000000</span>     <span class="mi">2</span><span class="n">MASS</span><span class="o">/</span><span class="mi">2</span><span class="n">MASS</span><span class="o">.</span><span class="n">H</span>
+<span class="mf">21590.000000</span>    <span class="mi">2</span><span class="n">MASS</span><span class="o">/</span><span class="mi">2</span><span class="n">MASS</span><span class="o">.</span><span class="n">Ks</span>
+<span class="mf">33526.000000</span>      <span class="n">WISE</span><span class="o">/</span><span class="n">WISE</span><span class="o">.</span><span class="n">W1</span>
+<span class="mf">46028.000000</span>      <span class="n">WISE</span><span class="o">/</span><span class="n">WISE</span><span class="o">.</span><span class="n">W2</span>
+<span class="mf">115608.000000</span>     <span class="n">WISE</span><span class="o">/</span><span class="n">WISE</span><span class="o">.</span><span class="n">W3</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">drop_filters</span>
+<span class="n">Filters</span><span class="p">:</span> <span class="n">used</span><span class="o">/</span><span class="nb">all</span> <span class="o">=</span> <span class="mi">12</span><span class="o">/</span><span class="mi">17</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">blackbody</span>
+<span class="n">Fit</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">T</span><span class="o">=</span><span class="mi">5141</span> <span class="n">K</span><span class="p">,</span> <span class="n">log_sf</span><span class="o">=-</span><span class="mf">19.68</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">calculate_chi2</span>
+<span class="n">Give</span> <span class="s2">&quot;refit=True&quot;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">rerun</span> <span class="n">the</span> <span class="n">fitting</span> <span class="n">process</span><span class="o">.</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">calculate_chi2</span>
+     <span class="n">Te</span>  <span class="n">logg</span>   <span class="n">MH</span>  <span class="n">alpha</span>            <span class="n">sf</span>         <span class="n">chi2</span>         <span class="n">R</span>          <span class="n">L</span>
+<span class="mi">0</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1436.600470</span>  <span class="mf">5.331470</span>  <span class="mf">19.454716</span>
+<span class="mi">1</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1437.936819</span>  <span class="mf">5.331470</span>  <span class="mf">19.454716</span>
+<span class="mi">2</span>  <span class="mi">5250</span>   <span class="mf">5.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1465.574398</span>  <span class="mf">5.331470</span>  <span class="mf">19.454716</span>
+<span class="mi">3</span>  <span class="mi">5250</span>   <span class="mf">3.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1475.514792</span>  <span class="mf">5.331470</span>  <span class="mf">19.454716</span>
+<span class="mi">4</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.141090e-20</span>  <span class="mf">1557.722256</span>  <span class="mf">5.393206</span>  <span class="mf">19.907874</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">get_parameters_from_chi2_minimization</span>
+<span class="n">Te</span>  <span class="mi">5250</span>
+<span class="n">logg</span>        <span class="mf">4.5</span>
+<span class="n">MH</span>  <span class="mf">0.0</span>
+<span class="n">alpha</span>       <span class="mf">0.0</span>
+<span class="n">sf</span>  <span class="mf">2.0923525610805822e-20</span>
+<span class="n">chi2</span>        <span class="mf">1436.6004696876382</span>
+<span class="n">R</span>   <span class="mf">5.331470347607279</span>
+<span class="n">L</span>   <span class="mf">19.454715675310812</span>
+<span class="n">vgf2</span>        <span class="mf">1409.3254983079803</span>
+<span class="n">vgfb2</span>       <span class="mf">367.3732364927856</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">get_parameters_from_chi2_minimization</span>
+<span class="n">Based</span> <span class="n">on</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">I</span> <span class="n">recommend</span> <span class="n">removal</span> <span class="n">of</span> <span class="n">following</span> <span class="n">filters</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;GAIA/GAIA3.Grvs&#39;</span><span class="p">];</span> <span class="n">chi2</span><span class="o">=</span><span class="p">[</span><span class="mf">19.2204403</span><span class="p">]</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">calculate_noisy_chi2</span>
+<span class="n">Give</span> <span class="s2">&quot;refit=True&quot;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">rerun</span> <span class="n">the</span> <span class="n">fitting</span> <span class="n">process</span><span class="o">.</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">calculate_noisy_chi2</span>
+     <span class="n">Te</span>  <span class="n">logg</span>   <span class="n">MH</span>  <span class="n">alpha</span>            <span class="n">sf</span>         <span class="n">chi2</span>        <span class="n">R</span>          <span class="n">L</span>
+<span class="mi">0</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1436.600470</span>  <span class="mf">5.33147</span>  <span class="mf">19.454716</span>
+<span class="mi">1</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1448.373499</span>  <span class="mf">5.33147</span>  <span class="mf">19.454716</span>
+<span class="mi">2</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1365.291238</span>  <span class="mf">5.33147</span>  <span class="mf">19.454716</span>
+<span class="mi">3</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1384.661354</span>  <span class="mf">5.33147</span>  <span class="mf">19.454716</span>
+<span class="mi">4</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.092353e-20</span>  <span class="mf">1519.437073</span>  <span class="mf">5.33147</span>  <span class="mf">19.454716</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">54</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">get_parameters_from_noisy_chi2_minimization</span>
+<span class="n">Te</span>  <span class="mi">5250</span><span class="p">(</span><span class="o">-</span><span class="mi">250</span><span class="p">,</span><span class="o">+</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">logg</span>        <span class="mf">4.5</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">MH</span>  <span class="mf">0.0</span><span class="p">(</span><span class="o">-</span><span class="n">nan</span><span class="p">,</span><span class="o">+</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">alpha</span>       <span class="mf">0.0</span><span class="p">(</span><span class="o">-</span><span class="n">nan</span><span class="p">,</span><span class="o">+</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">sf</span>  <span class="mf">2.0923525610805822e-20</span><span class="p">(</span><span class="o">-</span><span class="mf">4.762775903042835e-22</span><span class="p">,</span><span class="o">+</span><span class="mf">4.8737152053873975e-22</span><span class="p">)</span>
+<span class="n">R</span>   <span class="mf">5.331470347607279</span><span class="p">(</span><span class="o">-</span><span class="mf">0.0933009594847496</span><span class="p">,</span><span class="o">+</span><span class="mf">0.09376472807053667</span><span class="p">)</span>
+<span class="n">L</span>   <span class="mf">19.454715675310812</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5150466243764595</span><span class="p">,</span><span class="o">+</span><span class="mf">0.5150466243764595</span><span class="p">)</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">55</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">save_summary</span>
+<span class="n">Saving</span> <span class="n">log</span> <span class="ow">in</span> <span class="n">data</span><span class="o">/</span><span class="n">log_single_fitting</span><span class="o">.</span><span class="n">csv</span>
+</pre></div>
+</div>
+<img alt="_images/output_9_11.png" src="_images/output_9_11.png" />
+<img alt="_images/output_9_21.png" src="_images/output_9_21.png" />
+</section>
+<section id="example-2">
+<h3>Example 2<a class="headerlink" href="#example-2" title="Link to this heading">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.binary_sed_fitting</span> <span class="k">as</span> <span class="nn">bsf</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">bsf</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">bsf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">WARNING</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;Y1168&#39;</span>
+<span class="n">file_name</span>   <span class="o">=</span> <span class="s1">&#39;data/extinction_corrected_flux_files/</span><span class="si">%s</span><span class="s1">.csv&#39;</span><span class="o">%</span><span class="k">name</span>
+<span class="n">data</span>        <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="n">distance</span>    <span class="o">=</span> <span class="mf">831.</span> <span class="c1"># pc</span>
+<span class="n">e_distance</span>  <span class="o">=</span> <span class="mf">11.</span>  <span class="c1"># pc</span>
+
+<span class="n">refit</span>    <span class="o">=</span> <span class="kc">False</span>
+<span class="n">run_name</span> <span class="o">=</span> <span class="s1">&#39;0&#39;</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;koester&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">5000</span><span class="p">,</span> <span class="mi">80000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span> <span class="mf">6.5</span><span class="p">,</span>   <span class="mf">9.5</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Star</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                <span class="n">e_distance</span><span class="o">=</span><span class="n">e_distance</span><span class="p">,</span>
+                <span class="n">filters_to_drop</span><span class="o">=</span><span class="p">[],</span>
+                <span class="n">wavelength_range</span><span class="o">=</span><span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1_000_000_000</span><span class="p">],</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">r_limits</span><span class="o">=</span><span class="s1">&#39;blackbody&#39;</span><span class="p">,</span>
+                <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_noisy_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">add_noisy_seds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+          <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;plots/&#39;</span><span class="p">,</span>
+          <span class="n">FR_cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">save_summary</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">56</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">calculate_chi2</span>
+<span class="n">Give</span> <span class="s2">&quot;refit=True&quot;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">rerun</span> <span class="n">the</span> <span class="n">fitting</span> <span class="n">process</span><span class="o">.</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">56</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">get_parameters_from_chi2_minimization</span>
+<span class="n">Based</span> <span class="n">on</span> <span class="n">chi2</span><span class="p">,</span> <span class="n">I</span> <span class="n">recommend</span> <span class="n">removal</span> <span class="n">of</span> <span class="n">following</span> <span class="n">filters</span><span class="p">:</span> <span class="p">[</span><span class="s1">&#39;WISE/WISE.W1&#39;</span><span class="p">];</span> <span class="n">chi2</span><span class="o">=</span><span class="p">[</span><span class="mf">1722.30668168</span><span class="p">]</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">56</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">calculate_noisy_chi2</span>
+<span class="n">Give</span> <span class="s2">&quot;refit=True&quot;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">rerun</span> <span class="n">the</span> <span class="n">fitting</span> <span class="n">process</span><span class="o">.</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">56</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">get_realistic_errors_from_iterations</span>
+<span class="n">logg_A</span> <span class="p">:</span> <span class="n">The</span> <span class="n">best</span> <span class="n">fit</span> <span class="n">value</span> <span class="ow">is</span> <span class="n">at</span> <span class="n">upper</span> <span class="n">limit</span> <span class="n">of</span> <span class="n">the</span> <span class="n">model</span><span class="o">.</span>
+</pre></div>
+</div>
+<img alt="_images/output_11_1.png" src="_images/output_11_1.png" />
+</section>
+<section id="example-3">
+<h3>Example 3<a class="headerlink" href="#example-3" title="Link to this heading">¶</a></h3>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.binary_sed_fitting</span> <span class="k">as</span> <span class="nn">bsf</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">bsf</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">bsf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">ERROR</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;WOCS2002&#39;</span>
+<span class="n">file_name</span>   <span class="o">=</span> <span class="s1">&#39;data/extinction_corrected_flux_files/</span><span class="si">%s</span><span class="s1">.csv&#39;</span><span class="o">%</span><span class="k">name</span>
+<span class="n">data</span>        <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="n">distance</span>    <span class="o">=</span> <span class="mf">831.</span> <span class="c1"># pc</span>
+<span class="n">e_distance</span>  <span class="o">=</span> <span class="mf">11.</span>  <span class="c1"># pc</span>
+
+<span class="n">refit</span>    <span class="o">=</span> <span class="kc">False</span>
+<span class="n">run_name</span> <span class="o">=</span> <span class="s1">&#39;uvblue&#39;</span>
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;kurucz_uvblue&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">5</span><span class="p">],</span>
+          <span class="s1">&#39;MH&#39;</span>   <span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Star</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                <span class="n">e_distance</span><span class="o">=</span><span class="n">e_distance</span><span class="p">,</span>
+                <span class="n">filters_to_drop</span><span class="o">=</span><span class="p">[],</span>
+                <span class="n">wavelength_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">1_000_000_000</span><span class="p">],</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">r_limits</span><span class="o">=</span><span class="p">[</span><span class="mf">0.1</span><span class="p">,</span> <span class="mi">10</span><span class="p">],</span>
+                <span class="n">run_name</span><span class="o">=</span><span class="n">run_name</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_noisy_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">add_noisy_seds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+          <span class="n">folder</span><span class="o">=</span><span class="s1">&#39;plots/&#39;</span><span class="p">,</span>
+          <span class="n">FR_cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">save_summary</span><span class="p">()</span>
+</pre></div>
+</div>
+<img alt="_images/output_13_0.png" src="_images/output_13_0.png" />
+</section>
+</section>
+<section id="advance-options">
+<h2>Advance options<a class="headerlink" href="#advance-options" title="Link to this heading">¶</a></h2>
+<ul>
+<li><p>Console logging options can be changes based on requirements</p>
+<ul class="simple">
+<li><p>For minimal logs: <code class="docutils literal notranslate"><span class="pre">bsf.console.setLevel(bsf.logging.ERROR)</span></code></p></li>
+<li><p>For typical logs: <code class="docutils literal notranslate"><span class="pre">bsf.console.setLevel(bsf.logging.WARNING)</span></code></p></li>
+<li><p>For detailed logs: <code class="docutils literal notranslate"><span class="pre">bsf.console.setLevel(bsf.logging.INFO)</span></code></p></li>
+<li><p>For debug logs: <code class="docutils literal notranslate"><span class="pre">bsf.console.setLevel(bsf.logging.DEBUG)</span></code></p></li>
+</ul>
+</li>
+<li><p>Editing the <code class="docutils literal notranslate"><span class="pre">bsf</span></code> file and re-importing the file
+<code class="docutils literal notranslate"><span class="pre">python</span>&#160;&#160;&#160;&#160; <span class="pre">import</span> <span class="pre">importlib</span>&#160;&#160;&#160;&#160; <span class="pre">importlib.reload(bsf)</span></code></p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Star</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">component</span></code> : Name of the component. Useful for binary fits.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_blackbody</span></code></p>
+<ul class="simple">
+<li><p>Fits a blackbody to given flux</p></li>
+<li><p><code class="docutils literal notranslate"><span class="pre">p0</span></code> : Initial guess for the temperature and log(scaling
+factor). Default is [5000., -20]</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_chi2</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">_trim</span></code> : Trimming the number of chi2 fits to save memory</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">fit_noisy_chi2</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">total_iterations</span></code> : Number of iterations for noisy fits</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">show_plot</span></code> : Showing/hiding the plots in the notebook</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">plot_public</span></code></p>
+<ul class="simple">
+<li><p>Duplicate and modify the funcion to suit your need</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">create_sf_list</span></code></p>
+<ul class="simple">
+<li><p><code class="docutils literal notranslate"><span class="pre">LOG_SF_STEPSIZE</span></code> (=0.01) and <code class="docutils literal notranslate"><span class="pre">LOG_SF_FLEXIBILITY</span></code> (=2) are
+used to determine the stepsizes in scaling factor</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data</span></code></p>
+<ul class="simple">
+<li><p>Dataframe containing the observational data. It is cropped to the
+fitted filters based on <code class="docutils literal notranslate"><span class="pre">filters_to_drop</span></code> and
+<code class="docutils literal notranslate"><span class="pre">wavelength_range</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_all</span></code></p>
+<ul class="simple">
+<li><p>A copy of the original data with an added ‘fitted’ column
+indicating whether the filter is used. Mmodel flux, residuals, and
+statistical measures are added in
+<code class="docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_chi2_minimization</span></code> and
+<code class="docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_noisy_chi2_minimization</span></code>.</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">data_not_fitted</span></code></p>
+<ul class="simple">
+<li><p>DataFrame containing only removed filters based on
+<code class="docutils literal notranslate"><span class="pre">filters_to_drop</span></code> and <code class="docutils literal notranslate"><span class="pre">wavelength_range</span></code></p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">save_fig</span></code></p>
+<ul class="simple">
+<li><p>Edit the function to change the plot format (e.g. PDF, PNG or
+multiple formats)</p></li>
+</ul>
+</li>
+<li><p><code class="docutils literal notranslate"><span class="pre">Star.df_chi2</span></code></p>
+<blockquote>
+<div><ul class="simple">
+<li><p>The chi2 dataframe is saved in <code class="docutils literal notranslate"><span class="pre">outputs\</span></code>.</p></li>
+</ul>
+</div></blockquote>
+</li>
+</ul>
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="kn">import</span> <span class="nn">src.binary_sed_fitting</span> <span class="k">as</span> <span class="nn">bsf</span>
+<span class="kn">import</span> <span class="nn">warnings</span>
+<span class="kn">import</span> <span class="nn">importlib</span>
+<span class="n">warnings</span><span class="o">.</span><span class="n">filterwarnings</span><span class="p">(</span><span class="s2">&quot;ignore&quot;</span><span class="p">)</span>
+<span class="n">importlib</span><span class="o">.</span><span class="n">reload</span><span class="p">(</span><span class="n">bsf</span><span class="p">)</span>
+<span class="n">bsf</span><span class="o">.</span><span class="n">console</span><span class="o">.</span><span class="n">setLevel</span><span class="p">(</span><span class="n">bsf</span><span class="o">.</span><span class="n">logging</span><span class="o">.</span><span class="n">INFO</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">name</span>        <span class="o">=</span> <span class="s1">&#39;WOCS2002&#39;</span>
+<span class="n">file_name</span>   <span class="o">=</span> <span class="s1">&#39;data/extinction_corrected_flux_files/</span><span class="si">%s</span><span class="s1">.csv&#39;</span><span class="o">%</span><span class="k">name</span>
+<span class="n">data</span>        <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">load_data</span><span class="p">(</span><span class="n">file_name</span><span class="p">,</span> <span class="n">mode</span><span class="o">=</span><span class="s1">&#39;csv&#39;</span><span class="p">)</span>
+<span class="n">distance</span>    <span class="o">=</span> <span class="mf">831.</span> <span class="c1"># pc</span>
+<span class="n">e_distance</span>  <span class="o">=</span> <span class="mf">11.</span>  <span class="c1"># pc</span>
+
+<span class="n">refit</span> <span class="o">=</span> <span class="kc">False</span>
+
+<span class="c1">################################################################################</span>
+<span class="n">model_name</span> <span class="o">=</span> <span class="s1">&#39;kurucz&#39;</span>
+<span class="n">limits</span> <span class="o">=</span> <span class="p">{</span><span class="s1">&#39;Te&#39;</span>   <span class="p">:</span> <span class="p">[</span><span class="mi">3500</span><span class="p">,</span> <span class="mi">9000</span><span class="p">],</span>
+          <span class="s1">&#39;logg&#39;</span> <span class="p">:</span> <span class="p">[</span>   <span class="mi">3</span><span class="p">,</span>    <span class="mi">5</span><span class="p">],</span>
+          <span class="s1">&#39;MH&#39;</span>   <span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">],</span>
+          <span class="s1">&#39;alpha&#39;</span><span class="p">:</span> <span class="p">[</span> <span class="mf">0.0</span><span class="p">,</span>  <span class="mf">0.0</span><span class="p">]}</span>
+<span class="n">model</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Model</span><span class="p">(</span><span class="n">model_name</span><span class="p">,</span> <span class="n">limits</span><span class="o">=</span><span class="n">limits</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span> <span class="o">=</span> <span class="n">bsf</span><span class="o">.</span><span class="n">Star</span><span class="p">(</span><span class="n">name</span><span class="o">=</span><span class="n">name</span><span class="p">,</span>
+                <span class="n">distance</span><span class="o">=</span><span class="n">distance</span><span class="p">,</span>
+                <span class="n">e_distance</span><span class="o">=</span><span class="n">e_distance</span><span class="p">,</span>
+                <span class="n">filters_to_drop</span><span class="o">=</span><span class="p">[</span><span class="s1">&#39;KPNO/Mosaic.I&#39;</span><span class="p">],</span>
+                <span class="n">wavelength_range</span><span class="o">=</span><span class="p">[</span><span class="mi">3000</span><span class="p">,</span> <span class="mi">1_000_000_000</span><span class="p">],</span>
+                <span class="n">data</span><span class="o">=</span><span class="n">data</span><span class="p">,</span>
+                <span class="n">model</span><span class="o">=</span><span class="n">model</span><span class="p">,</span>
+                <span class="n">r_limits</span><span class="o">=</span><span class="s1">&#39;blackbody&#39;</span><span class="p">,</span>
+                <span class="n">run_name</span><span class="o">=</span><span class="s1">&#39;kur&#39;</span><span class="p">,</span>
+                <span class="n">component</span><span class="o">=</span><span class="s1">&#39;A&#39;</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_blackbody</span><span class="p">(</span><span class="n">p0</span><span class="o">=</span><span class="p">[</span><span class="mf">5000.</span><span class="p">,</span> <span class="o">-</span><span class="mi">20</span><span class="p">],</span>
+                   <span class="n">plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                   <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">,</span>
+              <span class="n">_trim</span><span class="o">=</span><span class="mi">1000</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">fit_noisy_chi2</span><span class="p">(</span><span class="n">refit</span><span class="o">=</span><span class="n">refit</span><span class="p">,</span>
+                    <span class="n">total_iterations</span><span class="o">=</span><span class="mi">100</span><span class="p">)</span>
+<span class="c1">################################################################################</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot</span><span class="p">(</span><span class="n">add_noisy_seds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+          <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+          <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+          <span class="n">FR_cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">plot_public</span><span class="p">(</span><span class="n">add_noisy_seds</span><span class="o">=</span><span class="kc">False</span><span class="p">,</span>
+                 <span class="n">show_plot</span><span class="o">=</span><span class="kc">True</span><span class="p">,</span>
+                 <span class="n">folder</span><span class="o">=</span><span class="kc">None</span><span class="p">,</span>
+                 <span class="n">FR_cutoff</span><span class="o">=</span><span class="mf">0.5</span><span class="p">)</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="fm">__init__</span>
+<span class="o">==========================================================</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="o">------------</span>            <span class="n">WOCS2002</span> <span class="n">A</span>            <span class="o">------------</span>
+<span class="o">----------------------------------------------------------</span>
+<span class="o">==========================================================</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">drop_filters</span>
+                        <span class="n">Fitted</span>           <span class="n">Not</span> <span class="n">fitted</span>
+<span class="n">wavelength</span>
+<span class="mf">1481.000000</span>                     <span class="n">Astrosat</span><span class="o">/</span><span class="n">UVIT</span><span class="o">.</span><span class="n">F148W</span>
+<span class="mf">1541.000000</span>                     <span class="n">Astrosat</span><span class="o">/</span><span class="n">UVIT</span><span class="o">.</span><span class="n">F154W</span>
+<span class="mf">1608.000000</span>                     <span class="n">Astrosat</span><span class="o">/</span><span class="n">UVIT</span><span class="o">.</span><span class="n">F169M</span>
+<span class="mf">2303.366368</span>                         <span class="n">GALEX</span><span class="o">/</span><span class="n">GALEX</span><span class="o">.</span><span class="n">NUV</span>
+<span class="mf">4357.276538</span>      <span class="n">KPNO</span><span class="o">/</span><span class="n">Mosaic</span><span class="o">.</span><span class="n">B</span>
+<span class="mf">5035.750275</span>     <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">Gbp</span>
+<span class="mf">5366.240786</span>      <span class="n">KPNO</span><span class="o">/</span><span class="n">Mosaic</span><span class="o">.</span><span class="n">V</span>
+<span class="mf">5822.388714</span>       <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">G</span>
+<span class="mf">7619.959993</span>     <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">Grp</span>
+<span class="mf">8101.609574</span>                           <span class="n">KPNO</span><span class="o">/</span><span class="n">Mosaic</span><span class="o">.</span><span class="n">I</span>
+<span class="mf">8578.159519</span>    <span class="n">GAIA</span><span class="o">/</span><span class="n">GAIA3</span><span class="o">.</span><span class="n">Grvs</span>
+<span class="mf">12350.000000</span>     <span class="mi">2</span><span class="n">MASS</span><span class="o">/</span><span class="mi">2</span><span class="n">MASS</span><span class="o">.</span><span class="n">J</span>
+<span class="mf">16620.000000</span>     <span class="mi">2</span><span class="n">MASS</span><span class="o">/</span><span class="mi">2</span><span class="n">MASS</span><span class="o">.</span><span class="n">H</span>
+<span class="mf">21590.000000</span>    <span class="mi">2</span><span class="n">MASS</span><span class="o">/</span><span class="mi">2</span><span class="n">MASS</span><span class="o">.</span><span class="n">Ks</span>
+<span class="mf">33526.000000</span>      <span class="n">WISE</span><span class="o">/</span><span class="n">WISE</span><span class="o">.</span><span class="n">W1</span>
+<span class="mf">46028.000000</span>      <span class="n">WISE</span><span class="o">/</span><span class="n">WISE</span><span class="o">.</span><span class="n">W2</span>
+<span class="mf">115608.000000</span>     <span class="n">WISE</span><span class="o">/</span><span class="n">WISE</span><span class="o">.</span><span class="n">W3</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">drop_filters</span>
+<span class="n">Filters</span><span class="p">:</span> <span class="n">used</span><span class="o">/</span><span class="nb">all</span> <span class="o">=</span> <span class="mi">12</span><span class="o">/</span><span class="mi">17</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">blackbody</span>
+<span class="n">Fit</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">T</span><span class="o">=</span><span class="mi">5141</span> <span class="n">K</span><span class="p">,</span> <span class="n">log_sf</span><span class="o">=-</span><span class="mf">19.68</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">blackbody</span>
+<span class="n">Fit</span> <span class="n">parameters</span><span class="p">:</span> <span class="n">T</span><span class="o">=</span><span class="mi">5141</span> <span class="n">K</span><span class="p">,</span> <span class="n">log_sf</span><span class="o">=-</span><span class="mf">19.68</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">calculate_chi2</span>
+<span class="n">Give</span> <span class="s2">&quot;refit=True&quot;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">rerun</span> <span class="n">the</span> <span class="n">fitting</span> <span class="n">process</span><span class="o">.</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">calculate_chi2</span>
+     <span class="n">Te</span>  <span class="n">logg</span>   <span class="n">MH</span>  <span class="n">alpha</span>            <span class="n">sf</span>       <span class="n">chi2</span>         <span class="n">R</span>          <span class="n">L</span>
+<span class="mi">0</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">42.148650</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">1</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">43.750774</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">2</span>  <span class="mi">5250</span>   <span class="mf">3.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">46.564792</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">3</span>  <span class="mi">5250</span>   <span class="mf">5.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">51.654370</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">4</span>  <span class="mi">5250</span>   <span class="mf">3.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">60.201435</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">get_parameters_from_chi2_minimization</span>
+<span class="n">Te</span>  <span class="mi">5250</span>
+<span class="n">logg</span>        <span class="mf">4.0</span>
+<span class="n">MH</span>  <span class="mf">0.0</span>
+<span class="n">alpha</span>       <span class="mf">0.0</span>
+<span class="n">sf</span>  <span class="mf">2.1053889442869984e-20</span>
+<span class="n">chi2</span>        <span class="mf">42.148649603337915</span>
+<span class="n">R</span>   <span class="mf">5.348053395835723</span>
+<span class="n">L</span>   <span class="mf">19.57592810070829</span>
+<span class="n">vgf2</span>        <span class="mf">11.474651537318044</span>
+<span class="n">vgfb2</span>       <span class="mf">0.8009328529123378</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">WARNING</span>  <span class="o">-----</span> <span class="n">calculate_noisy_chi2</span>
+<span class="n">Give</span> <span class="s2">&quot;refit=True&quot;</span> <span class="k">if</span> <span class="n">you</span> <span class="n">want</span> <span class="n">to</span> <span class="n">rerun</span> <span class="n">the</span> <span class="n">fitting</span> <span class="n">process</span><span class="o">.</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">calculate_noisy_chi2</span>
+     <span class="n">Te</span>  <span class="n">logg</span>   <span class="n">MH</span>  <span class="n">alpha</span>            <span class="n">sf</span>       <span class="n">chi2</span>         <span class="n">R</span>          <span class="n">L</span>
+<span class="mi">0</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">42.148650</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">1</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">48.786377</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">2</span>  <span class="mi">5250</span>   <span class="mf">4.5</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">58.784976</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">3</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">83.279210</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">4</span>  <span class="mi">5250</span>   <span class="mf">4.0</span>  <span class="mf">0.0</span>    <span class="mf">0.0</span>  <span class="mf">2.105389e-20</span>  <span class="mf">57.314788</span>  <span class="mf">5.348053</span>  <span class="mf">19.575928</span>
+<span class="mi">22</span><span class="p">:</span><span class="mi">39</span><span class="p">:</span><span class="mi">59</span> <span class="o">-----</span> <span class="n">INFO</span>     <span class="o">-----</span> <span class="n">get_parameters_from_noisy_chi2_minimization</span>
+<span class="n">Te</span>  <span class="mi">5250</span><span class="p">(</span><span class="o">-</span><span class="mi">250</span><span class="p">,</span><span class="o">+</span><span class="mi">250</span><span class="p">)</span>
+<span class="n">logg</span>        <span class="mf">4.0</span><span class="p">(</span><span class="o">-</span><span class="mf">0.5</span><span class="p">,</span><span class="o">+</span><span class="mf">0.5</span><span class="p">)</span>
+<span class="n">MH</span>  <span class="mf">0.0</span><span class="p">(</span><span class="o">-</span><span class="n">nan</span><span class="p">,</span><span class="o">+</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">alpha</span>       <span class="mf">0.0</span><span class="p">(</span><span class="o">-</span><span class="n">nan</span><span class="p">,</span><span class="o">+</span><span class="n">nan</span><span class="p">)</span>
+<span class="n">sf</span>  <span class="mf">2.1053889442869984e-20</span><span class="p">(</span><span class="o">-</span><span class="mf">4.792450334089126e-22</span><span class="p">,</span><span class="o">+</span><span class="mf">4.904080842726991e-22</span><span class="p">)</span>
+<span class="n">R</span>   <span class="mf">5.348053395835723</span><span class="p">(</span><span class="o">-</span><span class="mf">0.09359116353916891</span><span class="p">,</span><span class="o">+</span><span class="mf">0.0940563746344943</span><span class="p">)</span>
+<span class="n">L</span>   <span class="mf">19.57592810070829</span><span class="p">(</span><span class="o">-</span><span class="mf">0.518255617587945</span><span class="p">,</span><span class="o">+</span><span class="mf">0.518255617587945</span><span class="p">)</span>
+</pre></div>
+</div>
+<img alt="_images/output_16_1.png" src="_images/output_16_1.png" />
+<img alt="_images/output_16_2.png" src="_images/output_16_2.png" />
+<img alt="_images/output_16_3.png" src="_images/output_16_3.png" />
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="nb">print</span><span class="p">(</span><span class="n">star</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">star</span><span class="o">.</span><span class="n">data_all</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">star</span><span class="o">.</span><span class="n">data_not_fitted</span><span class="o">.</span><span class="n">index</span><span class="p">)</span>
+<span class="n">star</span><span class="o">.</span><span class="n">data</span><span class="o">.</span><span class="n">head</span><span class="p">()</span>
+</pre></div>
+</div>
+<div class="highlight-default notranslate"><div class="highlight"><pre><span></span><span class="n">Index</span><span class="p">([</span><span class="s1">&#39;KPNO/Mosaic.B&#39;</span><span class="p">,</span> <span class="s1">&#39;GAIA/GAIA3.Gbp&#39;</span><span class="p">,</span> <span class="s1">&#39;KPNO/Mosaic.V&#39;</span><span class="p">,</span> <span class="s1">&#39;GAIA/GAIA3.G&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;GAIA/GAIA3.Grp&#39;</span><span class="p">,</span> <span class="s1">&#39;GAIA/GAIA3.Grvs&#39;</span><span class="p">,</span> <span class="s1">&#39;2MASS/2MASS.J&#39;</span><span class="p">,</span> <span class="s1">&#39;2MASS/2MASS.H&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;2MASS/2MASS.Ks&#39;</span><span class="p">,</span> <span class="s1">&#39;WISE/WISE.W1&#39;</span><span class="p">,</span> <span class="s1">&#39;WISE/WISE.W2&#39;</span><span class="p">,</span> <span class="s1">&#39;WISE/WISE.W3&#39;</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;FilterID&#39;</span><span class="p">)</span>
+<span class="n">Index</span><span class="p">([</span><span class="s1">&#39;Astrosat/UVIT.F148W&#39;</span><span class="p">,</span> <span class="s1">&#39;Astrosat/UVIT.F154W&#39;</span><span class="p">,</span> <span class="s1">&#39;Astrosat/UVIT.F169M&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;GALEX/GALEX.NUV&#39;</span><span class="p">,</span> <span class="s1">&#39;KPNO/Mosaic.B&#39;</span><span class="p">,</span> <span class="s1">&#39;GAIA/GAIA3.Gbp&#39;</span><span class="p">,</span> <span class="s1">&#39;KPNO/Mosaic.V&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;GAIA/GAIA3.G&#39;</span><span class="p">,</span> <span class="s1">&#39;GAIA/GAIA3.Grp&#39;</span><span class="p">,</span> <span class="s1">&#39;KPNO/Mosaic.I&#39;</span><span class="p">,</span> <span class="s1">&#39;GAIA/GAIA3.Grvs&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;2MASS/2MASS.J&#39;</span><span class="p">,</span> <span class="s1">&#39;2MASS/2MASS.H&#39;</span><span class="p">,</span> <span class="s1">&#39;2MASS/2MASS.Ks&#39;</span><span class="p">,</span> <span class="s1">&#39;WISE/WISE.W1&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;WISE/WISE.W2&#39;</span><span class="p">,</span> <span class="s1">&#39;WISE/WISE.W3&#39;</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;FilterID&#39;</span><span class="p">)</span>
+<span class="n">Index</span><span class="p">([</span><span class="s1">&#39;Astrosat/UVIT.F148W&#39;</span><span class="p">,</span> <span class="s1">&#39;Astrosat/UVIT.F154W&#39;</span><span class="p">,</span> <span class="s1">&#39;Astrosat/UVIT.F169M&#39;</span><span class="p">,</span>
+       <span class="s1">&#39;GALEX/GALEX.NUV&#39;</span><span class="p">,</span> <span class="s1">&#39;KPNO/Mosaic.I&#39;</span><span class="p">],</span>
+      <span class="n">dtype</span><span class="o">=</span><span class="s1">&#39;object&#39;</span><span class="p">,</span> <span class="n">name</span><span class="o">=</span><span class="s1">&#39;FilterID&#39;</span><span class="p">)</span>
+</pre></div>
+</div>
+<div>
+<style scoped>
+    .dataframe tbody tr th:only-of-type {
+        vertical-align: middle;
+    }
+
+    .dataframe tbody tr th {
+        vertical-align: top;
+    }
+
+    .dataframe thead th {
+        text-align: right;
+    }
+</style>
+<table border="1" class="dataframe">
+  <thead>
+    <tr style="text-align: right;">
+      <th></th>
+      <th>wavelength</th>
+      <th>flux</th>
+      <th>error</th>
+      <th>error_fraction</th>
+      <th>error_2percent</th>
+      <th>error_10percent</th>
+      <th>log_wavelength</th>
+      <th>log_flux</th>
+      <th>e_log_flux</th>
+      <th>fitted</th>
+      <th>...</th>
+      <th>chi2_i</th>
+      <th>vgf2_i</th>
+      <th>vgfb2_i</th>
+      <th>model_flux_median</th>
+      <th>residual_flux_median</th>
+      <th>fractional_residual_median</th>
+      <th>ewr_median</th>
+      <th>chi2_i_median</th>
+      <th>vgf2_i_median</th>
+      <th>vgfb2_i_median</th>
+    </tr>
+    <tr>
+      <th>FilterID</th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+      <th></th>
+    </tr>
+  </thead>
+  <tbody>
+    <tr>
+      <th>KPNO/Mosaic.B</th>
+      <td>4357.276538</td>
+      <td>9.309407e-14</td>
+      <td>6.130611e-15</td>
+      <td>0.065854</td>
+      <td>6.130611e-15</td>
+      <td>9.309407e-15</td>
+      <td>3.639215</td>
+      <td>-13.031078</td>
+      <td>0.028600</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.545712</td>
+      <td>0.545712</td>
+      <td>2.366611e-01</td>
+      <td>8.856525e-14</td>
+      <td>4.528824e-15</td>
+      <td>0.048648</td>
+      <td>0.738723</td>
+      <td>0.545712</td>
+      <td>0.545712</td>
+      <td>2.366611e-01</td>
+    </tr>
+    <tr>
+      <th>GAIA/GAIA3.Gbp</th>
+      <td>5035.750275</td>
+      <td>1.028575e-13</td>
+      <td>3.881303e-16</td>
+      <td>0.003773</td>
+      <td>2.057150e-15</td>
+      <td>1.028575e-14</td>
+      <td>3.702064</td>
+      <td>-12.987764</td>
+      <td>0.001639</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.000081</td>
+      <td>0.000003</td>
+      <td>1.148069e-07</td>
+      <td>1.028540e-13</td>
+      <td>3.485137e-18</td>
+      <td>0.000034</td>
+      <td>0.008979</td>
+      <td>0.000081</td>
+      <td>0.000003</td>
+      <td>1.148069e-07</td>
+    </tr>
+    <tr>
+      <th>KPNO/Mosaic.V</th>
+      <td>5366.240786</td>
+      <td>1.079375e-13</td>
+      <td>7.108112e-15</td>
+      <td>0.065854</td>
+      <td>7.108112e-15</td>
+      <td>1.079375e-14</td>
+      <td>3.729670</td>
+      <td>-12.966827</td>
+      <td>0.028600</td>
+      <td>1</td>
+      <td>...</td>
+      <td>0.298089</td>
+      <td>0.298089</td>
+      <td>1.292734e-01</td>
+      <td>1.118184e-13</td>
+      <td>-3.880853e-15</td>
+      <td>-0.035955</td>
+      <td>-0.545975</td>
+      <td>0.298089</td>
+      <td>0.298089</td>
+      <td>1.292734e-01</td>
+    </tr>
+    <tr>
+      <th>GAIA/GAIA3.G</th>
+      <td>5822.388714</td>
+      <td>9.174216e-14</td>
+      <td>2.539155e-16</td>
+      <td>0.002768</td>
+      <td>1.834843e-15</td>
+      <td>9.174216e-15</td>
+      <td>3.765101</td>
+      <td>-13.037431</td>
+      <td>0.001202</td>
+      <td>1</td>
+      <td>...</td>
+      <td>4.897209</td>
+      <td>0.093784</td>
+      <td>3.751362e-03</td>
+      <td>9.230407e-14</td>
+      <td>-5.619057e-16</td>
+      <td>-0.006125</td>
+      <td>-2.212964</td>
+      <td>4.897209</td>
+      <td>0.093784</td>
+      <td>3.751362e-03</td>
+    </tr>
+    <tr>
+      <th>GAIA/GAIA3.Grp</th>
+      <td>7619.959993</td>
+      <td>7.878734e-14</td>
+      <td>3.154436e-16</td>
+      <td>0.004004</td>
+      <td>1.575747e-15</td>
+      <td>7.878734e-15</td>
+      <td>3.881953</td>
+      <td>-13.103544</td>
+      <td>0.001739</td>
+      <td>1</td>
+      <td>...</td>
+      <td>13.712759</td>
+      <td>0.549535</td>
+      <td>2.198141e-02</td>
+      <td>7.995545e-14</td>
+      <td>-1.168111e-15</td>
+      <td>-0.014826</td>
+      <td>-3.703074</td>
+      <td>13.712759</td>
+      <td>0.549535</td>
+      <td>2.198141e-02</td>
+    </tr>
+  </tbody>
+</table>
+<p>5 rows × 24 columns</p>
+</div></section>
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="examples_binary.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Example binary fit</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="examples_io.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">I/O and VOSA helper functions</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Vikrant Jadhav
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#">Example single fit</a><ul>
+<li><a class="reference internal" href="#quick-fit">Quick fit</a></li>
+<li><a class="reference internal" href="#selecting-model">Selecting model</a></li>
+<li><a class="reference internal" href="#recommended-fitting-routine">Recommended fitting routine</a><ul>
+<li><a class="reference internal" href="#example-1">Example 1</a></li>
+<li><a class="reference internal" href="#example-2">Example 2</a></li>
+<li><a class="reference internal" href="#example-3">Example 3</a></li>
+</ul>
+</li>
+<li><a class="reference internal" href="#advance-options">Advance options</a></li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=237dbe43"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>

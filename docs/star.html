@@ -1,0 +1,1224 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="System" href="system.html" /><link rel="prev" title="Code Documentation" href="modules.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Star - Binary_SED_Fitting 3.4.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Binary_SED_Fitting 3.4.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples_io.html">I/O and VOSA helper functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_single.html">Example single fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_binary.html">Example binary fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_cluster.html">Example cluster fit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="fitter.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html">Utility functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changlog.html">Changlog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/star.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="star">
+<h1><a class="reference internal" href="#src.binary_sed_fitting.Star" title="src.binary_sed_fitting.Star"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a><a class="headerlink" href="#star" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.binary_sed_fitting.</span></span><span class="sig-name descname"><span class="pre">Star</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1000000000]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackbody'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Star'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star" title="Link to this definition">¶</a></dt>
+<dd><p>Class for working with individual stars and their SED fitting.</p>
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.name">
+<span class="sig-name descname"><span class="pre">name</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the source.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.distance">
+<span class="sig-name descname"><span class="pre">distance</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.distance" title="Link to this definition">¶</a></dt>
+<dd><p>Distance to the source in parsecs (pc).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.e_distance">
+<span class="sig-name descname"><span class="pre">e_distance</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.e_distance" title="Link to this definition">¶</a></dt>
+<dd><p>Error in the distance measurement in parsecs (pc).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.filters_to_drop">
+<span class="sig-name descname"><span class="pre">filters_to_drop</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.filters_to_drop" title="Link to this definition">¶</a></dt>
+<dd><p>List of filters to be dropped before fitting the SED. Default is an empty list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.wavelength_range">
+<span class="sig-name descname"><span class="pre">wavelength_range</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.wavelength_range" title="Link to this definition">¶</a></dt>
+<dd><p>Minimum and maximum values of the filters to consider for fitting. Default is [0, 1,000,000,000].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.r_limits">
+<span class="sig-name descname"><span class="pre">r_limits</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.r_limits" title="Link to this definition">¶</a></dt>
+<dd><p>Limits for the radius. Default is ‘blackbody’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.run_name">
+<span class="sig-name descname"><span class="pre">run_name</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.run_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the run. Default is ‘0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.component">
+<span class="sig-name descname"><span class="pre">component</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.component" title="Link to this definition">¶</a></dt>
+<dd><p>Component identifier (should be either ‘A’, ‘B’ or ‘C’). Default is ‘A’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star._type">
+<span class="sig-name descname"><span class="pre">_type</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star._type" title="Link to this definition">¶</a></dt>
+<dd><p>Type of the source. Default is ‘Star’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.model">
+<span class="sig-name descname"><span class="pre">model</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.model" title="Link to this definition">¶</a></dt>
+<dd><p>Model to fit to the data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p><a class="reference internal" href="model.html#src.binary_sed_fitting.Model" title="src.binary_sed_fitting.Model">Model</a>, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data_all">
+<span class="sig-name descname"><span class="pre">data_all</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data_all" title="Link to this definition">¶</a></dt>
+<dd><p>A copy of the original data with an added ‘fitted’ column indicating whether the filter is used. Mmodel flux, residuals, and statistical measures are added in <a class="reference internal" href="fitter.html#src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization" title="src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization"><code class="xref py py-func docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_chi2_minimization()</span></code></a> and <a class="reference internal" href="fitter.html#src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization" title="src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization"><code class="xref py py-func docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_noisy_chi2_minimization()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data">
+<span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data" title="Link to this definition">¶</a></dt>
+<dd><p>Dataframe containing the observational data. It is cropped to the fitted filters based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pandas.DataFrame, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data_not_fitted">
+<span class="sig-name descname"><span class="pre">data_not_fitted</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data_not_fitted" title="Link to this definition">¶</a></dt>
+<dd><p>DataFrame containing only removed filters based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>..</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.N_points">
+<span class="sig-name descname"><span class="pre">N_points</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.N_points" title="Link to this definition">¶</a></dt>
+<dd><p>Updated number of data points.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.filters_to_drop_all">
+<span class="sig-name descname"><span class="pre">filters_to_drop_all</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.filters_to_drop_all" title="Link to this definition">¶</a></dt>
+<dd><p>List of filters that are to be dropped based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>array-like</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.N">
+<span class="sig-name descname"><span class="pre">N</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.N" title="Link to this definition">¶</a></dt>
+<dd><p>The number of filters that are fitted.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>int</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.Te_blackbody">
+<span class="sig-name descname"><span class="pre">Te_blackbody</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.Te_blackbody" title="Link to this definition">¶</a></dt>
+<dd><p>Effective temperature from the blackbody fit [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.log_sf_blackbody">
+<span class="sig-name descname"><span class="pre">log_sf_blackbody</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.log_sf_blackbody" title="Link to this definition">¶</a></dt>
+<dd><p>Logarithm of the scaling factor from the blackbody fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.sf_list">
+<span class="sig-name descname"><span class="pre">sf_list</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.sf_list" title="Link to this definition">¶</a></dt>
+<dd><p>List of scaling factors (NOT in log space).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star._minimising_param">
+<span class="sig-name descname"><span class="pre">_minimising_param</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star._minimising_param" title="Link to this definition">¶</a></dt>
+<dd><p>Parameter used for minimization (Only ‘chi2’ is implimented).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.df_chi2">
+<span class="sig-name descname"><span class="pre">df_chi2</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.df_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>DataFrame with fitting parameters for all fits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.df_chi2_trimmed">
+<span class="sig-name descname"><span class="pre">df_chi2_trimmed</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.df_chi2_trimmed" title="Link to this definition">¶</a></dt>
+<dd><p>DataFrame with fitting parameters for the top fits after trimming (default: top 1000).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.df_chi2_noisy">
+<span class="sig-name descname"><span class="pre">df_chi2_noisy</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="Link to this definition">¶</a></dt>
+<dd><p>DataFrame with best fitting parameters for each noisy iteration.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.N_Np">
+<span class="sig-name descname"><span class="pre">N_Np</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.N_Np" title="Link to this definition">¶</a></dt>
+<dd><p>Number of data points minus the number of free parameters in the model.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.chi2_r">
+<span class="sig-name descname"><span class="pre">chi2_r</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.chi2_r" title="Link to this definition">¶</a></dt>
+<dd><p>Reduced chi^2 value indicating goodness of fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.vgf2">
+<span class="sig-name descname"><span class="pre">vgf2</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.vgf2" title="Link to this definition">¶</a></dt>
+<dd><p>Variance of fractional residuals squared (vgf^2) for the fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.vgfb2">
+<span class="sig-name descname"><span class="pre">vgfb2</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.vgfb2" title="Link to this definition">¶</a></dt>
+<dd><p>Variance of fractional residuals squared with broadened error (vgfb^2) for the fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">&lt;dim&gt;</span></span></dt>
+<dd><p>Updates various best fit parameters available in star.df_chi2 (e.g., chi2, sf, R, L, Te, MH, logg).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.chi2_median">
+<span class="sig-name descname"><span class="pre">chi2_median</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.chi2_median" title="Link to this definition">¶</a></dt>
+<dd><p>Median of the chi^2 values from noisy fits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.chi2_r_median">
+<span class="sig-name descname"><span class="pre">chi2_r_median</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.chi2_r_median" title="Link to this definition">¶</a></dt>
+<dd><p>Median of the reduced chi^2 values from noisy fits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.vgf2_median">
+<span class="sig-name descname"><span class="pre">vgf2_median</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.vgf2_median" title="Link to this definition">¶</a></dt>
+<dd><p>Median of the vgf^2 values from noisy fits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.vgfb2_median">
+<span class="sig-name descname"><span class="pre">vgfb2_median</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.vgfb2_median" title="Link to this definition">¶</a></dt>
+<dd><p>Median of the vgfb^2 values from noisy fits.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">&lt;dim&gt;_median</span></span></dt>
+<dd><p>Updates the median best fit parameter values available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a> (sf, R, L, Te, MH, logg, etc.)</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">&lt;dim&gt;_error_lower</span></span></dt>
+<dd><p>Updates the 16th percentile error for best fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py">
+<span class="sig-name descname"><span class="pre">&lt;dim&gt;_error_upper</span></span></dt>
+<dd><p>Updates the 84th percentile error for best fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.__init__">
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1000000000]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackbody'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Star'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.__init__" title="Link to this definition">¶</a></dt>
+<dd><p>Initializes a Star object using name, distance, model_to_fit, etc.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>name</strong> (<em>str</em>) – Name of the source.</p></li>
+<li><p><strong>distance</strong> (<em>float</em>) – Distance to the source in parsecs (pc).</p></li>
+<li><p><strong>e_distance</strong> (<em>float</em>) – Error in the distance measurement in parsecs (pc).</p></li>
+<li><p><strong>filters_to_drop</strong> (<em>list</em><em>, </em><em>optional</em>) – List of filters to be dropped before fitting the SED. Default is an empty list.</p></li>
+<li><p><strong>wavelength_range</strong> (<em>list</em><em>, </em><em>optional</em>) – Minimum and maximum values of the filters to consider for fitting. Default is [0, 1,000,000,000].</p></li>
+<li><p><strong>r_limits</strong> (<em>str</em><em>, </em><em>optional</em>) – Limits for the radius. Default is ‘blackbody’.</p></li>
+<li><p><strong>run_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the run. Default is ‘0’.</p></li>
+<li><p><strong>component</strong> (<em>str</em><em>, </em><em>optional</em>) – Component identifier (should be either ‘A’, ‘B’ or ‘C’). Default is ‘A’.</p></li>
+<li><p><strong>_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the source. Default is ‘Star’.</p></li>
+<li><p><strong>data</strong> (<em>pandas.DataFrame</em><em>, </em><em>optional</em>) – Dataframe containing the observational data.</p></li>
+<li><p><strong>model</strong> (<a class="reference internal" href="model.html#src.binary_sed_fitting.Model" title="src.binary_sed_fitting.Model"><em>Model</em></a><em>, </em><em>optional</em>) – Model to fit to the data.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If ‘component’ is not ‘A’, ‘B’, or ‘C’.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>If <cite>data</cite> is provided, it will be sorted by wavelength and processed.
+If <cite>model</cite> is also provided, it will be configured with the processed data.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.create_sf_list">
+<span class="sig-name descname"><span class="pre">create_sf_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r_limits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.create_sf_list" title="Link to this definition">¶</a></dt>
+<dd><p>Create list of scaling factors.
+The limits on radius are either taken from the used (via r_limits parameter).
+Or calculated automatically from blackbody fitting.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>r_limits</strong> (<em>str</em><em> or </em><em>list</em>) – Limits for the radius. Can be ‘blackbody’ to use blackbody fitting results or a list of two values for radius limits.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.sf_list" title="src.binary_sed_fitting.Star.sf_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.sf_list</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.drop_filters">
+<span class="sig-name descname"><span class="pre">drop_filters</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.drop_filters" title="Link to this definition">¶</a></dt>
+<dd><p>Drops unnecessary filters based on wavelength range.</p>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop_all" title="src.binary_sed_fitting.Star.filters_to_drop_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.filters_to_drop_all</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.N" title="src.binary_sed_fitting.Star.N"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.N</span></code></a></p>
+<p>This function updates self.data and self.data_not_fitted DataFrames by filtering out
+entries outside the specified wavelength range or with negative wavelengths.</p>
+<p>The function also logs the filters that are fitted and not fitted.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.fit_blackbody">
+<span class="sig-name descname"><span class="pre">fit_blackbody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[5000.0,</span> <span class="pre">-20]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.fit_blackbody" title="Link to this definition">¶</a></dt>
+<dd><p>Fits a blackbody model to the SED.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>p0</strong> (<em>list</em><em>, </em><em>optional</em>) – Initial guess for the blackbody model parameters. Default is [5000., -20].</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the blackbody fit. Default is False.</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to show the plot. Default is True.</p></li>
+<li><p><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – Folder to save the plot. No plot is saved if <cite>folder</cite> is <cite>None</cite>.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.Te_blackbody" title="src.binary_sed_fitting.Star.Te_blackbody"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.Te_blackbody</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.log_sf_blackbody" title="src.binary_sed_fitting.Star.log_sf_blackbody"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.log_sf_blackbody</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.fit_chi2">
+<span class="sig-name descname"><span class="pre">fit_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_trim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">1000</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_minimising_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chi2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.fit_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>Fits the SED using a chi-squared minimization approach.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to refit the model. Default is True.</p></li>
+<li><p><strong>_trim</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of data points to trim for fitting. Default is 1000.</p></li>
+<li><p><strong>_minimising_param</strong> (<em>str</em><em>, </em><em>optional</em>) – Parameter used for minimizing (only ‘chi2’ supported as of now). Default is ‘chi2’.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star._minimising_param" title="src.binary_sed_fitting.Star._minimising_param"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star._minimising_param</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.fit_noisy_chi2">
+<span class="sig-name descname"><span class="pre">fit_noisy_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">total_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_percentile_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.fit_noisy_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>Fits the SED using a chi-squared minimization approach. The SED is fitted total_iterations times using bootstrapping.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>total_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of iterations used for bootstrapping. Default is 100.</p></li>
+<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to refit the model. Default is True.</p></li>
+<li><p><strong>_percentile_threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – Percentile threshold used for setting up the extent of the noisy parameter grid. Default is 10.</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the blackbody fit. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot">
+<span class="sig-name descname"><span class="pre">plot</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">add_noisy_seds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FR_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot" title="Link to this definition">¶</a></dt>
+<dd><p>Plot detailed properties of a single SED.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>add_noisy_seds</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to add noisy SEDs to the plot.</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display the plot.</p></li>
+<li><p><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – Folder to save the plot. No plot is saved if <cite>folder</cite> is <cite>None</cite>.</p></li>
+<li><p><strong>FR_cutoff</strong> (<em>float</em><em>, </em><em>optional</em>) – Cutoff value for identifying data with fractional residual excess.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values for plotting.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If component is other than ‘A’, ‘B’, and ‘C’.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method plots various detailed properties of a single SED, including observed and fitted SEDs,
+fractional residuals, error weighted residuals, chi-squared values, HR diagram, and temperature-related
+distributions.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_blackbody_model">
+<span class="sig-name descname"><span class="pre">plot_blackbody_model</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_blackbody_model" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the blackbody model spectrum.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_chi2">
+<span class="sig-name descname"><span class="pre">plot_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the chi-squared values.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>ls</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the plot. Default is ‘-‘.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_ewr">
+<span class="sig-name descname"><span class="pre">plot_ewr</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">deviation_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_ewr" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the Error Weighted Residual.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>deviation_cutoff</strong> (<em>float</em><em>, </em><em>optional</em>) – Cutoff value for deviation in EWR.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>ls</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the plot. Default is ‘-‘.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_fractional_residual">
+<span class="sig-name descname"><span class="pre">plot_fractional_residual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FR_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_fractional_residual" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the fractional residuals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>FR_cutoff</strong> (<em>float</em><em>, </em><em>optional</em>) – Cutoff value for identifying data with fractional residual excess.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>ls</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the plot. Default is ‘-‘.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_hrd">
+<span class="sig-name descname"><span class="pre">plot_hrd</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_hrd" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the Hertzsprung-Russell Diagram (HRD).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values.</p></li>
+<li><p><strong>cax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes for the colorbar.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_noisy_seds">
+<span class="sig-name descname"><span class="pre">plot_noisy_seds</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_noisy_seds" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the noisy SEDs.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>ls</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the plot. Default is ‘–‘.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_public">
+<span class="sig-name descname"><span class="pre">plot_public</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">add_noisy_seds</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">FR_cutoff</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.5</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">show_plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">folder</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_public" title="Link to this definition">¶</a></dt>
+<dd><p>Plot a simplified version of various properties of a single SED for public view.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values.</p></li>
+<li><p><strong>add_noisy_seds</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to add noisy SEDs to the plot.</p></li>
+<li><p><strong>ax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>FR_cutoff</strong> (<em>float</em><em>, </em><em>optional</em>) – Cutoff value for identifying data with fractional residual excess.</p></li>
+<li><p><strong>show_plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to display the plot.</p></li>
+<li><p><strong>folder</strong> (<em>str</em><em>, </em><em>optional</em>) – Folder to save the plot. No plot is saved if <cite>folder</cite> is <cite>None</cite>.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If component is other than ‘A’, ‘B’, and ‘C’.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_residual">
+<span class="sig-name descname"><span class="pre">plot_residual</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_residual" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the residuals.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>ls</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the plot. Default is ‘–‘.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_sed_fitted">
+<span class="sig-name descname"><span class="pre">plot_sed_fitted</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">ls</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'--'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_sed_fitted" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the fitted SED.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>ls</strong> (<em>str</em><em>, </em><em>optional</em>) – Linestyle of the plot. Default is ‘–‘.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. Default is False.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_sed_obs">
+<span class="sig-name descname"><span class="pre">plot_sed_obs</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_sed_obs" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the observed SED.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_sed_skeleton_detailed">
+<span class="sig-name descname"><span class="pre">plot_sed_skeleton_detailed</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_sed_skeleton_detailed" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize and return the skeleton for detailed SED plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – Matplotlib figure object.</p></li>
+<li><p><strong>ax</strong> (<em>np.ndarray</em>) – Matplotlib axes array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_sed_skeleton_public">
+<span class="sig-name descname"><span class="pre">plot_sed_skeleton_public</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_sed_skeleton_public" title="Link to this definition">¶</a></dt>
+<dd><p>Initialize and return the skeleton for public SED plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Returns<span class="colon">:</span></dt>
+<dd class="field-odd"><p><ul class="simple">
+<li><p><strong>fig</strong> (<em>matplotlib.figure.Figure</em>) – Matplotlib figure object.</p></li>
+<li><p><strong>ax</strong> (<em>np.ndarray</em>) – Matplotlib axes array.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_temperature_chi2">
+<span class="sig-name descname"><span class="pre">plot_temperature_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_temperature_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the Temperature-Chi-squared distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. Default is False.</p></li>
+<li><p><strong>cax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes for the colorbar.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_temperature_radius">
+<span class="sig-name descname"><span class="pre">plot_temperature_radius</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_temperature_radius" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the Temperature-Radius distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values.</p></li>
+<li><p><strong>cax</strong> (<em>matplotlib.axes</em><em>, </em><em>optional</em>) – Matplotlib axes for the colorbar.</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.plot_temperature_vgfb2">
+<span class="sig-name descname"><span class="pre">plot_temperature_vgfb2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">color</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'C1'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">median</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">cax</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.plot_temperature_vgfb2" title="Link to this definition">¶</a></dt>
+<dd><p>Plot the Temperature-vgf_b^2 distribution.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>ax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes to plot on. If None, a new subplot is created.</p></li>
+<li><p><strong>color</strong> (<em>str</em><em>, </em><em>optional</em>) – Color of the plot. Default is ‘C1’.</p></li>
+<li><p><strong>median</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to use the median values. (Not supported for vgfb2)</p></li>
+<li><p><strong>cax</strong> (<em>matplotlib.axes.Axes</em><em>, </em><em>optional</em>) – Matplotlib axes for the colorbar.</p></li>
+</ul>
+</dd>
+<dt class="field-even">Raises<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>NotImplementedError</strong> – If median mode is True (not supported for vgfb2).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.process_data">
+<span class="sig-name descname"><span class="pre">process_data</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.process_data" title="Link to this definition">¶</a></dt>
+<dd><p>Process the data by validating the data and calculating necessary parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ValueError</strong> – If duplicate filters are found in the data.</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.data_not_fitted" title="src.binary_sed_fitting.Star.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.N_points" title="src.binary_sed_fitting.Star.N_points"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.N_points</span></code></a></p>
+<p>The method includes several steps to clean and preprocess the data before fitting:
+- Ensures no duplicate filters are present in the data.
+- Filters with zero errors are replaced with a value calculated as 110% of the maximum error fraction.
+- Errors are adjusted to ensure a minimum error fraction of 2% for VGF and 10% for VGFB calculations.
+- Logarithmic values of wavelength and flux are computed to facilitate fitting.</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.save_summary">
+<span class="sig-name descname"><span class="pre">save_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.save_summary" title="Link to this definition">¶</a></dt>
+<dd><p>Save a summary of the current state of the instance to a log file.</p>
+<p class="rubric">Notes</p>
+<ul class="simple">
+<li><p>Logs the current state of the instance into a CSV file (‘data/log_single_fitting.csv’) for future reference.</p></li>
+<li><p>If the log file does not exist, it creates a new one. Otherwise, it appends to the existing log file.</p></li>
+<li><p>Uses the <code class="xref py py-func docutils literal notranslate"><span class="pre">Star._reduce_Star()</span></code> method to create a reduced copy of the instance suitable for saving.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.update_xylimits_detailed">
+<span class="sig-name descname"><span class="pre">update_xylimits_detailed</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.update_xylimits_detailed" title="Link to this definition">¶</a></dt>
+<dd><p>Update the x and y limits for public SED plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ax</strong> (<em>np.ndarray</em>) – Matplotlib axes array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.update_xylimits_public">
+<span class="sig-name descname"><span class="pre">update_xylimits_public</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">ax</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.update_xylimits_public" title="Link to this definition">¶</a></dt>
+<dd><p>Update the x and y limits for public SED plots.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>ax</strong> (<em>np.ndarray</em>) – Matplotlib axes array.</p>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="system.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="modules.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title">Code Documentation</div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Vikrant Jadhav
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a><ul>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star"><code class="docutils literal notranslate"><span class="pre">Star</span></code></a><ul>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.name"><code class="docutils literal notranslate"><span class="pre">Star.name</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.distance"><code class="docutils literal notranslate"><span class="pre">Star.distance</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.e_distance"><code class="docutils literal notranslate"><span class="pre">Star.e_distance</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop"><code class="docutils literal notranslate"><span class="pre">Star.filters_to_drop</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range"><code class="docutils literal notranslate"><span class="pre">Star.wavelength_range</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.r_limits"><code class="docutils literal notranslate"><span class="pre">Star.r_limits</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.run_name"><code class="docutils literal notranslate"><span class="pre">Star.run_name</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.component"><code class="docutils literal notranslate"><span class="pre">Star.component</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star._type"><code class="docutils literal notranslate"><span class="pre">Star._type</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.model"><code class="docutils literal notranslate"><span class="pre">Star.model</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.data_all"><code class="docutils literal notranslate"><span class="pre">Star.data_all</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.data"><code class="docutils literal notranslate"><span class="pre">Star.data</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.data_not_fitted"><code class="docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.N_points"><code class="docutils literal notranslate"><span class="pre">Star.N_points</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop_all"><code class="docutils literal notranslate"><span class="pre">Star.filters_to_drop_all</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.N"><code class="docutils literal notranslate"><span class="pre">Star.N</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.Te_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.Te_blackbody</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.log_sf_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.log_sf_blackbody</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.sf_list"><code class="docutils literal notranslate"><span class="pre">Star.sf_list</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star._minimising_param"><code class="docutils literal notranslate"><span class="pre">Star._minimising_param</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2"><code class="docutils literal notranslate"><span class="pre">Star.df_chi2</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_trimmed"><code class="docutils literal notranslate"><span class="pre">Star.df_chi2_trimmed</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy"><code class="docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.N_Np"><code class="docutils literal notranslate"><span class="pre">Star.N_Np</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.chi2_r"><code class="docutils literal notranslate"><span class="pre">Star.chi2_r</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgf2"><code class="docutils literal notranslate"><span class="pre">Star.vgf2</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgfb2"><code class="docutils literal notranslate"><span class="pre">Star.vgfb2</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.chi2_median"><code class="docutils literal notranslate"><span class="pre">Star.chi2_median</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.chi2_r_median"><code class="docutils literal notranslate"><span class="pre">Star.chi2_r_median</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgf2_median"><code class="docutils literal notranslate"><span class="pre">Star.vgf2_median</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgfb2_median"><code class="docutils literal notranslate"><span class="pre">Star.vgfb2_median</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.__init__"><code class="docutils literal notranslate"><span class="pre">Star.__init__()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.create_sf_list"><code class="docutils literal notranslate"><span class="pre">Star.create_sf_list()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.drop_filters"><code class="docutils literal notranslate"><span class="pre">Star.drop_filters()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.fit_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.fit_blackbody()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.fit_chi2"><code class="docutils literal notranslate"><span class="pre">Star.fit_chi2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.fit_noisy_chi2"><code class="docutils literal notranslate"><span class="pre">Star.fit_noisy_chi2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot"><code class="docutils literal notranslate"><span class="pre">Star.plot()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_blackbody_model"><code class="docutils literal notranslate"><span class="pre">Star.plot_blackbody_model()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_chi2"><code class="docutils literal notranslate"><span class="pre">Star.plot_chi2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_ewr"><code class="docutils literal notranslate"><span class="pre">Star.plot_ewr()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_fractional_residual"><code class="docutils literal notranslate"><span class="pre">Star.plot_fractional_residual()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_hrd"><code class="docutils literal notranslate"><span class="pre">Star.plot_hrd()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_noisy_seds"><code class="docutils literal notranslate"><span class="pre">Star.plot_noisy_seds()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_public"><code class="docutils literal notranslate"><span class="pre">Star.plot_public()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_residual"><code class="docutils literal notranslate"><span class="pre">Star.plot_residual()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_sed_fitted"><code class="docutils literal notranslate"><span class="pre">Star.plot_sed_fitted()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_sed_obs"><code class="docutils literal notranslate"><span class="pre">Star.plot_sed_obs()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_sed_skeleton_detailed"><code class="docutils literal notranslate"><span class="pre">Star.plot_sed_skeleton_detailed()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_sed_skeleton_public"><code class="docutils literal notranslate"><span class="pre">Star.plot_sed_skeleton_public()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_temperature_chi2"><code class="docutils literal notranslate"><span class="pre">Star.plot_temperature_chi2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_temperature_radius"><code class="docutils literal notranslate"><span class="pre">Star.plot_temperature_radius()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.plot_temperature_vgfb2"><code class="docutils literal notranslate"><span class="pre">Star.plot_temperature_vgfb2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.process_data"><code class="docutils literal notranslate"><span class="pre">Star.process_data()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.save_summary"><code class="docutils literal notranslate"><span class="pre">Star.save_summary()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.update_xylimits_detailed"><code class="docutils literal notranslate"><span class="pre">Star.update_xylimits_detailed()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.update_xylimits_public"><code class="docutils literal notranslate"><span class="pre">Star.update_xylimits_public()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=237dbe43"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=f281be69"></script>
+    </body>
+</html>
