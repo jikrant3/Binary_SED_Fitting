@@ -487,10 +487,15 @@ Advance options
    -  Edit the function to change the plot format (e.g. PDF, PNG or
       multiple formats)
 
-- ``Star.df_chi2``
+- ``Star.df_chi2`` and ``Star.df_chi2_noisy``
 
-   -  The chi2 dataframe is saved in ``outputs\``.
+   -  The chi2 dataframes are saved in ``outputs\``.
 
+- log files
+
+   -  The raw log files (with logging level DEBUG) are saved in ``data\log_<today's date>.txt``
+
+   -  The summary logs are chi2 dataframe is saved in ``outputs\log_single_fitting.csv`` and ``outputs\log_starsystem_fitting.csv``.
 
 .. code:: ipython3
 

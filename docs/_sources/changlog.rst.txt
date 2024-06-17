@@ -3,6 +3,11 @@
 Changlog
 ========
 
+3.4.1
+-----
+
+Fixed calculations of fractional errors in multi-component Systems.
+
 3.4.0
 -----
 

@@ -401,9 +401,9 @@
 </dl>
 <p class="rubric">Notes</p>
 <p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_not_fitted" title="src.binary_sed_fitting.Star.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.N_Np" title="src.binary_sed_fitting.Star.N_Np"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.N_Np</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.chi2_r" title="src.binary_sed_fitting.Star.chi2_r"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.chi2_r</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgf2" title="src.binary_sed_fitting.Star.vgf2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgf2</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgfb2" title="src.binary_sed_fitting.Star.vgfb2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgfb2</span></code></a>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.</span></code></p>
-<p>This method retrieves and updates parameters from the best chi2 fit found in star.df_chi2.
-It calculates additional statistical metrics for the fitted data.
-It raises a warning if any data points have chi2 values significantly higher than the average (3-sigma threshold).</p>
+<p>This method retrieves and updates parameters from the best chi2 fit found in star.df_chi2.</p>
+<p>It calculates additional statistical metrics for the fitted data.</p>
+<p>It raises a warning if any data points have chi2 values significantly higher than the average (3-sigma threshold).</p>
 </dd></dl>
 
 <dl class="py method">
@@ -420,10 +420,12 @@ It raises a warning if any data points have chi2 values significantly higher tha
 </dl>
 <p class="rubric">Notes</p>
 <p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_not_fitted" title="src.binary_sed_fitting.Star.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.chi2_median" title="src.binary_sed_fitting.Star.chi2_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.chi2_median</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.chi2_r_median" title="src.binary_sed_fitting.Star.chi2_r_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.chi2_r_median</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgf2_median" title="src.binary_sed_fitting.Star.vgf2_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgf2_median</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgfb2_median" title="src.binary_sed_fitting.Star.vgfb2_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgfb2_median</span></code></a>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.&lt;dim&gt;_median</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.&lt;dim&gt;_error_lower</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.&lt;dim&gt;_error_upper</span></code></p>
-<p>This method estimates the best fit parameters by calculating the median and errors from the noisy chi2 fits:
-- It uses Fitter.get_realistic_errors_from_iterations() to estimate realistic errors based on noisy fits and grid steps.
-- Updates various attributes in star related to best fit parameters, errors, and fit quality metrics.
-- Logs warnings if the best fit parameters differ from their median value.</p>
+<p>This method estimates the best fit parameters by calculating the median and errors from the noisy chi2 fits:</p>
+<ul class="simple">
+<li><p>It uses Fitter.get_realistic_errors_from_iterations() to estimate realistic errors based on noisy fits and grid steps.</p></li>
+<li><p>Updates various attributes in star related to best fit parameters, errors, and fit quality metrics.</p></li>
+<li><p>Logs warnings if the best fit parameters differ from their median value.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
@@ -474,10 +476,12 @@ It raises a warning if any data points have chi2 values significantly higher tha
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>This method estimates realistic errors based on noisy fits and grid steps:
-- It calculates percentiles and adjusts them to grid_steps boundaries if necessary.
-- Issues warnings if the best fit parameter is close to model boundaries.
-- Handles cases where spread in iterations is minimal or zero.</p>
+<p>This method estimates realistic errors based on noisy fits and grid steps:</p>
+<ul class="simple">
+<li><p>It calculates percentiles and adjusts them to grid_steps boundaries if necessary.</p></li>
+<li><p>Issues warnings if the best fit parameter is close to model boundaries.</p></li>
+<li><p>Handles cases where spread in iterations is minimal or zero.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
@@ -582,6 +586,6 @@ It raises a warning if any data points have chi2 values significantly higher tha
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/copybutton.js?v=5eb1bb1e"></script>
     </body>
 </html>

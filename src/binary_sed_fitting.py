@@ -16,7 +16,7 @@ from astropy import units as u
 import xarray as xr
 
 DIR_OUTPUTS = 'outputs/'
-DIR_MODELS = '/Users/vikrantjadhav/Documents/work/models_and_tools/models/'
+DIR_MODELS = 'C:/Users/Zert W/Documents/GitHub/models_and_tools/models/'
 if not os.path.exists(DIR_MODELS):
     raise FileNotFoundError('Rename the DIR_MODELS to your model folder.')
 
@@ -30,9 +30,8 @@ if 'logger' not in locals():
                         filename='data/log_%s.txt' % (
                             time.strftime("%Y-%m-%d", time.gmtime())),
                         filemode='a')
-    # # defined a Handler which writes INFO messages or higher to the sys.stderr
+    # defined a Handler which writes selected messages to the console
     console = logging.StreamHandler(stream=sys.stdout)
-    # console.terminator = ''
     console.setLevel(logging.WARNING)
     formatter = logging.Formatter(
         '%(asctime)s ----- %(levelname)-8s ----- %(funcName)s\n%(message)s', datefmt='%H:%M:%S')
@@ -42,15 +41,12 @@ if 'logger' not in locals():
     logger = logging.getLogger(__name__)
     logging.getLogger('matplotlib').setLevel(logging.WARNING)
 ################################################################################
-
 matplotlib.rcParams['xtick.top'] = True
 matplotlib.rcParams['ytick.right'] = True
 matplotlib.rcParams['xtick.direction'] = 'in'
 matplotlib.rcParams['ytick.direction'] = 'in'
 matplotlib.rcParams['grid.alpha'] = 0.5
-
 ################################################################################
-
 
 @u.quantity_input
 def calc_sf(radius: u.m, distance: u.m):
@@ -249,59 +245,59 @@ class Star:
     name : str
         Name of the source.
     distance : float
-        Distance to the source in parsecs (pc).
+        Distance to the source [pc].
     e_distance : float
-        Error in the distance measurement in parsecs (pc).
+        Error in the distance measurement [pc].
     filters_to_drop : list, optional
         List of filters to be dropped before fitting the SED. Default is an empty list.
     wavelength_range : list, optional
-        Minimum and maximum values of the filters to consider for fitting. Default is [0, 1,000,000,000].
+        Minimum and maximum values of the filters to consider for fitting [Angstrom]. Default is [0, 1,000,000,000].
     r_limits : str, optional
         Limits for the radius. Default is 'blackbody'.
-    run_name : str, optional
-        Name of the run. Default is '0'.
-    component : str, optional
-        Component identifier (should be either 'A', 'B' or 'C'). Default is 'A'.
-    _type : str, optional
-        Type of the source. Default is 'Star'.
+
+        `blackbody` : Radius range automatically calculated from blackbody fit
+        
+        `[r_min,r_max]` : Radius is varied between the r_min and r_max given in solar radii
+
     model : Model, optional
         Model to fit to the data.
-    data_all : pd.DataFrame
-        A copy of the original data with an added 'fitted' column indicating whether the filter is used. Mmodel flux, residuals, and statistical measures are added in :func:`Fitter.get_parameters_from_chi2_minimization` and :func:`Fitter.get_parameters_from_noisy_chi2_minimization`.
     data : pandas.DataFrame, optional
-        Dataframe containing the observational data. It is cropped to the fitted filters based on :attr:`filters_to_drop` and :attr:`wavelength_range`.
+        Dataframe containing the observational data. It is cropped to the fitted filters based on 
+        :attr:`filters_to_drop` and :attr:`wavelength_range`.
+    data_all : pd.DataFrame
+        A copy of the original data with an added 'fitted' column indicating whether the filter is used. 
+        
+        Created by :func:`drop_filters`. Model flux, residuals, and statistical measures are added in 
+        :func:`Fitter.get_parameters_from_chi2_minimization` and 
+        :func:`Fitter.get_parameters_from_noisy_chi2_minimization`.
+
     data_not_fitted : DataFrame
-        DataFrame containing only removed filters based on :attr:`filters_to_drop` and :attr:`wavelength_range`..
-    N_points : int
-        Updated number of data points.
+        DataFrame containing only removed filters based on :attr:`filters_to_drop` 
+        and :attr:`wavelength_range`.
     filters_to_drop_all : array-like
-        List of filters that are to be dropped based on :attr:`filters_to_drop` and :attr:`wavelength_range`.
+        List of filters that are to be dropped based on :attr:`filters_to_drop` 
+        and :attr:`wavelength_range`.
     N : int
         The number of filters that are fitted.
-    Te_blackbody : float
-        Effective temperature from the blackbody fit [K].
-    log_sf_blackbody : float
-        Logarithm of the scaling factor from the blackbody fit.
+    N_Np : float
+        Number of data points minus the number of free parameters in the model.
     sf_list : list
         List of scaling factors (NOT in log space).
-    _minimising_param : str
-        Parameter used for minimization (Only 'chi2' is implimented).
     df_chi2 : pd.DataFrame
         DataFrame with fitting parameters for all fits.
     df_chi2_trimmed : pd.DataFrame
         DataFrame with fitting parameters for the top fits after trimming (default: top 1000).
     df_chi2_noisy : pd.DataFrame
         DataFrame with best fitting parameters for each noisy iteration.
-    N_Np : float
-        Number of data points minus the number of free parameters in the model.
     chi2_r : float
         Reduced chi^2 value indicating goodness of fit.
     vgf2 : float
-        Variance of fractional residuals squared (vgf^2) for the fit.
+        Reduced chi^2 assuming minimum 2 percent error.
     vgfb2 : float
-        Variance of fractional residuals squared with broadened error (vgfb^2) for the fit.
-    <dim> : float
-        Updates various best fit parameters available in star.df_chi2 (e.g., chi2, sf, R, L, Te, MH, logg).
+        Reduced chi^2 assuming minimum 10 percent error.
+    <parameter> : float
+        The best fit parameters available in :attr:`Star.df_chi2`
+        (e.g., ``Star.chi2``, ``Star.sf``, ``Star.R``, ``Star.L``, ``Star.Te``, ``Star.MH``, ``Star.logg`` ...).
     chi2_median : float
         Median of the chi^2 values from noisy fits.
     chi2_r_median : float
@@ -310,13 +306,34 @@ class Star:
         Median of the vgf^2 values from noisy fits.
     vgfb2_median : float
         Median of the vgfb^2 values from noisy fits.
-    <dim>_median : float
-        Updates the median best fit parameter values available in :attr:`Star.df_chi2_noisy` (sf, R, L, Te, MH, logg, etc.)
-    <dim>_error_lower : float
-        Updates the 16th percentile error for best fit parameters available in :attr:`Star.df_chi2_noisy`.
-    <dim>_error_upper : float
-        Updates the 84th percentile error for best fit parameters available in :attr:`Star.df_chi2_noisy`.
-
+    <parameter>_median : float
+        The median of fit parameter values available in :attr:`Star.df_chi2_noisy` 
+        (e.g. ``Star.sf_median``, ``Star.R_median``, ``Star.L_median``, ``Star.Te_median``, 
+        ``Star.MH_median``, ``Star.logg_median``, ...).
+    <parameter>_error_lower : float
+        The 16th percentile error for fit parameters available in :attr:`Star.df_chi2_noisy`.
+        (e.g. ``Star.sf_error_lower``, ``Star.R_error_lower``, ``Star.L_error_lower``, ``Star.Te_error_lower``, 
+        ``Star.MH_error_lower``, ``Star.logg_error_lower``, ...).
+    <parameter>_error_upper : float
+        The 84th percentile error for fit parameters available in :attr:`Star.df_chi2_noisy`.
+        (e.g. ``Star.sf_error_upper``, ``Star.R_error_upper``, ``Star.L_error_upper``, ``Star.Te_error_upper``, 
+        ``Star.MH_error_upper``, ``Star.logg_error_upper``, ...).
+    Te_blackbody : float
+        Effective temperature from the blackbody fit [K].
+    log_sf_blackbody : float
+        Logarithm of the scaling factor from the blackbody fit.
+    run_name : str, optional
+        Name of the run. Default is '0'.
+    component : str, optional
+        Component identifier (should be either 'A', 'B' or 'C'). Default is 'A'.
+    _minimising_param : str
+        Parameter used for minimization (Only 'chi2' is implemented).
+    _TYPE : str, optional
+        Type of the source. 
+        
+        - Default is 'Star' for single fits.
+        
+        - 'System' for multi-component fits.
     """
 
     def __init__(self,
@@ -330,7 +347,7 @@ class Star:
                  r_limits='blackbody',
                  run_name='0',
                  component='A',
-                 _type='Star'):
+                 _TYPE='Star'):
         """
         Initializes a Star object using name, distance, model_to_fit, etc.
 
@@ -352,7 +369,7 @@ class Star:
             Name of the run. Default is '0'.
         component : str, optional
             Component identifier (should be either 'A', 'B' or 'C'). Default is 'A'.
-        _type : str, optional
+        _TYPE : str, optional
             Type of the source. Default is 'Star'.
         data : pandas.DataFrame, optional
             Dataframe containing the observational data.
@@ -366,6 +383,13 @@ class Star:
 
         Notes
         -----
+        *Updates:* :attr:`Star.name`, :attr:`Star.distance`, :attr:`Star.e_distance`, 
+        :attr:`Star.filters_to_drop`, :attr:`Star.wavelength_range`, :attr:`Star.r_limits`, 
+        :attr:`Star.run_name`, :attr:`Star.component`, :attr:`Star._TYPE`, 
+        :attr:`Star.data`, :attr:`Star.model`, 
+        :attr:`Star.data_all`, :attr:`Star.filters_to_drop_all`, :attr:`Star.N`,
+        :attr:`Star.sf_list`
+
         If `data` is provided, it will be sorted by wavelength and processed.
         If `model` is also provided, it will be configured with the processed data.
         """
@@ -383,12 +407,14 @@ class Star:
         self.r_limits = r_limits
         self.run_name = run_name
         self.component = component
-        self._type = _type
+        self._TYPE = _TYPE
 
         if data is not None:
             data = data.sort_values(by='wavelength')
             self.data = data
-            self.process_data()
+            # To avoide wrongly recalculating fractional errors in multi-component fits
+            if (self._TYPE=='Star') or (self.component=='Total'):
+                self.process_data()
             self.drop_filters()
             self.create_sf_list(r_limits)
 
@@ -409,12 +435,16 @@ class Star:
 
         Notes
         -----
-        *Updates:* :attr:`Star.data`, :attr:`Star.data_not_fitted`, :attr:`Star.N_points`
+        *Updates:* :attr:`Star.data`, :attr:`Star.data_all`
 
         The method includes several steps to clean and preprocess the data before fitting:
+        
         - Ensures no duplicate filters are present in the data.
+        
         - Filters with zero errors are replaced with a value calculated as 110% of the maximum error fraction.
+        
         - Errors are adjusted to ensure a minimum error fraction of 2% for VGF and 10% for VGFB calculations.
+        
         - Logarithmic values of wavelength and flux are computed to facilitate fitting.
         """
         if len(self.data.index) > len(self.data.index.unique()):
@@ -548,7 +578,9 @@ class Star:
     def create_sf_list(self, r_limits):
         """
         Create list of scaling factors.
+        
         The limits on radius are either taken from the used (via r_limits parameter).
+        
         Or calculated automatically from blackbody fitting.
 
         Parameters
@@ -602,6 +634,11 @@ class Star:
         ----------
         refit : bool, optional
             Whether to refit the model. Default is True.
+
+            - if `True` : the fit is redone. 
+            
+            - If `False`: If a previous fit is available, it is read. Otherwise a fresh fit is made.
+        
         _trim : int, optional
             Number of data points to trim for fitting. Default is 1000.
         _minimising_param : str, optional
@@ -625,7 +662,13 @@ class Star:
         total_iterations : int, optional
             Number of iterations used for bootstrapping. Default is 100.
         refit : bool, optional
+
             Whether to refit the model. Default is True.
+        
+            - if `True` : the fit is redone. 
+        
+            - If `False`: If a previous fit is available, it is read. Otherwise a fresh fit is made.
+        
         _percentile_threshold : int, optional
             Percentile threshold used for setting up the extent of the noisy parameter grid. Default is 10.
         plot : bool, optional
@@ -1268,7 +1311,9 @@ class Star:
         ----------
         level : int, optional
             Reduction level.
+
             0: Only remove dataframes.
+            
             1: Remove arrays and dataframes.
 
         Returns
@@ -1278,11 +1323,14 @@ class Star:
 
         Notes
         -----
-        This method creates a reduced copy of the Star object, primarily for saving to storage formats like pickle files.
+        This method creates a reduced copy of the Star object, primarily for saving to storage formats like log and pickle files.
+        
         At `level` 0, dataframes (:attr:`Star.df_chi2`, :attr:`Star.df_chi2_trimmed`, :attr:`Star.df_chi2_noisy`) and 
         bigger attributes (:attr:`Star.model`, :attr:`Star.sf_list`, :attr:`Star.sf_list_noisy`) are removed.
+        
         At `level` 1, additional attributes (:attr:`Star.data`, :attr:`Star.data_all`, :attr:`Star.data_not_fitted`) are also removed.
         Lists within the object are converted to strings for efficient saving.
+        
         If any list-like attribute contains more than one element, a ValueError is raised.
 
         Examples
@@ -1335,7 +1383,9 @@ class Star:
         Notes
         -----
         - Logs the current state of the instance into a CSV file ('data/log_single_fitting.csv') for future reference.
+        
         - If the log file does not exist, it creates a new one. Otherwise, it appends to the existing log file.
+        
         - Uses the :func:`Star._reduce_Star` method to create a reduced copy of the instance suitable for saving.
         """
         log_file_name = 'data/log_single_fitting.csv'
@@ -1358,6 +1408,7 @@ class Model:
     Class to work with synthetic photometry models. 
 
     - The models are saved as xarray DataArrays.
+    
     - Also includes simple tools to access and plot isochrones and WD cooling curves 
     """
 
@@ -1380,8 +1431,11 @@ class Model:
         ----------
         da : xarray.DataArray
             Multi-dimensional array representing spectral energy distribution (SED) models.
+            
             Dimensions typically include FilterID, Te (effective temperature), logg (surface gravity), etc.
+            
             The specific dimensions depend on the model file read.
+        
         da_obs : xarray.DataArray
             DataArray of observed flux values with dimensions matching :attr:`Model.da`.
         da_obs_error : xarray.DataArray
@@ -1399,8 +1453,11 @@ class Model:
         Notes
         -----
         - Initializes a Model object with a specified model name, parameter limits, and optional filter list.
+        
         - If a Star object is provided, extracts filter_list from its data; otherwise, uses the provided filter_list.
+        
         - Uses :func:`Model.read_model_file` to load model data from a pre-defined file based on the model name.
+        
         - Initializes :attr:`Model.free_params` based on the number of dimensions in the model.
         """
         if name not in ['kurucz', 'koester', 'kurucz_uvblue']:  # 'uvblue', 'levenhagen'
@@ -1441,7 +1498,9 @@ class Model:
         *Updates:* :attr:`Model.da`
 
         - Updates :attr:`Model.da` with the contents of the model file specified by :attr:`Model.model_file_name`.
+        
         - Calls :func:`Model.crop_based_on_filter_list` to adjust :attr:`Model.da` based on the provided filter list.
+        
         - If DIR_MODELS is different from the current path of :attr:`Model.model_file_name`, updates it accordingly.
         """
         # Updating path of the model file if DIR_MODELS has been changed
@@ -1640,8 +1699,11 @@ class Fitter:
     Collections of functions which deal with SED fitting. 
 
     - Fitting blackbody spectrum
+    
     - Functions to calculate chi2 values for a parameter grid.
+    
     - Functions to find best fit values and their errors
+    
     - At present, only chi2 minimization is implimented.
     """
     @staticmethod
@@ -1748,10 +1810,15 @@ class Fitter:
         *Updates:* :attr:`Star.df_chi2`, :attr:`Star.df_chi2_trimmed`
 
         - Calculates chi2 values based on model parameters and observed data.
+        
         - Saves the results into DataFrame `star.df_chi2`.
+        
         - Optionally plots the scatter matrix using `plot_chi2_matrix` if `plot=True`.
+        
         - Trims `star.df_chi2` to top `_trim` results if `_trim` is provided.
+        
         - Saves `star.df_chi2` into a CSV file.
+        
         - Uses `calc_radius` and `calc_luminosity` functions to calculate radius (R) and luminosity (L) based on model parameters.
 
         Raises
@@ -1762,7 +1829,7 @@ class Fitter:
         if not os.path.exists(DIR_OUTPUTS+'chi_files/'):
             os.makedirs(DIR_OUTPUTS+'chi_files/')
         chi2_file_name = '%s%s_%s_%s_%s_%s.csv' % (DIR_OUTPUTS+'chi_files/', star.name, star.component,
-                                                   model.name, star.run_name, star._type)
+                                                   model.name, star.run_name, star._TYPE)
 
         # If the chi2 file exists, it will be read (depends on refit = True or False)
         if os.path.isfile(chi2_file_name):
@@ -1864,8 +1931,11 @@ class Fitter:
         *Updates:* :attr:`Star.df_chi2_noisy`
 
         - Uses `star.df_chi2` to filter out top performing parameters based on `_percentile_threshold`.
+        
         - Generates `total_iterations` versions of noisy observed data (`da_obs_noisy`) by adding Gaussian noise to the original flux.
+        
         - Computes chi2 values for each noisy iteration and stores the best fitting parameters in `star.df_chi2_noisy`.
+        
         - Saves `star.df_chi2_noisy` into a CSV file named based on star and model information.
 
         Raises
@@ -1881,7 +1951,7 @@ class Fitter:
                                            np.log10(sf_max), 0.01)
 
         chi2_file_name = '%s%s_%s_%s_noisy_%s_%s.csv' % (DIR_OUTPUTS+'chi_files/', star.name, star.component,
-                                                         model.name, star.run_name, star._type)
+                                                         model.name, star.run_name, star._TYPE)
         # If the chi2 file exists, it will be read (depends on 'refit' = True or False)
         if os.path.isfile(chi2_file_name):
             if not refit:
@@ -1968,7 +2038,9 @@ class Fitter:
         *Updates:* :attr:`Star.data_all`, :attr:`Star.data`, :attr:`Star.data_not_fitted`, :attr:`Star.N_Np`, :attr:`Star.chi2_r`, :attr:`Star.vgf2`, :attr:`Star.vgfb2`, :attr:`Star.<dim>`
 
         This method retrieves and updates parameters from the best chi2 fit found in star.df_chi2.
+        
         It calculates additional statistical metrics for the fitted data.
+        
         It raises a warning if any data points have chi2 values significantly higher than the average (3-sigma threshold).
         """
         fitting_results = {}
@@ -2052,8 +2124,11 @@ class Fitter:
         Notes
         -----
         This method estimates realistic errors based on noisy fits and grid steps:
+        
         - It calculates percentiles and adjusts them to grid_steps boundaries if necessary.
+        
         - Issues warnings if the best fit parameter is close to model boundaries.
+        
         - Handles cases where spread in iterations is minimal or zero.
 
         """
@@ -2129,8 +2204,11 @@ class Fitter:
         *Updates:* :attr:`Star.data_all`, :attr:`Star.data`, :attr:`Star.data_not_fitted`, :attr:`Star.chi2_median`, :attr:`Star.chi2_r_median`, :attr:`Star.vgf2_median`, :attr:`Star.vgfb2_median`, :attr:`Star.<dim>_median`, :attr:`Star.<dim>_error_lower`, :attr:`Star.<dim>_error_upper`
 
         This method estimates the best fit parameters by calculating the median and errors from the noisy chi2 fits:
+        
         - It uses Fitter.get_realistic_errors_from_iterations() to estimate realistic errors based on noisy fits and grid steps.
+        
         - Updates various attributes in star related to best fit parameters, errors, and fit quality metrics.
+        
         - Logs warnings if the best fit parameters differ from their median value.
         """
         fitting_results = {}
@@ -2222,29 +2300,13 @@ class System:
     run_name : str
         Name of the run.
     filters_to_drop : list
-        List of filters to drop from the data.
-    Total : Star
-        Star object representing the total fitted flux.
+        List of filters to be dropped before fitting the SED. Default is an empty list.
     components : list
         List of components within the system.
+    Total : Star
+        Star object representing the total fitted flux.
     <component> : Star
-        Star object for a given component (e.g. 'A', 'B', 'C' or 'Total').
-    Total.data_all : pd.DataFrame
-        Data for all filters.
-    Total.data : pd.DataFrame
-        Data for fitted filters.
-    Total.data_not_fitted : pd.DataFrame
-        Data for non-fitted filters.
-    Total.N_Np : float
-        Number of data points minus number of free parameters.
-    Total.chi2 : float
-        Total chi^2 of the fit.
-    Total.chi2_r : float
-        Reduced chi^2 of the fit.
-    Total.vgf2 : float
-        Total vgf^2 of the fit.
-    Total.vgfb2 : float
-        Total vgfb^2 of the fit.
+        Star object for a given component (e.g. `System.A`, `System.B`, `System.C` or `System.Total`).
     """
 
     def __init__(self, name, distance, e_distance, data, run_name='0', filters_to_drop=[]):
@@ -2268,7 +2330,8 @@ class System:
 
         Notes
         -----
-        Initializes a Star object (:attr:`System.Total`) representing the total fitted flux for the system based on the input data.
+        Initializes a Star object (:attr:`System.Total`) representing the total fitted 
+        flux for the system based on the input data.
         """
         self.name = name
         self.distance = distance
@@ -2282,7 +2345,7 @@ class System:
                           e_distance=e_distance,
                           filters_to_drop=filters_to_drop,
                           run_name=run_name,
-                          _type='System',
+                          _TYPE='System',
                           data=data.copy(),
                           component='Total')
         self.components = []
@@ -2311,8 +2374,9 @@ class System:
         *Updates*: :attr:`System.A`, :attr:`System.components`
 
         Initializes the A component of the system as a Star object (`self.A`), using the provided model
-        information (`model`), wavelength range (`wavelength_range`), and R limits (`r_limits`). Updates
-        `self.A` with the appropriate data and attributes, and adds 'A' to the list of components 
+        information (`model`), wavelength range (`wavelength_range`), and R limits (`r_limits`). 
+
+        Updates `self.A` with the appropriate data and attributes, and adds 'A' to the list of components 
         (`self.components`) within the system.
         """
         if 'A' in self.components:
@@ -2324,7 +2388,7 @@ class System:
                       filters_to_drop=self.filters_to_drop,
                       data=self.Total.data_all.copy(),
                       run_name=self.run_name,
-                      _type='System',
+                      _TYPE='System',
 
                       model=model,
                       wavelength_range=wavelength_range,
@@ -2363,16 +2427,18 @@ class System:
             raise AttributeError(
                 "'%s' component is already defined." % component)
         self.update_Total_flux()
-        data_res = self.Total.data_all[[
-            'wavelength', 'residual_flux', 'error']]
-        data_res.columns = ['wavelength', 'flux', 'error']
+
+        data_res = self.Total.data_all[['wavelength', 'residual_flux', 
+                                        'error', 'error_fraction', 'error_2percent','error_10percent', 
+                                        'log_wavelength', 'log_flux', 'e_log_flux']]
+        data_res.rename(columns={'residual_flux': 'flux'}, inplace=True)
         star_res = Star(name=self.name,
                         distance=self.distance,
                         e_distance=self.e_distance,
                         filters_to_drop=self.filters_to_drop,
                         wavelength_range=wavelength_range,
                         run_name=self.run_name,
-                        _type='System',
+                        _TYPE='System',
 
                         data=data_res,
                         model=model,
@@ -2393,7 +2459,10 @@ class System:
 
         Notes
         -----
-        *Updates:* :attr:`System.Total.data_all`, :attr:`System.Total.data`, :attr:`System.Total.data_not_fitted`, :attr:`System.Total.N_Np`, :attr:`System.Total.chi2`, :attr:`System.Total.chi2_r`, :attr:`System.Total.vgf2`, :attr:`System.Total.vgfb2`
+        *Updates:* :attr:`System.Total.data_all`, :attr:`System.Total.data`, 
+        :attr:`System.Total.data_not_fitted`, :attr:`System.Total.N_Np`, 
+        :attr:`System.Total.chi2`, :attr:`System.Total.chi2_r`, :attr:`System.Total.vgf2`, 
+        :attr:`System.Total.vgfb2`
         """
         for idx, component in enumerate(self.components):
             star = getattr(self, component)
@@ -2486,7 +2555,7 @@ class System:
                     title += '$^{+%.2f}_{-%.2f}$' % (getattr(star, dim+'_error_upper')/ten_factor,
                                                      getattr(star, dim+'_error_lower')/ten_factor)
         title += '\n $χ^2_r$ %.1f, vgfb$^2$ %.2f' % (
-            star.chi2_r, star.vgfb2)
+            self.Total.chi2_r, self.Total.vgfb2)
         self.update_Total_flux()
         # Don't know why the next line changes xlim
         ax[0, 0].set_xlim(ax[0, 0].get_xlim())
@@ -2563,7 +2632,8 @@ class System:
 
         Notes
         -----
-        If the log file (`data/log_starsystem_fitting.csv`) does not exist, creates a new one. Otherwise, appends to the existing log file.
+        If the log file (`data/log_starsystem_fitting.csv`) does not exist, 
+        creates a new one. Otherwise, appends to the existing log file.
         """
         log_file_name = 'data/log_starsystem_fitting.csv'
         dict = {'run_name': self.run_name}

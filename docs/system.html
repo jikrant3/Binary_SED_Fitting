@@ -326,7 +326,18 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.System.filters_to_drop">
 <span class="sig-name descname"><span class="pre">filters_to_drop</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.filters_to_drop" title="Link to this definition">¶</a></dt>
-<dd><p>List of filters to drop from the data.</p>
+<dd><p>List of filters to be dropped before fitting the SED. Default is an empty list.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.System.components">
+<span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.components" title="Link to this definition">¶</a></dt>
+<dd><p>List of components within the system.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
@@ -346,111 +357,12 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.components">
-<span class="sig-name descname"><span class="pre">components</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.components" title="Link to this definition">¶</a></dt>
-<dd><p>List of components within the system.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py">
 <span class="sig-name descname"><span class="pre">&lt;component&gt;</span></span></dt>
-<dd><p>Star object for a given component (e.g. ‘A’, ‘B’, ‘C’ or ‘Total’).</p>
+<dd><p>Star object for a given component (e.g. <cite>System.A</cite>, <cite>System.B</cite>, <cite>System.C</cite> or <cite>System.Total</cite>).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p><a class="reference internal" href="star.html#src.binary_sed_fitting.Star" title="src.binary_sed_fitting.Star">Star</a></p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.data_all">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">data_all</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.data_all" title="Link to this definition">¶</a></dt>
-<dd><p>Data for all filters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.data">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.data" title="Link to this definition">¶</a></dt>
-<dd><p>Data for fitted filters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.data_not_fitted">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">data_not_fitted</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.data_not_fitted" title="Link to this definition">¶</a></dt>
-<dd><p>Data for non-fitted filters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.N_Np">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">N_Np</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.N_Np" title="Link to this definition">¶</a></dt>
-<dd><p>Number of data points minus number of free parameters.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.chi2">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">chi2</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.chi2" title="Link to this definition">¶</a></dt>
-<dd><p>Total chi^2 of the fit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.chi2_r">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">chi2_r</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.chi2_r" title="Link to this definition">¶</a></dt>
-<dd><p>Reduced chi^2 of the fit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.vgf2">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">vgf2</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.vgf2" title="Link to this definition">¶</a></dt>
-<dd><p>Total vgf^2 of the fit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.System.Total.vgfb2">
-<span class="sig-prename descclassname"><span class="pre">Total.</span></span><span class="sig-name descname"><span class="pre">vgfb2</span></span><a class="headerlink" href="#src.binary_sed_fitting.System.Total.vgfb2" title="Link to this definition">¶</a></dt>
-<dd><p>Total vgfb^2 of the fit.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
 </dd>
 </dl>
 </dd></dl>
@@ -472,7 +384,8 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p>Initializes a Star object (<a class="reference internal" href="#src.binary_sed_fitting.System.Total" title="src.binary_sed_fitting.System.Total"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total</span></code></a>) representing the total fitted flux for the system based on the input data.</p>
+<p>Initializes a Star object (<a class="reference internal" href="#src.binary_sed_fitting.System.Total" title="src.binary_sed_fitting.System.Total"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total</span></code></a>) representing the total fitted
+flux for the system based on the input data.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -535,7 +448,8 @@
 <span class="sig-name descname"><span class="pre">save_summary</span></span><span class="sig-paren">(</span><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.System.save_summary" title="Link to this definition">¶</a></dt>
 <dd><p>Save a summary of the current state of the instance to a CSV file.</p>
 <p class="rubric">Notes</p>
-<p>If the log file (<cite>data/log_starsystem_fitting.csv</cite>) does not exist, creates a new one. Otherwise, appends to the existing log file.</p>
+<p>If the log file (<cite>data/log_starsystem_fitting.csv</cite>) does not exist,
+creates a new one. Otherwise, appends to the existing log file.</p>
 </dd></dl>
 
 <dl class="py method">
@@ -557,8 +471,8 @@
 <p class="rubric">Notes</p>
 <p><em>Updates</em>: <code class="xref py py-attr docutils literal notranslate"><span class="pre">System.A</span></code>, <a class="reference internal" href="#src.binary_sed_fitting.System.components" title="src.binary_sed_fitting.System.components"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.components</span></code></a></p>
 <p>Initializes the A component of the system as a Star object (<cite>self.A</cite>), using the provided model
-information (<cite>model</cite>), wavelength range (<cite>wavelength_range</cite>), and R limits (<cite>r_limits</cite>). Updates
-<cite>self.A</cite> with the appropriate data and attributes, and adds ‘A’ to the list of components
+information (<cite>model</cite>), wavelength range (<cite>wavelength_range</cite>), and R limits (<cite>r_limits</cite>).</p>
+<p>Updates <cite>self.A</cite> with the appropriate data and attributes, and adds ‘A’ to the list of components
 (<cite>self.components</cite>) within the system.</p>
 </dd></dl>
 
@@ -572,7 +486,10 @@ information (<cite>model</cite>), wavelength range (<cite>wavelength_range</cite
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.System.Total.data_all" title="src.binary_sed_fitting.System.Total.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.data_all</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.data" title="src.binary_sed_fitting.System.Total.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.data</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.data_not_fitted" title="src.binary_sed_fitting.System.Total.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.data_not_fitted</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.N_Np" title="src.binary_sed_fitting.System.Total.N_Np"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.N_Np</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.chi2" title="src.binary_sed_fitting.System.Total.chi2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.chi2</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.chi2_r" title="src.binary_sed_fitting.System.Total.chi2_r"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.chi2_r</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.vgf2" title="src.binary_sed_fitting.System.Total.vgf2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.vgf2</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.System.Total.vgfb2" title="src.binary_sed_fitting.System.Total.vgfb2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.vgfb2</span></code></a></p>
+<p><em>Updates:</em> <code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.data_all</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.data</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.data_not_fitted</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.N_Np</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.chi2</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.chi2_r</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.vgf2</span></code>,
+<code class="xref py py-attr docutils literal notranslate"><span class="pre">System.Total.vgfb2</span></code></p>
 </dd></dl>
 
 </dd></dl>
@@ -641,18 +558,8 @@ information (<cite>model</cite>), wavelength range (<cite>wavelength_range</cite
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.e_distance"><code class="docutils literal notranslate"><span class="pre">System.e_distance</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.run_name"><code class="docutils literal notranslate"><span class="pre">System.run_name</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.filters_to_drop"><code class="docutils literal notranslate"><span class="pre">System.filters_to_drop</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total"><code class="docutils literal notranslate"><span class="pre">System.Total</span></code></a><ul>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.data_all"><code class="docutils literal notranslate"><span class="pre">System.Total.data_all</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.data"><code class="docutils literal notranslate"><span class="pre">System.Total.data</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.data_not_fitted"><code class="docutils literal notranslate"><span class="pre">System.Total.data_not_fitted</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.N_Np"><code class="docutils literal notranslate"><span class="pre">System.Total.N_Np</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.chi2"><code class="docutils literal notranslate"><span class="pre">System.Total.chi2</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.chi2_r"><code class="docutils literal notranslate"><span class="pre">System.Total.chi2_r</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.vgf2"><code class="docutils literal notranslate"><span class="pre">System.Total.vgf2</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total.vgfb2"><code class="docutils literal notranslate"><span class="pre">System.Total.vgfb2</span></code></a></li>
-</ul>
-</li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.components"><code class="docutils literal notranslate"><span class="pre">System.components</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.System.Total"><code class="docutils literal notranslate"><span class="pre">System.Total</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.__init__"><code class="docutils literal notranslate"><span class="pre">System.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.create_residual_star"><code class="docutils literal notranslate"><span class="pre">System.create_residual_star()</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.System.plot"><code class="docutils literal notranslate"><span class="pre">System.plot()</span></code></a></li>
@@ -678,6 +585,6 @@ information (<cite>model</cite>), wavelength range (<cite>wavelength_range</cite
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/copybutton.js?v=5eb1bb1e"></script>
     </body>
 </html>

@@ -277,7 +277,7 @@
 <h1><a class="reference internal" href="#src.binary_sed_fitting.Star" title="src.binary_sed_fitting.Star"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a><a class="headerlink" href="#star" title="Link to this heading">¶</a></h1>
 <dl class="py class">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star">
-<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.binary_sed_fitting.</span></span><span class="sig-name descname"><span class="pre">Star</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1000000000]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackbody'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Star'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star" title="Link to this definition">¶</a></dt>
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.binary_sed_fitting.</span></span><span class="sig-name descname"><span class="pre">Star</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1000000000]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackbody'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_TYPE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Star'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star" title="Link to this definition">¶</a></dt>
 <dd><p>Class for working with individual stars and their SED fitting.</p>
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.name">
@@ -293,7 +293,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.distance">
 <span class="sig-name descname"><span class="pre">distance</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.distance" title="Link to this definition">¶</a></dt>
-<dd><p>Distance to the source in parsecs (pc).</p>
+<dd><p>Distance to the source [pc].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -304,7 +304,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.e_distance">
 <span class="sig-name descname"><span class="pre">e_distance</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.e_distance" title="Link to this definition">¶</a></dt>
-<dd><p>Error in the distance measurement in parsecs (pc).</p>
+<dd><p>Error in the distance measurement [pc].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -326,7 +326,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.wavelength_range">
 <span class="sig-name descname"><span class="pre">wavelength_range</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.wavelength_range" title="Link to this definition">¶</a></dt>
-<dd><p>Minimum and maximum values of the filters to consider for fitting. Default is [0, 1,000,000,000].</p>
+<dd><p>Minimum and maximum values of the filters to consider for fitting [Angstrom]. Default is [0, 1,000,000,000].</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list, optional</p>
@@ -338,39 +338,8 @@
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.r_limits">
 <span class="sig-name descname"><span class="pre">r_limits</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.r_limits" title="Link to this definition">¶</a></dt>
 <dd><p>Limits for the radius. Default is ‘blackbody’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.run_name">
-<span class="sig-name descname"><span class="pre">run_name</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.run_name" title="Link to this definition">¶</a></dt>
-<dd><p>Name of the run. Default is ‘0’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.component">
-<span class="sig-name descname"><span class="pre">component</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.component" title="Link to this definition">¶</a></dt>
-<dd><p>Component identifier (should be either ‘A’, ‘B’ or ‘C’). Default is ‘A’.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str, optional</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star._type">
-<span class="sig-name descname"><span class="pre">_type</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star._type" title="Link to this definition">¶</a></dt>
-<dd><p>Type of the source. Default is ‘Star’.</p>
+<p><cite>blackbody</cite> : Radius range automatically calculated from blackbody fit</p>
+<p><cite>[r_min,r_max]</cite> : Radius is varied between the r_min and r_max given in solar radii</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>str, optional</p>
@@ -390,20 +359,10 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data_all">
-<span class="sig-name descname"><span class="pre">data_all</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data_all" title="Link to this definition">¶</a></dt>
-<dd><p>A copy of the original data with an added ‘fitted’ column indicating whether the filter is used. Mmodel flux, residuals, and statistical measures are added in <a class="reference internal" href="fitter.html#src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization" title="src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization"><code class="xref py py-func docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_chi2_minimization()</span></code></a> and <a class="reference internal" href="fitter.html#src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization" title="src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization"><code class="xref py py-func docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_noisy_chi2_minimization()</span></code></a>.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>pd.DataFrame</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data">
 <span class="sig-name descname"><span class="pre">data</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data" title="Link to this definition">¶</a></dt>
-<dd><p>Dataframe containing the observational data. It is cropped to the fitted filters based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
+<dd><p>Dataframe containing the observational data. It is cropped to the fitted filters based on
+<a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>pandas.DataFrame, optional</p>
@@ -412,9 +371,24 @@
 </dd></dl>
 
 <dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data_all">
+<span class="sig-name descname"><span class="pre">data_all</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data_all" title="Link to this definition">¶</a></dt>
+<dd><p>A copy of the original data with an added ‘fitted’ column indicating whether the filter is used.</p>
+<p>Created by <a class="reference internal" href="#src.binary_sed_fitting.Star.drop_filters" title="src.binary_sed_fitting.Star.drop_filters"><code class="xref py py-func docutils literal notranslate"><span class="pre">drop_filters()</span></code></a>. Model flux, residuals, and statistical measures are added in
+<a class="reference internal" href="fitter.html#src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization" title="src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization"><code class="xref py py-func docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_chi2_minimization()</span></code></a> and
+<a class="reference internal" href="fitter.html#src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization" title="src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization"><code class="xref py py-func docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_noisy_chi2_minimization()</span></code></a>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>pd.DataFrame</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.data_not_fitted">
 <span class="sig-name descname"><span class="pre">data_not_fitted</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.data_not_fitted" title="Link to this definition">¶</a></dt>
-<dd><p>DataFrame containing only removed filters based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>..</p>
+<dd><p>DataFrame containing only removed filters based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a>
+and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>DataFrame</p>
@@ -423,20 +397,10 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.N_points">
-<span class="sig-name descname"><span class="pre">N_points</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.N_points" title="Link to this definition">¶</a></dt>
-<dd><p>Updated number of data points.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>int</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.filters_to_drop_all">
 <span class="sig-name descname"><span class="pre">filters_to_drop_all</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.filters_to_drop_all" title="Link to this definition">¶</a></dt>
-<dd><p>List of filters that are to be dropped based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a> and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
+<dd><p>List of filters that are to be dropped based on <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">filters_to_drop</span></code></a>
+and <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">wavelength_range</span></code></a>.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>array-like</p>
@@ -456,20 +420,9 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.Te_blackbody">
-<span class="sig-name descname"><span class="pre">Te_blackbody</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.Te_blackbody" title="Link to this definition">¶</a></dt>
-<dd><p>Effective temperature from the blackbody fit [K].</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.log_sf_blackbody">
-<span class="sig-name descname"><span class="pre">log_sf_blackbody</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.log_sf_blackbody" title="Link to this definition">¶</a></dt>
-<dd><p>Logarithm of the scaling factor from the blackbody fit.</p>
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.N_Np">
+<span class="sig-name descname"><span class="pre">N_Np</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.N_Np" title="Link to this definition">¶</a></dt>
+<dd><p>Number of data points minus the number of free parameters in the model.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -484,17 +437,6 @@
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>list</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star._minimising_param">
-<span class="sig-name descname"><span class="pre">_minimising_param</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star._minimising_param" title="Link to this definition">¶</a></dt>
-<dd><p>Parameter used for minimization (Only ‘chi2’ is implimented).</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>str</p>
 </dd>
 </dl>
 </dd></dl>
@@ -533,17 +475,6 @@
 </dd></dl>
 
 <dl class="py attribute">
-<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.N_Np">
-<span class="sig-name descname"><span class="pre">N_Np</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.N_Np" title="Link to this definition">¶</a></dt>
-<dd><p>Number of data points minus the number of free parameters in the model.</p>
-<dl class="field-list simple">
-<dt class="field-odd">Type<span class="colon">:</span></dt>
-<dd class="field-odd"><p>float</p>
-</dd>
-</dl>
-</dd></dl>
-
-<dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.chi2_r">
 <span class="sig-name descname"><span class="pre">chi2_r</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.chi2_r" title="Link to this definition">¶</a></dt>
 <dd><p>Reduced chi^2 value indicating goodness of fit.</p>
@@ -557,7 +488,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.vgf2">
 <span class="sig-name descname"><span class="pre">vgf2</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.vgf2" title="Link to this definition">¶</a></dt>
-<dd><p>Variance of fractional residuals squared (vgf^2) for the fit.</p>
+<dd><p>Reduced chi^2 assuming minimum 2 percent error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -568,7 +499,7 @@
 <dl class="py attribute">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.vgfb2">
 <span class="sig-name descname"><span class="pre">vgfb2</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.vgfb2" title="Link to this definition">¶</a></dt>
-<dd><p>Variance of fractional residuals squared with broadened error (vgfb^2) for the fit.</p>
+<dd><p>Reduced chi^2 assuming minimum 10 percent error.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -578,8 +509,9 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">&lt;dim&gt;</span></span></dt>
-<dd><p>Updates various best fit parameters available in star.df_chi2 (e.g., chi2, sf, R, L, Te, MH, logg).</p>
+<span class="sig-name descname"><span class="pre">&lt;parameter&gt;</span></span></dt>
+<dd><p>The best fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2" title="src.binary_sed_fitting.Star.df_chi2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2</span></code></a>
+(e.g., <code class="docutils literal notranslate"><span class="pre">Star.chi2</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.sf</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.R</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.L</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.Te</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.MH</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.logg</span></code> …).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -633,8 +565,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">&lt;dim&gt;_median</span></span></dt>
-<dd><p>Updates the median best fit parameter values available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a> (sf, R, L, Te, MH, logg, etc.)</p>
+<span class="sig-name descname"><span class="pre">&lt;parameter&gt;_median</span></span></dt>
+<dd><p>The median of fit parameter values available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>
+(e.g. <code class="docutils literal notranslate"><span class="pre">Star.sf_median</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.R_median</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.L_median</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.Te_median</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Star.MH_median</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.logg_median</span></code>, …).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -644,8 +578,10 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">&lt;dim&gt;_error_lower</span></span></dt>
-<dd><p>Updates the 16th percentile error for best fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>.</p>
+<span class="sig-name descname"><span class="pre">&lt;parameter&gt;_error_lower</span></span></dt>
+<dd><p>The 16th percentile error for fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>.
+(e.g. <code class="docutils literal notranslate"><span class="pre">Star.sf_error_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.R_error_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.L_error_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.Te_error_lower</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Star.MH_error_lower</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.logg_error_lower</span></code>, …).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
@@ -655,18 +591,90 @@
 
 <dl class="py attribute">
 <dt class="sig sig-object py">
-<span class="sig-name descname"><span class="pre">&lt;dim&gt;_error_upper</span></span></dt>
-<dd><p>Updates the 84th percentile error for best fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>.</p>
+<span class="sig-name descname"><span class="pre">&lt;parameter&gt;_error_upper</span></span></dt>
+<dd><p>The 84th percentile error for fit parameters available in <a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a>.
+(e.g. <code class="docutils literal notranslate"><span class="pre">Star.sf_error_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.R_error_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.L_error_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.Te_error_upper</span></code>,
+<code class="docutils literal notranslate"><span class="pre">Star.MH_error_upper</span></code>, <code class="docutils literal notranslate"><span class="pre">Star.logg_error_upper</span></code>, …).</p>
 <dl class="field-list simple">
 <dt class="field-odd">Type<span class="colon">:</span></dt>
 <dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.Te_blackbody">
+<span class="sig-name descname"><span class="pre">Te_blackbody</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.Te_blackbody" title="Link to this definition">¶</a></dt>
+<dd><p>Effective temperature from the blackbody fit [K].</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.log_sf_blackbody">
+<span class="sig-name descname"><span class="pre">log_sf_blackbody</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.log_sf_blackbody" title="Link to this definition">¶</a></dt>
+<dd><p>Logarithm of the scaling factor from the blackbody fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.run_name">
+<span class="sig-name descname"><span class="pre">run_name</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.run_name" title="Link to this definition">¶</a></dt>
+<dd><p>Name of the run. Default is ‘0’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star.component">
+<span class="sig-name descname"><span class="pre">component</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star.component" title="Link to this definition">¶</a></dt>
+<dd><p>Component identifier (should be either ‘A’, ‘B’ or ‘C’). Default is ‘A’.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star._minimising_param">
+<span class="sig-name descname"><span class="pre">_minimising_param</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star._minimising_param" title="Link to this definition">¶</a></dt>
+<dd><p>Parameter used for minimization (Only ‘chi2’ is implemented).</p>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py attribute">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Star._TYPE">
+<span class="sig-name descname"><span class="pre">_TYPE</span></span><a class="headerlink" href="#src.binary_sed_fitting.Star._TYPE" title="Link to this definition">¶</a></dt>
+<dd><p>Type of the source.</p>
+<ul class="simple">
+<li><p>Default is ‘Star’ for single fits.</p></li>
+<li><p>‘System’ for multi-component fits.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>str, optional</p>
 </dd>
 </dl>
 </dd></dl>
 
 <dl class="py method">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.__init__">
-<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1000000000]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackbody'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Star'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.__init__" title="Link to this definition">¶</a></dt>
+<span class="sig-name descname"><span class="pre">__init__</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">name</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">e_distance</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">filters_to_drop</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">wavelength_range</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[0,</span> <span class="pre">1000000000]</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">data</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">r_limits</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'blackbody'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">run_name</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'0'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'A'</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_TYPE</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'Star'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.__init__" title="Link to this definition">¶</a></dt>
 <dd><p>Initializes a Star object using name, distance, model_to_fit, etc.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
@@ -679,7 +687,7 @@
 <li><p><strong>r_limits</strong> (<em>str</em><em>, </em><em>optional</em>) – Limits for the radius. Default is ‘blackbody’.</p></li>
 <li><p><strong>run_name</strong> (<em>str</em><em>, </em><em>optional</em>) – Name of the run. Default is ‘0’.</p></li>
 <li><p><strong>component</strong> (<em>str</em><em>, </em><em>optional</em>) – Component identifier (should be either ‘A’, ‘B’ or ‘C’). Default is ‘A’.</p></li>
-<li><p><strong>_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the source. Default is ‘Star’.</p></li>
+<li><p><strong>_TYPE</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the source. Default is ‘Star’.</p></li>
 <li><p><strong>data</strong> (<em>pandas.DataFrame</em><em>, </em><em>optional</em>) – Dataframe containing the observational data.</p></li>
 <li><p><strong>model</strong> (<a class="reference internal" href="model.html#src.binary_sed_fitting.Model" title="src.binary_sed_fitting.Model"><em>Model</em></a><em>, </em><em>optional</em>) – Model to fit to the data.</p></li>
 </ul>
@@ -689,6 +697,12 @@
 </dd>
 </dl>
 <p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.name" title="src.binary_sed_fitting.Star.name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.name</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.distance" title="src.binary_sed_fitting.Star.distance"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.distance</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.e_distance" title="src.binary_sed_fitting.Star.e_distance"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.e_distance</span></code></a>,
+<a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop" title="src.binary_sed_fitting.Star.filters_to_drop"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.filters_to_drop</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range" title="src.binary_sed_fitting.Star.wavelength_range"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.wavelength_range</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.r_limits" title="src.binary_sed_fitting.Star.r_limits"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.r_limits</span></code></a>,
+<a class="reference internal" href="#src.binary_sed_fitting.Star.run_name" title="src.binary_sed_fitting.Star.run_name"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.run_name</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.component" title="src.binary_sed_fitting.Star.component"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.component</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star._TYPE" title="src.binary_sed_fitting.Star._TYPE"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star._TYPE</span></code></a>,
+<a class="reference internal" href="#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.model" title="src.binary_sed_fitting.Star.model"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.model</span></code></a>,
+<a class="reference internal" href="#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop_all" title="src.binary_sed_fitting.Star.filters_to_drop_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.filters_to_drop_all</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.N" title="src.binary_sed_fitting.Star.N"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.N</span></code></a>,
+<a class="reference internal" href="#src.binary_sed_fitting.Star.sf_list" title="src.binary_sed_fitting.Star.sf_list"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.sf_list</span></code></a></p>
 <p>If <cite>data</cite> is provided, it will be sorted by wavelength and processed.
 If <cite>model</cite> is also provided, it will be configured with the processed data.</p>
 </dd></dl>
@@ -696,9 +710,9 @@ If <cite>model</cite> is also provided, it will be configured with the processed
 <dl class="py method">
 <dt class="sig sig-object py" id="src.binary_sed_fitting.Star.create_sf_list">
 <span class="sig-name descname"><span class="pre">create_sf_list</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">r_limits</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Star.create_sf_list" title="Link to this definition">¶</a></dt>
-<dd><p>Create list of scaling factors.
-The limits on radius are either taken from the used (via r_limits parameter).
-Or calculated automatically from blackbody fitting.</p>
+<dd><p>Create list of scaling factors.</p>
+<p>The limits on radius are either taken from the used (via r_limits parameter).</p>
+<p>Or calculated automatically from blackbody fitting.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><p><strong>r_limits</strong> (<em>str</em><em> or </em><em>list</em>) – Limits for the radius. Can be ‘blackbody’ to use blackbody fitting results or a list of two values for radius limits.</p>
@@ -744,7 +758,12 @@ entries outside the specified wavelength range or with negative wavelengths.</p>
 <dl class="field-list simple">
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
-<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to refit the model. Default is True.</p></li>
+<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Whether to refit the model. Default is True.</p>
+<ul>
+<li><p>if <cite>True</cite> : the fit is redone.</p></li>
+<li><p>If <cite>False</cite>: If a previous fit is available, it is read. Otherwise a fresh fit is made.</p></li>
+</ul>
+</p></li>
 <li><p><strong>_trim</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of data points to trim for fitting. Default is 1000.</p></li>
 <li><p><strong>_minimising_param</strong> (<em>str</em><em>, </em><em>optional</em>) – Parameter used for minimizing (only ‘chi2’ supported as of now). Default is ‘chi2’.</p></li>
 </ul>
@@ -762,7 +781,12 @@ entries outside the specified wavelength range or with negative wavelengths.</p>
 <dt class="field-odd">Parameters<span class="colon">:</span></dt>
 <dd class="field-odd"><ul class="simple">
 <li><p><strong>total_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of iterations used for bootstrapping. Default is 100.</p></li>
-<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to refit the model. Default is True.</p></li>
+<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – <p>Whether to refit the model. Default is True.</p>
+<ul>
+<li><p>if <cite>True</cite> : the fit is redone.</p></li>
+<li><p>If <cite>False</cite>: If a previous fit is available, it is read. Otherwise a fresh fit is made.</p></li>
+</ul>
+</p></li>
 <li><p><strong>_percentile_threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – Percentile threshold used for setting up the extent of the noisy parameter grid. Default is 10.</p></li>
 <li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the blackbody fit. Default is False.</p></li>
 </ul>
@@ -1041,12 +1065,14 @@ distributions.</p>
 </dd>
 </dl>
 <p class="rubric">Notes</p>
-<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.data_not_fitted" title="src.binary_sed_fitting.Star.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.N_points" title="src.binary_sed_fitting.Star.N_points"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.N_points</span></code></a></p>
-<p>The method includes several steps to clean and preprocess the data before fitting:
-- Ensures no duplicate filters are present in the data.
-- Filters with zero errors are replaced with a value calculated as 110% of the maximum error fraction.
-- Errors are adjusted to ensure a minimum error fraction of 2% for VGF and 10% for VGFB calculations.
-- Logarithmic values of wavelength and flux are computed to facilitate fitting.</p>
+<p><em>Updates:</em> <a class="reference internal" href="#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a></p>
+<p>The method includes several steps to clean and preprocess the data before fitting:</p>
+<ul class="simple">
+<li><p>Ensures no duplicate filters are present in the data.</p></li>
+<li><p>Filters with zero errors are replaced with a value calculated as 110% of the maximum error fraction.</p></li>
+<li><p>Errors are adjusted to ensure a minimum error fraction of 2% for VGF and 10% for VGFB calculations.</p></li>
+<li><p>Logarithmic values of wavelength and flux are computed to facilitate fitting.</p></li>
+</ul>
 </dd></dl>
 
 <dl class="py method">
@@ -1150,24 +1176,17 @@ distributions.</p>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop"><code class="docutils literal notranslate"><span class="pre">Star.filters_to_drop</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.wavelength_range"><code class="docutils literal notranslate"><span class="pre">Star.wavelength_range</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.r_limits"><code class="docutils literal notranslate"><span class="pre">Star.r_limits</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.run_name"><code class="docutils literal notranslate"><span class="pre">Star.run_name</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.component"><code class="docutils literal notranslate"><span class="pre">Star.component</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star._type"><code class="docutils literal notranslate"><span class="pre">Star._type</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.model"><code class="docutils literal notranslate"><span class="pre">Star.model</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.data_all"><code class="docutils literal notranslate"><span class="pre">Star.data_all</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.data"><code class="docutils literal notranslate"><span class="pre">Star.data</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.data_all"><code class="docutils literal notranslate"><span class="pre">Star.data_all</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.data_not_fitted"><code class="docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.N_points"><code class="docutils literal notranslate"><span class="pre">Star.N_points</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.filters_to_drop_all"><code class="docutils literal notranslate"><span class="pre">Star.filters_to_drop_all</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.N"><code class="docutils literal notranslate"><span class="pre">Star.N</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.Te_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.Te_blackbody</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.log_sf_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.log_sf_blackbody</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.N_Np"><code class="docutils literal notranslate"><span class="pre">Star.N_Np</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.sf_list"><code class="docutils literal notranslate"><span class="pre">Star.sf_list</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star._minimising_param"><code class="docutils literal notranslate"><span class="pre">Star._minimising_param</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2"><code class="docutils literal notranslate"><span class="pre">Star.df_chi2</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_trimmed"><code class="docutils literal notranslate"><span class="pre">Star.df_chi2_trimmed</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.df_chi2_noisy"><code class="docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a></li>
-<li><a class="reference internal" href="#src.binary_sed_fitting.Star.N_Np"><code class="docutils literal notranslate"><span class="pre">Star.N_Np</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.chi2_r"><code class="docutils literal notranslate"><span class="pre">Star.chi2_r</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgf2"><code class="docutils literal notranslate"><span class="pre">Star.vgf2</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgfb2"><code class="docutils literal notranslate"><span class="pre">Star.vgfb2</span></code></a></li>
@@ -1175,6 +1194,12 @@ distributions.</p>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.chi2_r_median"><code class="docutils literal notranslate"><span class="pre">Star.chi2_r_median</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgf2_median"><code class="docutils literal notranslate"><span class="pre">Star.vgf2_median</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.vgfb2_median"><code class="docutils literal notranslate"><span class="pre">Star.vgfb2_median</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.Te_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.Te_blackbody</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.log_sf_blackbody"><code class="docutils literal notranslate"><span class="pre">Star.log_sf_blackbody</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.run_name"><code class="docutils literal notranslate"><span class="pre">Star.run_name</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star.component"><code class="docutils literal notranslate"><span class="pre">Star.component</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star._minimising_param"><code class="docutils literal notranslate"><span class="pre">Star._minimising_param</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Star._TYPE"><code class="docutils literal notranslate"><span class="pre">Star._TYPE</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.__init__"><code class="docutils literal notranslate"><span class="pre">Star.__init__()</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.create_sf_list"><code class="docutils literal notranslate"><span class="pre">Star.create_sf_list()</span></code></a></li>
 <li><a class="reference internal" href="#src.binary_sed_fitting.Star.drop_filters"><code class="docutils literal notranslate"><span class="pre">Star.drop_filters()</span></code></a></li>
@@ -1219,6 +1244,6 @@ distributions.</p>
     <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
     <script src="_static/scripts/furo.js?v=4e2eecee"></script>
     <script src="_static/clipboard.min.js?v=a7894cd8"></script>
-    <script src="_static/copybutton.js?v=f281be69"></script>
+    <script src="_static/copybutton.js?v=5eb1bb1e"></script>
     </body>
 </html>
