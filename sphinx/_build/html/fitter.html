@@ -1,0 +1,591 @@
+<!doctype html>
+<html class="no-js" lang="en" data-content_root="./">
+  <head><meta charset="utf-8"/>
+    <meta name="viewport" content="width=device-width,initial-scale=1"/>
+    <meta name="color-scheme" content="light dark"><meta name="viewport" content="width=device-width, initial-scale=1" />
+<link rel="index" title="Index" href="genindex.html" /><link rel="search" title="Search" href="search.html" /><link rel="next" title="Utility functions" href="util_functions.html" /><link rel="prev" title="Model" href="model.html" />
+
+    <!-- Generated with Sphinx 7.3.7 and Furo 2024.05.06 -->
+        <title>Fitter - Binary_SED_Fitting 3.4.0 documentation</title>
+      <link rel="stylesheet" type="text/css" href="_static/pygments.css?v=a746c00c" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo.css?v=387cc868" />
+    <link rel="stylesheet" type="text/css" href="_static/copybutton.css?v=76b2166b" />
+    <link rel="stylesheet" type="text/css" href="_static/styles/furo-extensions.css?v=36a5483c" />
+    
+    
+
+
+<style>
+  body {
+    --color-code-background: #f8f8f8;
+  --color-code-foreground: black;
+  
+  }
+  @media not print {
+    body[data-theme="dark"] {
+      --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+    }
+    @media (prefers-color-scheme: dark) {
+      body:not([data-theme="light"]) {
+        --color-code-background: #202020;
+  --color-code-foreground: #d0d0d0;
+  
+      }
+    }
+  }
+</style></head>
+  <body>
+    
+    <script>
+      document.body.dataset.theme = localStorage.getItem("theme") || "auto";
+    </script>
+    
+
+<svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+  <symbol id="svg-toc" viewBox="0 0 24 24">
+    <title>Contents</title>
+    <svg stroke="currentColor" fill="currentColor" stroke-width="0" viewBox="0 0 1024 1024">
+      <path d="M408 442h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8zm-8 204c0 4.4 3.6 8 8 8h480c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8H408c-4.4 0-8 3.6-8 8v56zm504-486H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zm0 632H120c-4.4 0-8 3.6-8 8v56c0 4.4 3.6 8 8 8h784c4.4 0 8-3.6 8-8v-56c0-4.4-3.6-8-8-8zM115.4 518.9L271.7 642c5.8 4.6 14.4.5 14.4-6.9V388.9c0-7.4-8.5-11.5-14.4-6.9L115.4 505.1a8.74 8.74 0 0 0 0 13.8z"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-menu" viewBox="0 0 24 24">
+    <title>Menu</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-menu">
+      <line x1="3" y1="12" x2="21" y2="12"></line>
+      <line x1="3" y1="6" x2="21" y2="6"></line>
+      <line x1="3" y1="18" x2="21" y2="18"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-arrow-right" viewBox="0 0 24 24">
+    <title>Expand</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather-chevron-right">
+      <polyline points="9 18 15 12 9 6"></polyline>
+    </svg>
+  </symbol>
+  <symbol id="svg-sun" viewBox="0 0 24 24">
+    <title>Light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="feather-sun">
+      <circle cx="12" cy="12" r="5"></circle>
+      <line x1="12" y1="1" x2="12" y2="3"></line>
+      <line x1="12" y1="21" x2="12" y2="23"></line>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+      <line x1="1" y1="12" x2="3" y2="12"></line>
+      <line x1="21" y1="12" x2="23" y2="12"></line>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon" viewBox="0 0 24 24">
+    <title>Dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-moon">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M12 3c.132 0 .263 0 .393 0a7.5 7.5 0 0 0 7.92 12.446a9 9 0 1 1 -8.313 -12.454z" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-half" viewBox="0 0 24 24">
+    <title>Auto light/dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-shadow">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none"/>
+      <circle cx="12" cy="12" r="9" />
+      <path d="M13 12h5" />
+      <path d="M13 15h4" />
+      <path d="M13 18h1" />
+      <path d="M13 9h4" />
+      <path d="M13 6h1" />
+    </svg>
+  </symbol>
+  <symbol id="svg-sun-with-moon" viewBox="0 0 24 24">
+    <title>Auto light/dark, in light mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path style="opacity: 50%" d="M 5.411 14.504 C 5.471 14.504 5.532 14.504 5.591 14.504 C 3.639 16.319 4.383 19.569 6.931 20.352 C 7.693 20.586 8.512 20.551 9.25 20.252 C 8.023 23.207 4.056 23.725 2.11 21.184 C 0.166 18.642 1.702 14.949 4.874 14.536 C 5.051 14.512 5.231 14.5 5.411 14.5 L 5.411 14.504 Z"/>
+      <line x1="14.5" y1="3.25" x2="14.5" y2="1.25"/>
+      <line x1="14.5" y1="15.85" x2="14.5" y2="17.85"/>
+      <line x1="10.044" y1="5.094" x2="8.63" y2="3.68"/>
+      <line x1="19" y1="14.05" x2="20.414" y2="15.464"/>
+      <line x1="8.2" y1="9.55" x2="6.2" y2="9.55"/>
+      <line x1="20.8" y1="9.55" x2="22.8" y2="9.55"/>
+      <line x1="10.044" y1="14.006" x2="8.63" y2="15.42"/>
+      <line x1="19" y1="5.05" x2="20.414" y2="3.636"/>
+      <circle cx="14.5" cy="9.55" r="3.6"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-moon-with-sun" viewBox="0 0 24 24">
+    <title>Auto light/dark, in dark mode</title>
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round"
+      class="icon-custom-derived-from-feather-sun-and-tabler-moon">
+      <path d="M 8.282 7.007 C 8.385 7.007 8.494 7.007 8.595 7.007 C 5.18 10.184 6.481 15.869 10.942 17.24 C 12.275 17.648 13.706 17.589 15 17.066 C 12.851 22.236 5.91 23.143 2.505 18.696 C -0.897 14.249 1.791 7.786 7.342 7.063 C 7.652 7.021 7.965 7 8.282 7 L 8.282 7.007 Z"/>
+      <line style="opacity: 50%" x1="18" y1="3.705" x2="18" y2="2.5"/>
+      <line style="opacity: 50%" x1="18" y1="11.295" x2="18" y2="12.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="4.816" x2="14.464" y2="3.964"/>
+      <line style="opacity: 50%" x1="20.711" y1="10.212" x2="21.563" y2="11.063"/>
+      <line style="opacity: 50%" x1="14.205" y1="7.5" x2="13.001" y2="7.5"/>
+      <line style="opacity: 50%" x1="21.795" y1="7.5" x2="23" y2="7.5"/>
+      <line style="opacity: 50%" x1="15.316" y1="10.184" x2="14.464" y2="11.036"/>
+      <line style="opacity: 50%" x1="20.711" y1="4.789" x2="21.563" y2="3.937"/>
+      <circle style="opacity: 50%" cx="18" cy="7.5" r="2.169"/>
+    </svg>
+  </symbol>
+  <symbol id="svg-pencil" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-pencil-code">
+      <path d="M4 20h4l10.5 -10.5a2.828 2.828 0 1 0 -4 -4l-10.5 10.5v4" />
+      <path d="M13.5 6.5l4 4" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" /
+    </svg>
+  </symbol>
+  <symbol id="svg-eye" viewBox="0 0 24 24">
+    <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+      stroke-width="1" stroke-linecap="round" stroke-linejoin="round" class="icon-tabler-eye-code">
+      <path stroke="none" d="M0 0h24v24H0z" fill="none" />
+      <path d="M10 12a2 2 0 1 0 4 0a2 2 0 0 0 -4 0" />
+      <path
+        d="M11.11 17.958c-3.209 -.307 -5.91 -2.293 -8.11 -5.958c2.4 -4 5.4 -6 9 -6c3.6 0 6.6 2 9 6c-.21 .352 -.427 .688 -.647 1.008" />
+      <path d="M20 21l2 -2l-2 -2" />
+      <path d="M17 17l-2 2l2 2" />
+    </svg>
+  </symbol>
+</svg>
+
+<input type="checkbox" class="sidebar-toggle" name="__navigation" id="__navigation">
+<input type="checkbox" class="sidebar-toggle" name="__toc" id="__toc">
+<label class="overlay sidebar-overlay" for="__navigation">
+  <div class="visually-hidden">Hide navigation sidebar</div>
+</label>
+<label class="overlay toc-overlay" for="__toc">
+  <div class="visually-hidden">Hide table of contents sidebar</div>
+</label>
+
+<a class="skip-to-content muted-link" href="#furo-main-content">Skip to content</a>
+
+
+
+<div class="page">
+  <header class="mobile-header">
+    <div class="header-left">
+      <label class="nav-overlay-icon" for="__navigation">
+        <div class="visually-hidden">Toggle site navigation sidebar</div>
+        <i class="icon"><svg><use href="#svg-menu"></use></svg></i>
+      </label>
+    </div>
+    <div class="header-center">
+      <a href="index.html"><div class="brand">Binary_SED_Fitting 3.4.0 documentation</div></a>
+    </div>
+    <div class="header-right">
+      <div class="theme-toggle-container theme-toggle-header">
+        <button class="theme-toggle">
+          <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+          <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+          <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+          <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+          <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+        </button>
+      </div>
+      <label class="toc-overlay-icon toc-header-icon" for="__toc">
+        <div class="visually-hidden">Toggle table of contents sidebar</div>
+        <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+      </label>
+    </div>
+  </header>
+  <aside class="sidebar-drawer">
+    <div class="sidebar-container">
+      
+      <div class="sidebar-sticky"><a class="sidebar-brand" href="index.html">
+  
+  <div class="sidebar-logo-container">
+    <img class="sidebar-logo" src="_static/logo.png" alt="Logo"/>
+  </div>
+  
+  
+</a><form class="sidebar-search-container" method="get" action="search.html" role="search">
+  <input class="sidebar-search" placeholder="Search" name="q" aria-label="Search">
+  <input type="hidden" name="check_keywords" value="yes">
+  <input type="hidden" name="area" value="default">
+</form>
+<div id="searchbox"></div><div class="sidebar-scroll"><div class="sidebar-tree">
+  <p class="caption" role="heading"><span class="caption-text">Contents:</span></p>
+<ul class="current">
+<li class="toctree-l1"><a class="reference internal" href="index.html">Home</a></li>
+<li class="toctree-l1 has-children"><a class="reference internal" href="getting_started.html">Getting Started</a><input class="toctree-checkbox" id="toctree-checkbox-1" name="toctree-checkbox-1" role="switch" type="checkbox"/><label for="toctree-checkbox-1"><div class="visually-hidden">Toggle navigation of Getting Started</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul>
+<li class="toctree-l2"><a class="reference internal" href="examples_io.html">I/O and VOSA helper functions</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_single.html">Example single fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_binary.html">Example binary fit</a></li>
+<li class="toctree-l2"><a class="reference internal" href="examples_cluster.html">Example cluster fit</a></li>
+</ul>
+</li>
+<li class="toctree-l1 current has-children"><a class="reference internal" href="modules.html">Code Documentation</a><input checked="" class="toctree-checkbox" id="toctree-checkbox-2" name="toctree-checkbox-2" role="switch" type="checkbox"/><label for="toctree-checkbox-2"><div class="visually-hidden">Toggle navigation of Code Documentation</div><i class="icon"><svg><use href="#svg-arrow-right"></use></svg></i></label><ul class="current">
+<li class="toctree-l2"><a class="reference internal" href="star.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Star</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="system.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">System</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="model.html"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></a></li>
+<li class="toctree-l2 current current-page"><a class="current reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a></li>
+<li class="toctree-l2"><a class="reference internal" href="util_functions.html">Utility functions</a></li>
+</ul>
+</li>
+<li class="toctree-l1"><a class="reference internal" href="changlog.html">Changlog</a></li>
+</ul>
+
+</div>
+</div>
+
+      </div>
+      
+    </div>
+  </aside>
+  <div class="main">
+    <div class="content">
+      <div class="article-container">
+        <a href="#" class="back-to-top muted-link">
+          <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24">
+            <path d="M13 20h-2V8l-5.5 5.5-1.42-1.42L12 4.16l7.92 7.92-1.42 1.42L13 8v12z"></path>
+          </svg>
+          <span>Back to top</span>
+        </a>
+        <div class="content-icon-container">
+          <div class="view-this-page">
+  <a class="muted-link" href="_sources/fitter.rst.txt" title="View this page">
+    <svg><use href="#svg-eye"></use></svg>
+    <span class="visually-hidden">View this page</span>
+  </a>
+</div>
+<div class="theme-toggle-container theme-toggle-content">
+            <button class="theme-toggle">
+              <div class="visually-hidden">Toggle Light / Dark / Auto color theme</div>
+              <svg class="theme-icon-when-auto-light"><use href="#svg-sun-with-moon"></use></svg>
+              <svg class="theme-icon-when-auto-dark"><use href="#svg-moon-with-sun"></use></svg>
+              <svg class="theme-icon-when-dark"><use href="#svg-moon"></use></svg>
+              <svg class="theme-icon-when-light"><use href="#svg-sun"></use></svg>
+            </button>
+          </div>
+          <label class="toc-overlay-icon toc-content-icon" for="__toc">
+            <div class="visually-hidden">Toggle table of contents sidebar</div>
+            <i class="icon"><svg><use href="#svg-toc"></use></svg></i>
+          </label>
+        </div>
+        <article role="main" id="furo-main-content">
+          <section id="fitter">
+<h1><a class="reference internal" href="#src.binary_sed_fitting.Fitter" title="src.binary_sed_fitting.Fitter"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a><a class="headerlink" href="#fitter" title="Link to this heading">¶</a></h1>
+<dl class="py class">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter">
+<em class="property"><span class="pre">class</span><span class="w"> </span></em><span class="sig-prename descclassname"><span class="pre">src.binary_sed_fitting.</span></span><span class="sig-name descname"><span class="pre">Fitter</span></span><a class="headerlink" href="#src.binary_sed_fitting.Fitter" title="Link to this definition">¶</a></dt>
+<dd><p>Collections of functions which deal with SED fitting.</p>
+<ul class="simple">
+<li><p>Fitting blackbody spectrum</p></li>
+<li><p>Functions to calculate chi2 values for a parameter grid.</p></li>
+<li><p>Functions to find best fit values and their errors</p></li>
+<li><p>At present, only chi2 minimization is implimented.</p></li>
+</ul>
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.blackbody">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">blackbody</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">p0</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">[5000.0,</span> <span class="pre">-20]</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.blackbody" title="Link to this definition">¶</a></dt>
+<dd><p>Fit blackbody parameters to observational data using <cite>scipy.optimize.curve_fit</cite>.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>star</strong> (<em>Star object</em>) – Star data with observed flux.</p></li>
+<li><p><strong>p0</strong> (<em>list</em><em>, </em><em>optional</em>) – Initial guess for the fit parameters [Temperature, Log Scaling Factor].</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.Te_blackbody" title="src.binary_sed_fitting.Star.Te_blackbody"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.Te_blackbody</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.log_sf_blackbody" title="src.binary_sed_fitting.Star.log_sf_blackbody"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.log_sf_blackbody</span></code></a></p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.calculate_chi2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_trim</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">None</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_minimising_param</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'chi2'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.calculate_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate chi2 values for different model parameters.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>star</strong> (<em>Star object</em>) – Star data.</p></li>
+<li><p><strong>model</strong> (<em>Model object</em>) – Model information.</p></li>
+<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to refit the data (default is True).</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the scatter matrix (default is False).</p></li>
+<li><p><strong>_trim</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of top results to trim the DataFrame (default is None).</p></li>
+<li><p><strong>_minimising_param</strong> (<em>str</em><em>, </em><em>optional</em>) – Parameter over which to determine the best fit (‘chi2’, ‘vgf2’, ‘vgfb2’). Currently, only ‘chi2’ is implemented.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.df_chi2" title="src.binary_sed_fitting.Star.df_chi2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.df_chi2_trimmed" title="src.binary_sed_fitting.Star.df_chi2_trimmed"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_trimmed</span></code></a></p>
+<ul class="simple">
+<li><p>Calculates chi2 values based on model parameters and observed data.</p></li>
+<li><p>Saves the results into DataFrame <cite>star.df_chi2</cite>.</p></li>
+<li><p>Optionally plots the scatter matrix using <cite>plot_chi2_matrix</cite> if <cite>plot=True</cite>.</p></li>
+<li><p>Trims <cite>star.df_chi2</cite> to top <cite>_trim</cite> results if <cite>_trim</cite> is provided.</p></li>
+<li><p>Saves <cite>star.df_chi2</cite> into a CSV file.</p></li>
+<li><p>Uses <cite>calc_radius</cite> and <cite>calc_luminosity</cite> functions to calculate radius (R) and luminosity (L) based on model parameters.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>NotImplementedError</strong> – If <cite>_minimising_param</cite> is not ‘chi2’. (‘vgf2’ and ‘vgfb2’ are to be implemented).</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.calculate_noisy_chi2">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">calculate_noisy_chi2</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">total_iterations</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">100</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">refit</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">True</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">plot</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">False</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">_percentile_threshold</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">10</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.calculate_noisy_chi2" title="Link to this definition">¶</a></dt>
+<dd><p>Calculate chi2 values for noise added data.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>star</strong> (<em>Star object</em>) – Star data.</p></li>
+<li><p><strong>model</strong> (<em>Model object</em>) – Model information.</p></li>
+<li><p><strong>total_iterations</strong> (<em>int</em><em>, </em><em>optional</em>) – Number of iterations to perform noisy chi2 calculations (default is 100).</p></li>
+<li><p><strong>refit</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to refit the data if a previous result exists (default is True).</p></li>
+<li><p><strong>plot</strong> (<em>bool</em><em>, </em><em>optional</em>) – Whether to plot the scatter matrix of noisy chi2 results (default is False).</p></li>
+<li><p><strong>_percentile_threshold</strong> (<em>int</em><em>, </em><em>optional</em>) – Percentile threshold for filtering chi2 values from the original chi2 results (default is 10).</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.df_chi2_noisy" title="src.binary_sed_fitting.Star.df_chi2_noisy"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.df_chi2_noisy</span></code></a></p>
+<ul class="simple">
+<li><p>Uses <cite>star.df_chi2</cite> to filter out top performing parameters based on <cite>_percentile_threshold</cite>.</p></li>
+<li><p>Generates <cite>total_iterations</cite> versions of noisy observed data (<cite>da_obs_noisy</cite>) by adding Gaussian noise to the original flux.</p></li>
+<li><p>Computes chi2 values for each noisy iteration and stores the best fitting parameters in <cite>star.df_chi2_noisy</cite>.</p></li>
+<li><p>Saves <cite>star.df_chi2_noisy</cite> into a CSV file named based on star and model information.</p></li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Raises<span class="colon">:</span></dt>
+<dd class="field-odd"><p><strong>AttributeError</strong> – If <cite>star.df_chi2</cite> does not exist or <cite>_percentile_threshold</cite> is not within the valid range [0, 100].</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.get_blackbody_spectrum_loglog">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_blackbody_spectrum_loglog</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">log_wavelength</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">Te</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">log_scaling_factor</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.get_blackbody_spectrum_loglog" title="Link to this definition">¶</a></dt>
+<dd><p>Compute the log-log blackbody spectrum flux.</p>
+<p>Adapted from the IUE RDAF 1989.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>log_wavelength</strong> (<em>float</em><em> or </em><em>list</em>) – Logarithm of the wavelength in Angstroms.</p></li>
+<li><p><strong>Te</strong> (<em>float</em>) – Temperature of the source in Kelvin.</p></li>
+<li><p><strong>log_scaling_factor</strong> (<em>float</em>) – Logarithmic scaling factor to normalize flux (for a star: log10(radius/distance^2)).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><strong>log_bbflux</strong> – Logarithm of the blackbody flux in ergs/cm2/s/A for the given temperature and wavelength range.</p>
+</dd>
+<dt class="field-odd">Return type<span class="colon">:</span></dt>
+<dd class="field-odd"><p>float or list</p>
+</dd>
+</dl>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_parameters_from_chi2_minimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization" title="Link to this definition">¶</a></dt>
+<dd><p>Estimate best fit parameters from the least chi2 fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>star</strong> (<em>Star object</em>) – Star data containing chi2 results and observed data.</p></li>
+<li><p><strong>model</strong> (<em>Model object</em>) – Model information used for fitting.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_not_fitted" title="src.binary_sed_fitting.Star.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.N_Np" title="src.binary_sed_fitting.Star.N_Np"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.N_Np</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.chi2_r" title="src.binary_sed_fitting.Star.chi2_r"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.chi2_r</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgf2" title="src.binary_sed_fitting.Star.vgf2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgf2</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgfb2" title="src.binary_sed_fitting.Star.vgfb2"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgfb2</span></code></a>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.</span></code></p>
+<p>This method retrieves and updates parameters from the best chi2 fit found in star.df_chi2.</p>
+<p>It calculates additional statistical metrics for the fitted data.</p>
+<p>It raises a warning if any data points have chi2 values significantly higher than the average (3-sigma threshold).</p>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_parameters_from_noisy_chi2_minimization</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">star</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization" title="Link to this definition">¶</a></dt>
+<dd><p>Estimate best fit parameters from noisy least chi2 fit.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>star</strong> (<em>Star object</em>) – Star data containing noisy chi2 results.</p></li>
+<li><p><strong>model</strong> (<em>Model object</em>) – Model information used for fitting.</p></li>
+</ul>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p><em>Updates:</em> <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_all" title="src.binary_sed_fitting.Star.data_all"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_all</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data" title="src.binary_sed_fitting.Star.data"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.data_not_fitted" title="src.binary_sed_fitting.Star.data_not_fitted"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.data_not_fitted</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.chi2_median" title="src.binary_sed_fitting.Star.chi2_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.chi2_median</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.chi2_r_median" title="src.binary_sed_fitting.Star.chi2_r_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.chi2_r_median</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgf2_median" title="src.binary_sed_fitting.Star.vgf2_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgf2_median</span></code></a>, <a class="reference internal" href="star.html#src.binary_sed_fitting.Star.vgfb2_median" title="src.binary_sed_fitting.Star.vgfb2_median"><code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.vgfb2_median</span></code></a>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.&lt;dim&gt;_median</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.&lt;dim&gt;_error_lower</span></code>, <code class="xref py py-attr docutils literal notranslate"><span class="pre">Star.&lt;dim&gt;_error_upper</span></code></p>
+<p>This method estimates the best fit parameters by calculating the median and errors from the noisy chi2 fits:</p>
+<ul class="simple">
+<li><p>It uses Fitter.get_realistic_errors_from_iterations() to estimate realistic errors based on noisy fits and grid steps.</p></li>
+<li><p>Updates various attributes in star related to best fit parameters, errors, and fit quality metrics.</p></li>
+<li><p>Logs warnings if the best fit parameters differ from their median value.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.get_realistic_errors_from_iterations">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">get_realistic_errors_from_iterations</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">parameter_values</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">grid_steps</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">component</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">para_type</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">'parameter'</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.get_realistic_errors_from_iterations" title="Link to this definition">¶</a></dt>
+<dd><p>Estimates errors using spread in the noisy fits and edge cases.</p>
+<ul class="simple">
+<li><dl class="simple">
+<dt>If the best fit parameter is near a boundary:</dt><dd><ul>
+<li><p>Exaggerates errors and issues a warning.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>If spread in iterations is less than step size:</dt><dd><ul>
+<li><p>Keeps errors similar to the step size.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+<li><dl class="simple">
+<dt>Otherwise:</dt><dd><ul>
+<li><p>Calculates the 16nd, 50th, and 84th percentiles of the parameter_values.</p></li>
+<li><p>Adjusts percentiles to grid_steps boundaries if needed.</p></li>
+<li><p>Computes lower and upper bound errors in the parameter.</p></li>
+</ul>
+</dd>
+</dl>
+</li>
+</ul>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>parameter_values</strong> (<em>list</em>) – List of parameter values obtained from noisy fits.</p></li>
+<li><p><strong>grid_steps</strong> (<em>list</em>) – List of grid steps available for the parameter.</p></li>
+<li><p><strong>component</strong> (<em>str</em>) – Component information related to the parameter.</p></li>
+<li><p><strong>para_type</strong> (<em>str</em><em>, </em><em>optional</em>) – Type of the parameter (default is ‘parameter’).</p></li>
+</ul>
+</dd>
+<dt class="field-even">Returns<span class="colon">:</span></dt>
+<dd class="field-even"><p><ul class="simple">
+<li><p><strong>para_50</strong> (<em>float</em>) – Median of the parameter_values.</p></li>
+<li><p><strong>error_lower</strong> (<em>float</em>) – Lower bound error in the parameter.</p></li>
+<li><p><strong>error_upper</strong> (<em>float</em>) – Upper bound error in the parameter.</p></li>
+</ul>
+</p>
+</dd>
+</dl>
+<p class="rubric">Notes</p>
+<p>This method estimates realistic errors based on noisy fits and grid steps:</p>
+<ul class="simple">
+<li><p>It calculates percentiles and adjusts them to grid_steps boundaries if necessary.</p></li>
+<li><p>Issues warnings if the best fit parameter is close to model boundaries.</p></li>
+<li><p>Handles cases where spread in iterations is minimal or zero.</p></li>
+</ul>
+</dd></dl>
+
+<dl class="py method">
+<dt class="sig sig-object py" id="src.binary_sed_fitting.Fitter.plot_chi2_matrix">
+<em class="property"><span class="pre">static</span><span class="w"> </span></em><span class="sig-name descname"><span class="pre">plot_chi2_matrix</span></span><span class="sig-paren">(</span><em class="sig-param"><span class="n"><span class="pre">df</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">model</span></span></em>, <em class="sig-param"><span class="n"><span class="pre">alpha</span></span><span class="o"><span class="pre">=</span></span><span class="default_value"><span class="pre">0.3</span></span></em><span class="sig-paren">)</span><a class="headerlink" href="#src.binary_sed_fitting.Fitter.plot_chi2_matrix" title="Link to this definition">¶</a></dt>
+<dd><p>Plot scatter matrix for chi2 DataFrame.</p>
+<dl class="field-list simple">
+<dt class="field-odd">Parameters<span class="colon">:</span></dt>
+<dd class="field-odd"><ul class="simple">
+<li><p><strong>df</strong> (<em>DataFrame</em>) – DataFrame containing chi2 values.</p></li>
+<li><p><strong>model</strong> (<em>Model object</em>) – Model information.</p></li>
+<li><p><strong>alpha</strong> (<em>float</em><em>, </em><em>optional</em>) – Transparency of points in the scatter matrix plot (default is 0.3).</p></li>
+</ul>
+</dd>
+</dl>
+</dd></dl>
+
+</dd></dl>
+
+</section>
+
+        </article>
+      </div>
+      <footer>
+        
+        <div class="related-pages">
+          <a class="next-page" href="util_functions.html">
+              <div class="page-info">
+                <div class="context">
+                  <span>Next</span>
+                </div>
+                <div class="title">Utility functions</div>
+              </div>
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+            </a>
+          <a class="prev-page" href="model.html">
+              <svg class="furo-related-icon"><use href="#svg-arrow-right"></use></svg>
+              <div class="page-info">
+                <div class="context">
+                  <span>Previous</span>
+                </div>
+                
+                <div class="title"><code class="xref py py-class docutils literal notranslate"><span class="pre">Model</span></code></div>
+                
+              </div>
+            </a>
+        </div>
+        <div class="bottom-of-page">
+          <div class="left-details">
+            <div class="copyright">
+                Copyright &#169; 2024, Vikrant Jadhav
+            </div>
+            Made with <a href="https://www.sphinx-doc.org/">Sphinx</a> and <a class="muted-link" href="https://pradyunsg.me">@pradyunsg</a>'s
+            
+            <a href="https://github.com/pradyunsg/furo">Furo</a>
+            
+          </div>
+          <div class="right-details">
+            
+          </div>
+        </div>
+        
+      </footer>
+    </div>
+    <aside class="toc-drawer">
+      
+      
+      <div class="toc-sticky toc-scroll">
+        <div class="toc-title-container">
+          <span class="toc-title">
+            On this page
+          </span>
+        </div>
+        <div class="toc-tree-container">
+          <div class="toc-tree">
+            <ul>
+<li><a class="reference internal" href="#"><code class="xref py py-class docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter"><code class="docutils literal notranslate"><span class="pre">Fitter</span></code></a><ul>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.blackbody"><code class="docutils literal notranslate"><span class="pre">Fitter.blackbody()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.calculate_chi2"><code class="docutils literal notranslate"><span class="pre">Fitter.calculate_chi2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.calculate_noisy_chi2"><code class="docutils literal notranslate"><span class="pre">Fitter.calculate_noisy_chi2()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.get_blackbody_spectrum_loglog"><code class="docutils literal notranslate"><span class="pre">Fitter.get_blackbody_spectrum_loglog()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.get_parameters_from_chi2_minimization"><code class="docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_chi2_minimization()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.get_parameters_from_noisy_chi2_minimization"><code class="docutils literal notranslate"><span class="pre">Fitter.get_parameters_from_noisy_chi2_minimization()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.get_realistic_errors_from_iterations"><code class="docutils literal notranslate"><span class="pre">Fitter.get_realistic_errors_from_iterations()</span></code></a></li>
+<li><a class="reference internal" href="#src.binary_sed_fitting.Fitter.plot_chi2_matrix"><code class="docutils literal notranslate"><span class="pre">Fitter.plot_chi2_matrix()</span></code></a></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+
+          </div>
+        </div>
+      </div>
+      
+      
+    </aside>
+  </div>
+</div><script src="_static/documentation_options.js?v=237dbe43"></script>
+    <script src="_static/doctools.js?v=9a2dae69"></script>
+    <script src="_static/sphinx_highlight.js?v=dc90522c"></script>
+    <script src="_static/scripts/furo.js?v=4e2eecee"></script>
+    <script src="_static/clipboard.min.js?v=a7894cd8"></script>
+    <script src="_static/copybutton.js?v=5eb1bb1e"></script>
+    </body>
+</html>
