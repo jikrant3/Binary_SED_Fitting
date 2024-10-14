@@ -18,7 +18,7 @@ Fitting stellar SEDs for single and multi-component systems.
 
 - `xarray` >= 2024.3.0
    - Installation: `python3 -m pip install xarray`
-   - Install optional dependencies for handling I/O: `python3 -m pip install "xarray[io]"`
+   - Install the dependencies for handling I/O: `python3 -m pip install "xarray[io]"`
 
 ## Installation
 - Add the `binary_sed_fitting.py` to your working directory.
@@ -49,3 +49,34 @@ However, only double component fitting is thoroughly tested.
 This code is developed by Vikrant V. Jadhav (Universität Bonn). 
 
 If you use the code, please refer to Jadhav et al. (2021), UOCS. IV. Discovery of diverse hot companions to blue stragglers in the old open cluster King 2, Journal of Astrophysics and Astronomy, Volume 42, Issue 2, article id.89 (https://doi.org/10.1007/s12036-021-09746-y)
+
+### Used in the following publications
+1. Saketh et al. AJ, 168, 97, (2024) 
+
+1. Pal et al. ApJL, 970, L39, (2024) 
+
+1. Jadhav et al. A&A, 688, A152, (2024) 
+
+1. Panthi and Vaidya et al. MNRAS, 527, 10335, (2024) 
+
+1. Panthi et al. MNRAS, 527, 8325, (2024) 
+
+1. Panthi et al. MNRAS, 525, 1311, (2023) 
+
+1. Jadhav et al. A&A, 676, A47, (2023) 
+
+1. Panthi et al. MNRAS, 516, 5318, (2022) 
+
+1. Rao et al. MNRAS, 516, 2444, (2022) 
+
+1. Vaidya et al. MNRAS, 511, 2274, (2022) 
+
+1. Pandey et al. MNRAS, 507, 2373, (2021) 
+
+1. Jadhav et al. JApA, 42, 89, (2021) 
+
+1. Subramaniam et al. JApA, 41, 45, (2020) 
+
+1. Jadhav et al. ApJ, 886, 13, (2019) 
+
+1. Sindhu et al. ApJ, 882, 43, (2019)
