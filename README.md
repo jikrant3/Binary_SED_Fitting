@@ -46,7 +46,7 @@ The code has been designed for 3 component SEDs.
 However, only double component fitting is thoroughly tested.
 
 ## Reference [![DOI](https://zenodo.org/badge/304547682.svg)](https://doi.org/10.5281/zenodo.13928317):
-This code is developed by Vikrant V. Jadhav (Universität Bonn). 
+This code is developed by Vikrant V. Jadhav (Universität Bonn) and Sindhu Pandey (IIA). 
 
 
 If you use the code, please refer to the software repository and Jadhav et al. JApA, 42, 89, (2021) 
